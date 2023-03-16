@@ -39,6 +39,8 @@ const watch = async (fileURI) => {
             .map((line) => line.replace(/\s+$/, ""))
             .filter((line) => line !== "");
 
+        let lists = [];
+
         for (let i = 0; i < lines.length; i++) {
             if (/^[0-9]/.test(lines[i])) {
                 if (!/^[0-9]/.test(lines[i + 1])) {
@@ -57,7 +59,7 @@ const watch = async (fileURI) => {
             let thisLine = lines[i].replace(/[\W_]/g, "");
             // if it's all caps, it's a list name
             if (/^[A-Z]*$/.test(thisLine)) {
-                let listName = lines[i];
+                let list = lines[i];
                 let listItems = [];
                 for (let j = i + 1; j < lines.length; j++) {
                     // if the next line starts wwith a number
@@ -72,67 +74,33 @@ const watch = async (fileURI) => {
                             lines.splice(j + 1, 1);
                         }
                     }
+
+
+                    
                     listItems.push(lines[j]);
                     if (!/^[0-9]/.test(lines[j])) {
                         break;
                     }
                 }
-                console.log("listName: ", listName);
-                console.log("listItems: ", listItems);
+                listItems = listItems.filter((item) => /^[0-9]/.test(item));
+
+                // console.log("list: ", listName);
+                // console.log("listItems: ", listItems);
+                lists.push({
+                    list,
+                    listItems,
+                });
+                
             }
 
-            // let thisLine = lines[i].replace(/[\W_]/g, "");
-            // thisLine = thisLine.trim();
-            // console.log("thisLine: ", thisLine);
-            // if (/[\W_]/.test[thisLine]) {
-            //     console.log ("all CAPS?: ", thisLine);
-            // }
         }
-        //     if (/^[0-9]/.test(lines[i])) {
-
-        // if (!/^[0-9]/.test(lines[i]) && /^[0-9]/.test(lines[i - 1])) {
-        //     lines[i - 1] = lines[i - 1] + ", " + lines[i];
-        //     lines.splice(i, 1);
-        // }
-
-        // for (let i = 0; i < lines.length; i++) {
-        //     if (!/^[0-9]/.test(lines[i])) {
-        //         listName = lines[i];
-        //         console.log("listName: ", listName);
-        //         // console.log("lines[i]: ", lines[i]);
-        //         // delete lines[i]
-        //         lines.splice(i, 1);
-        //         listItems = [];
-        //         for (let j = 0; j < lines.length; i++) {
-        //             if (/^[0-9]/.test(lines[j])) {
-        //                 listItems.push(lines[j]);
-        //                 lines.splice(j, 1);
-        //             }
-        //             if (!/^[0-9]/.test(lines[i])) {
-        //                 break;
-        //             }
-        //         }
-        //         // console.log("listItems: ", listItems);
-
-        //         //
-
-        //         // let listItems = [];
-        //         // let j = lines[i + 1];
-        //         // console.log("j: ", j);
-        //         // while (j < lines.length && !/^[0-9]/.test(lines[j])) {
-        //         //     listItems.push(lines[j]);
-        //         //     j++;
-        //         // }
-        //         // console.log("listItems: ", listItems);
-        //     }
-        // }
-
-        // console.log("lines: ", lines);
-        return { date, lines };
+       
+        return { date, lists };
     }
 };
 
-parse = (lists) => {
+parse = (listsToParse) => {
+    return listsToParse;
     // console.log("lists: ", lists.lines);
 };
 
