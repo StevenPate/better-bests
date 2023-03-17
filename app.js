@@ -6,7 +6,6 @@ getLists = async () => {
     const lists = parse(listsAsObjects);
     
     console.log(JSON.stringify(lists, null, 2));
+    // console.log('uncomment the above');
 }
 getLists();
-
-// console.log("listsAsText: ", listsAsText);

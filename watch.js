@@ -60,13 +60,18 @@ const watch = async (fileURI) => {
             // if it's all caps, it's a list name
             if (/^[A-Z]*$/.test(thisLine)) {
                 let list = lines[i];
+                // add the items to the list
                 let listItems = [];
                 for (let j = i + 1; j < lines.length; j++) {
-                    // if the next line starts wwith a number
+                    // if the line starts with a number
                     if (/^[0-9]/.test(lines[j])) {
-                        let currentLine = lines[j].replace(/[\W_]/g, "");
+                        if (lines[j].slice(0, 4).includes(".")) {
+                            lines[j] = lines[j].replace(". ", "., ");
+                        }
+
+                        // let currentLine = lines[j].replace(/[\W_]/g, "");
                         if (
-                            !/^[0-9]/.test(lines[j + 1]) 
+                            !/^[0-9]/.test(lines[j + 1])
                             // &&
                             // /^[A-Z]*$/.test(currentLine)
                         ) {
@@ -75,8 +80,13 @@ const watch = async (fileURI) => {
                         }
                     }
 
+                    // add comma after period (for list poositions)
+                    // if (/^[0-9]/.test(lines[j])) {
+                    //     if (lines[j].slice(0, 4).includes(".")) {
+                    //         lines[j] = lines[j].replace(". ", "., ");
+                    //     }
+                    // }
 
-                    
                     listItems.push(lines[j]);
                     if (!/^[0-9]/.test(lines[j])) {
                         break;
@@ -90,11 +100,9 @@ const watch = async (fileURI) => {
                     list,
                     listItems,
                 });
-                
             }
-
         }
-       
+
         return { date, lists };
     }
 };
