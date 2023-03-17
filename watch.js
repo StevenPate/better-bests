@@ -5,7 +5,6 @@ const fetch = (...args) =>
 const watch = async (fileURI) => {
     const { document } = await window(fileURI);
     const result = document.querySelector("#node-111 ").textContent;
-    // console.log("result: ", result);
 
     // find string in result that ends with "pn.txt"
     const regex = /.*pn.txt/g;
@@ -14,7 +13,6 @@ const watch = async (fileURI) => {
     if (match[0].startsWith("\t")) {
         match[0] = match[0].replace("\t", "");
     }
-    // console.log("match: ", match);
 
     // for each url in match, fetch the url and save the content to a file
     for (let i = 0; i < match.length; i++) {
@@ -28,10 +26,9 @@ const watch = async (fileURI) => {
             dateString.slice(2, 4) +
             "-" +
             dateString.slice(4, 6);
-        // console.log("date: ", date);
         const response = await fetch(url);
         const text = await response.text();
-        // console.log("text: ", text);
+
         let lines = text.split("\n");
         lines.splice(0, 5);
         lines = lines
@@ -60,42 +57,48 @@ const watch = async (fileURI) => {
             // if it's all caps, it's a list name
             if (/^[A-Z]*$/.test(thisLine)) {
                 let list = lines[i];
-                // add the items to the list
                 let listItems = [];
                 for (let j = i + 1; j < lines.length; j++) {
-                    // if the line starts with a number
                     if (/^[0-9]/.test(lines[j])) {
+                        let entryParts = [];
                         if (lines[j].slice(0, 4).includes(".")) {
-                            lines[j] = lines[j].replace(". ", "., ");
+                            entryParts.push(...lines[j].split(". "));
+                        }
+                        if (!/^[0-9]/.test(lines[j + 1])) {
+                            entryParts.push(...lines[j + 1].split(", "));
                         }
 
-                        // let currentLine = lines[j].replace(/[\W_]/g, "");
-                        if (
-                            !/^[0-9]/.test(lines[j + 1])
-                            // &&
-                            // /^[A-Z]*$/.test(currentLine)
-                        ) {
-                            lines[j] = lines[j] + ", " + lines[j + 1];
-                            lines.splice(j + 1, 1);
-                        }
+                        entry = {
+                            position: entryParts[0],
+                            title: entryParts[1],
+                            author: entryParts[2],
+                            publisher: entryParts[3],
+                            price: entryParts[4],
+                            isbn: entryParts[5],
+                        };
                     }
-
-                    // add comma after period (for list poositions)
-                    // if (/^[0-9]/.test(lines[j])) {
-                    //     if (lines[j].slice(0, 4).includes(".")) {
-                    //         lines[j] = lines[j].replace(". ", "., ");
-                    //     }
-                    // }
-
-                    listItems.push(lines[j]);
-                    if (!/^[0-9]/.test(lines[j])) {
+                    listItems.push(entry);
+                    if (/^[A-Z]*$/.test(lines[j])) {
                         break;
                     }
                 }
-                listItems = listItems.filter((item) => /^[0-9]/.test(item));
 
-                // console.log("list: ", listName);
-                // console.log("listItems: ", listItems);
+                // remove duplicates from listItems
+                // todo figure out why the duplicates are there in the first place!
+                listItems = listItems.filter(
+                    (item, index, self) =>
+                        index ===
+                        self.findIndex(
+                            (t) =>
+                                t.position === item.position &&
+                                t.title === item.title &&
+                                t.author === item.author &&
+                                t.publisher === item.publisher &&
+                                t.price === item.price &&
+                                t.isbn === item.isbn
+                        )
+                );
+
                 lists.push({
                     list,
                     listItems,
@@ -109,7 +112,6 @@ const watch = async (fileURI) => {
 
 parse = (listsToParse) => {
     return listsToParse;
-    // console.log("lists: ", lists.lines);
 };
 
 module.exports.watch = watch;
