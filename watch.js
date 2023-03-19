@@ -25,7 +25,6 @@ const watch = async (fileURI) => {
             .filter((line) => line !== "");
 
         let lists = [];
-
         for (let i = 0; i < lines.length; i++) {
             if (/^[0-9]/.test(lines[i])) {
                 if (!/^[0-9]/.test(lines[i + 1])) {
@@ -40,13 +39,25 @@ const watch = async (fileURI) => {
         }
 
         for (let i = 0; i < lines.length; i++) {
+            // console.log(lines[i])
             let thisLine = lines[i].replace(/[\W_]/g, "");
+            // console.log(thisLine)
             // if it's all caps, it's a list name
             if (/^[A-Z]*$/.test(thisLine)) {
+                // console.log(`list: ${lines[i]}`)
                 let list = lines[i];
                 let listItems = [];
                 for (let j = i + 1; j < lines.length; j++) {
+                    // console.log('line: ', lines[j])
                     let entry;
+                    let nextLine = lines[j + 1] ? lines[j + 1].replace(/[\W_]/g, "") : '';
+                    if ((lines[j+1] === undefined) || (lines[j+1] === '') || /^[A-Z]*$/.test(nextLine)) {
+                        console.log('next line is undefined or empty or all caps: ', lines[j+1])
+                        console.log ('breaking')
+                        break;
+                    }
+
+
                     if (/^[0-9]/.test(lines[j])) {
                         let entryParts = [];
                         if (lines[j].slice(0, 4).includes(".")) {
