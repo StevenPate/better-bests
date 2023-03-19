@@ -1,0 +1,918 @@
+[
+  {
+    "HARDCOVER FICTION": [
+      {
+        "position": "1",
+        "title": "Lessons in Chemistry",
+        "author": "Bonnie Garmus",
+        "publisher": "Doubleday",
+        "price": "$29",
+        "isbn": "9780385547345"
+      },
+      {
+        "position": "2",
+        "title": "Tomorrow, and Tomorrow, and Tomorrow",
+        "author": "Gabrielle Zevin",
+        "publisher": "Knopf",
+        "price": "$28",
+        "isbn": "9780593321201"
+      },
+      {
+        "position": "3",
+        "title": "Demon Copperhead",
+        "author": "Barbara Kingsolver",
+        "publisher": "Harper",
+        "price": "$32.50",
+        "isbn": "9780063251922"
+      },
+      {
+        "position": "4",
+        "title": "Old Babes in the Wood: Stories",
+        "author": "Margaret Atwood",
+        "publisher": "Doubleday",
+        "price": "$30",
+        "isbn": "9780385549073"
+      },
+      {
+        "position": "5",
+        "title": "I Have Some Questions for You",
+        "author": "Rebecca Makkai",
+        "publisher": "Viking",
+        "price": "$28",
+        "isbn": "9780593490143"
+      },
+      {
+        "position": "6",
+        "title": "Remarkably Bright Creatures",
+        "author": "Shelby Van Pelt",
+        "publisher": "Ecco",
+        "price": "$27.99",
+        "isbn": "9780063204157"
+      },
+      {
+        "position": "7",
+        "title": "A Day of Fallen Night",
+        "author": "Samantha Shannon",
+        "publisher": "Bloomsbury Publishing",
+        "price": "$35",
+        "isbn": "9781635577921"
+      },
+      {
+        "position": "8",
+        "title": "A Psalm for the Wild-Built",
+        "author": "Becky Chambers",
+        "publisher": "Tordotcom",
+        "price": "$20.99",
+        "isbn": "9781250236210"
+      },
+      {
+        "position": "9",
+        "title": "The Adventures of Amina al-Sirafi",
+        "author": "Shannon Chakraborty",
+        "publisher": "Harper Voyager",
+        "price": "$32",
+        "isbn": "9780062963505"
+      },
+      {
+        "position": "10",
+        "title": "Horse",
+        "author": "Geraldine Brooks",
+        "publisher": "Viking",
+        "price": "$28",
+        "isbn": "9780399562969"
+      },
+      {
+        "position": "11",
+        "title": "Stone Blind",
+        "author": "Natalie Haynes",
+        "publisher": "Harper",
+        "price": "$30",
+        "isbn": "9780063258396"
+      },
+      {
+        "position": "12",
+        "title": "Before the Coffee Gets Cold",
+        "author": "Toshikazu Kawaguchi",
+        "publisher": "Hanover Square Press",
+        "price": "$19.99",
+        "isbn": "9781335430991"
+      },
+      {
+        "position": "13",
+        "title": "Storm Watch",
+        "author": "C.J. Box",
+        "publisher": "Putnam",
+        "price": "$29",
+        "isbn": "9780593331309"
+      },
+      {
+        "position": "14",
+        "title": "Murder Your Employer: The McMasters Guide to Homicide",
+        "author": "Rupert Holmes",
+        "publisher": "Avid Reader Press/Simon & Schuster",
+        "price": "$28",
+        "isbn": "9781451648218"
+      },
+      {
+        "position": "15",
+        "title": "The London Séance Society",
+        "author": "Sarah Penner",
+        "publisher": "Park Row",
+        "price": "$30",
+        "isbn": "9780778387114"
+      }
+    ]
+  },
+  {
+    "HARDCOVER NONFICTION": [
+      {
+        "position": "1",
+        "title": "Enchantment: Awakening Wonder in an Anxious Age",
+        "author": "Katherine May",
+        "publisher": "Riverhead Books",
+        "price": "$26",
+        "isbn": "9780593329993"
+      },
+      {
+        "position": "2",
+        "title": "I'm Glad My Mom Died",
+        "author": "Jennette McCurdy",
+        "publisher": "Simon & Schuster",
+        "price": "$27.99",
+        "isbn": "9781982185824"
+      },
+      {
+        "position": "3",
+        "title": "Saving Time: Discovering a Life Beyond the Clock",
+        "author": "Jenny Odell",
+        "publisher": "Random House",
+        "price": "$28.99",
+        "isbn": "9780593242704"
+      },
+      {
+        "position": "4",
+        "title": "The Boy, the Mole, the Fox and the Horse",
+        "author": "Charlie Mackesy",
+        "publisher": "HarperOne",
+        "price": "$22.99",
+        "isbn": "9780062976581"
+      },
+      {
+        "position": "5",
+        "title": "Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones",
+        "author": "James Clear",
+        "publisher": "Avery",
+        "price": "$27",
+        "isbn": "9780735211292"
+      },
+      {
+        "position": "6",
+        "title": "It's OK to Be Angry About Capitalism",
+        "author": "Bernie Sanders, John Nichols",
+        "publisher": "Crown",
+        "price": "$28",
+        "isbn": "9780593238714"
+      },
+      {
+        "position": "7",
+        "title": "Crying in H Mart: A Memoir",
+        "author": "Michelle Zauner",
+        "publisher": "Knopf",
+        "price": "$26.95",
+        "isbn": "9780525657743"
+      },
+      {
+        "position": "8",
+        "title": "Spare",
+        "author": "Prince Harry, The Duke of Sussex",
+        "publisher": "Random House",
+        "price": "$36",
+        "isbn": "9780593593806"
+      },
+      {
+        "position": "9",
+        "title": "The Light We Carry: Overcoming in Uncertain Times",
+        "author": "Michelle Obama",
+        "publisher": "Crown",
+        "price": "$32.5",
+        "isbn": "9780593237465"
+      },
+      {
+        "position": "10",
+        "title": "The Myth of Normal: Trauma, Illness, and Healing in a Toxic Culture",
+        "author": "Gabor Maté, M.D., Daniel Maté",
+        "publisher": "Avery",
+        "price": "$30",
+        "isbn": "9780593083888"
+      },
+      {
+        "position": "11",
+        "title": "The Creative Act: A Way of Being",
+        "author": "Rick Rubin",
+        "publisher": "Penguin Press",
+        "price": "$32",
+        "isbn": "9780593652886"
+      },
+      {
+        "position": "12",
+        "title": "Smitten Kitchen Keepers: New Classics for Your Forever Files",
+        "author": "Deb Perelman",
+        "publisher": "Knopf",
+        "price": "$35",
+        "isbn": "9780593318782"
+      },
+      {
+        "position": "13",
+        "title": "Wolfish: Wolf, Self, and the Stories We Tell About Fear",
+        "author": "Erica Berry",
+        "publisher": "Flatiron Books",
+        "price": "$29.99",
+        "isbn": "9781250821621"
+      },
+      {
+        "position": "14",
+        "title": "The Climate Book: The Facts and the Solutions",
+        "author": "Greta Thunberg",
+        "publisher": "Penguin Press",
+        "price": "$30",
+        "isbn": "9780593492307"
+      },
+      {
+        "position": "15",
+        "title": "The Song of the Cell: An Exploration of Medicine and the New Human",
+        "author": "Siddhartha Mukherjee",
+        "publisher": "Scribner",
+        "price": "$32.5",
+        "isbn": "9781982117351"
+      }
+    ]
+  },
+  {
+    "TRADE PAPERBACK FICTION": [
+      {
+        "position": "1",
+        "title": "Daisy Jones & The Six",
+        "author": "Taylor Jenkins Reid",
+        "publisher": "Ballantine",
+        "price": "$17",
+        "isbn": "9781524798642"
+      },
+      {
+        "position": "2",
+        "title": "Under the Whispering Door",
+        "author": "TJ Klune",
+        "publisher": "Tor",
+        "price": "$18.99",
+        "isbn": "9781250217394"
+      },
+      {
+        "position": "3",
+        "title": "The Seven Husbands of Evelyn Hugo",
+        "author": "Taylor Jenkins Reid",
+        "publisher": "Washington Square Press",
+        "price": "$17",
+        "isbn": "9781501161933"
+      },
+      {
+        "position": "4",
+        "title": "A Court of Thorns and Roses",
+        "author": "Sarah J. Maas",
+        "publisher": "Bloomsbury Publishing",
+        "price": "$19",
+        "isbn": "9781635575569"
+      },
+      {
+        "position": "5",
+        "title": "The Maid",
+        "author": "Nita Prose",
+        "publisher": "Ballantine",
+        "price": "$18",
+        "isbn": "9780593356173"
+      },
+      {
+        "position": "6",
+        "title": "The Candy House",
+        "author": "Jennifer Egan",
+        "publisher": "Scribner",
+        "price": "$17.99",
+        "isbn": "9781476716770"
+      },
+      {
+        "position": "7",
+        "title": "Circe",
+        "author": "Madeline Miller",
+        "publisher": "Back Bay",
+        "price": "$16.99",
+        "isbn": "9780316556323"
+      },
+      {
+        "position": "8",
+        "title": "Legends & Lattes",
+        "author": "Travis Baldree",
+        "publisher": "Tor",
+        "price": "$17.99",
+        "isbn": "9781250886088"
+      },
+      {
+        "position": "9",
+        "title": "Cloud Cuckoo Land",
+        "author": "Anthony Doerr",
+        "publisher": "Scribner",
+        "price": "$20",
+        "isbn": "9781982168445"
+      },
+      {
+        "position": "10",
+        "title": "The Priory of the Orange Tree",
+        "author": "Samantha Shannon",
+        "publisher": "Bloomsbury Publishing",
+        "price": "$20",
+        "isbn": "9781635570304"
+      },
+      {
+        "position": "11",
+        "title": "The Paris Apartment",
+        "author": "Lucy Foley",
+        "publisher": "Morrow",
+        "price": "$18.99",
+        "isbn": "9780063003064"
+      },
+      {
+        "position": "12",
+        "title": "The Thursday Murder Club",
+        "author": "Richard Osman",
+        "publisher": "Penguin",
+        "price": "$18",
+        "isbn": "9781984880987"
+      },
+      {
+        "position": "13",
+        "title": "Verity",
+        "author": "Colleen Hoover",
+        "publisher": "Grand Central",
+        "price": "$16.99",
+        "isbn": "9781538724736"
+      },
+      {
+        "position": "14",
+        "title": "The Song of Achilles",
+        "author": "Madeline Miller",
+        "publisher": "Ecco",
+        "price": "$17.99",
+        "isbn": "9780062060624"
+      },
+      {
+        "position": "15",
+        "title": "It Ends with Us",
+        "author": "Colleen Hoover",
+        "publisher": "Atria",
+        "price": "$16.99",
+        "isbn": "9781501110368"
+      }
+    ]
+  },
+  {
+    "TRADE PAPERBACK NONFICTION": [
+      {
+        "position": "1",
+        "title": "Braiding Sweetgrass: Indigenous Wisdom, Scientific Knowledge, and the Teachings of Plants",
+        "author": "Robin Wall Kimmerer",
+        "publisher": "Milkweed Editions",
+        "price": "$20",
+        "isbn": "9781571313560"
+      },
+      {
+        "position": "2",
+        "title": "The Body Keeps the Score: Brain, Mind, and Body in the Healing of Trauma",
+        "author": "Bessel van der Kolk, M.D.",
+        "publisher": "Penguin",
+        "price": "$19",
+        "isbn": "9780143127741"
+      },
+      {
+        "position": "3",
+        "title": "Caste: The Origins of Our Discontents",
+        "author": "Isabel Wilkerson",
+        "publisher": "Random House",
+        "price": "$20",
+        "isbn": "9780593230275"
+      },
+      {
+        "position": "4",
+        "title": "On Island Time: A Traveler's Atlas: Illustrated Adventures On and Around the Islands of Washington and British Columbia",
+        "author": "Chandler O'Leary",
+        "publisher": "Sasquatch Books",
+        "price": "$24.95",
+        "isbn": "9781632173386"
+      },
+      {
+        "position": "5",
+        "title": "Cascadia Field Guide: Art, Ecology, Poetry",
+        "author": "Cmarie Fuhrman (Ed.)",
+        "publisher": "Mountaineers Books",
+        "price": "$29.95",
+        "isbn": "9781680516227"
+      },
+      {
+        "position": "6",
+        "title": "Red Paint: The Ancestral Autobiography of a Coast Salish Punk",
+        "author": "Sasha taqʷšəblu LaPointe",
+        "publisher": "Counterpoint",
+        "price": "$16.95",
+        "isbn": "9781640095885"
+      },
+      {
+        "position": "7",
+        "title": "All About Love: New Visions",
+        "author": "bell hooks",
+        "publisher": "Morrow",
+        "price": "$16.99",
+        "isbn": "9780060959470"
+      },
+      {
+        "position": "8",
+        "title": "Dopamine Nation: Finding Balance in the Age of Indulgence",
+        "author": "Dr. Anna Lembke",
+        "publisher": "Dutton",
+        "price": "$18",
+        "isbn": "9781524746742"
+      },
+      {
+        "position": "9",
+        "title": "The Nineties: A Book",
+        "author": "Chuck Klosterman",
+        "publisher": "Penguin",
+        "price": "$18",
+        "isbn": "9780735217966"
+      },
+      {
+        "position": "10",
+        "title": "The Field Guide to Dumb Birds of North America",
+        "author": "Matt Kracht",
+        "publisher": "Chronicle",
+        "price": "$15.95",
+        "isbn": "9781452174037"
+      },
+      {
+        "position": "11",
+        "title": "Beer Hiking Pacific Northwest 2nd Edition: The Tastiest Way to Discover, Washington, Oregon and British Columbia",
+        "author": "Rachel Wood, Brandon Fralic",
+        "publisher": "Helvetiq",
+        "price": "$19.99",
+        "isbn": "9783907293706"
+      },
+      {
+        "position": "12",
+        "title": "The Pacific Northwest Native Plant Primer: 225 Plants for an Earth-Friendly Garden",
+        "author": "Kristin Currin, Andrew Merritt",
+        "publisher": "Timber Press",
+        "price": "$24.99",
+        "isbn": "9781643260716"
+      },
+      {
+        "position": "13",
+        "title": "What My Bones Know: A Memoir of Healing from Complex Trauma",
+        "author": "Stephanie Foo",
+        "publisher": "Ballantine Books",
+        "price": "$18",
+        "isbn": "9780593238127"
+      },
+      {
+        "position": "14",
+        "title": "Come As You Are: The Surprising New Science That Will Transform Your Sex Life",
+        "author": "Emily Nagoski, Ph.D.",
+        "publisher": "Simon & Schuster",
+        "price": "$18.99",
+        "isbn": "9781982165314"
+      },
+      {
+        "position": "15",
+        "title": "Attached: The New Science of Adult Attachment and How It Can Help You Find--and Keep--Love",
+        "author": "Amir Levine, Rachel Heller",
+        "publisher": "TarcherPerigee",
+        "price": "$17",
+        "isbn": "9781585429134"
+      }
+    ]
+  },
+  {
+    "MASS MARKET": [
+      {
+        "position": "1",
+        "title": "1984",
+        "author": "George Orwell",
+        "publisher": "Signet",
+        "price": "$9.99",
+        "isbn": "9780451524935"
+      },
+      {
+        "position": "2",
+        "title": "The Way of Kings",
+        "author": "Brandon Sanderson",
+        "publisher": "Tor",
+        "price": "$10.99",
+        "isbn": "9780765365279"
+      },
+      {
+        "position": "3",
+        "title": "Hyperion",
+        "author": "Dan Simmons",
+        "publisher": "Spectra",
+        "price": "$8.99",
+        "isbn": "9780553283686"
+      },
+      {
+        "position": "4",
+        "title": "Mistborn: The Final Empire",
+        "author": "Brandon Sanderson",
+        "publisher": "Tor",
+        "price": "$9.99",
+        "isbn": "9781250318541"
+      },
+      {
+        "position": "5",
+        "title": "Dune",
+        "author": "Frank Herbert",
+        "publisher": "Ace",
+        "price": "$10.99",
+        "isbn": "9780593438367"
+      },
+      {
+        "position": "6",
+        "title": "The Wise Man's Fear",
+        "author": "Patrick Rothfuss",
+        "publisher": "DAW",
+        "price": "$10.99",
+        "isbn": "9780756407919"
+      },
+      {
+        "position": "7",
+        "title": "Ninth House",
+        "author": "Leigh Bardugo",
+        "publisher": "Flatiron Books",
+        "price": "$10.99",
+        "isbn": "9781250798008"
+      },
+      {
+        "position": "8",
+        "title": "Slaughterhouse-Five",
+        "author": "Kurt Vonnegut",
+        "publisher": "Laurel Leaf",
+        "price": "$8.99",
+        "isbn": "9780440180296"
+      },
+      {
+        "position": "9",
+        "title": "The Well of Ascension",
+        "author": "Brandon Sanderson",
+        "publisher": "Tor",
+        "price": "$10.99",
+        "isbn": "9781250318572"
+      },
+      {
+        "position": "10",
+        "title": "The Shining",
+        "author": "Stephen King",
+        "publisher": "Anchor",
+        "price": "$9.99",
+        "isbn": "9780307743657"
+      }
+    ]
+  },
+  {
+    "CHILDREN'S ILLUSTRATED": [
+      {
+        "position": "1",
+        "title": "Goodnight Moon",
+        "author": "Margaret Wise Brown, Clement Hurd (Illus.)",
+        "publisher": "Harper",
+        "price": "$8.99",
+        "isbn": "9780694003617"
+      },
+      {
+        "position": "2",
+        "title": "Where the Wild Things Are",
+        "author": "Maurice Sendak",
+        "publisher": "Harper",
+        "price": "$19.95",
+        "isbn": "9780060254926"
+      },
+      {
+        "position": "3",
+        "title": "Chicka Chicka Boom Boom",
+        "author": "Bill Martin, John Archambault, Lois Ehlert (Illus.)",
+        "publisher": "Little Simon",
+        "price": "$7.99",
+        "isbn": "9781442450707"
+      },
+      {
+        "position": "4",
+        "title": "The Very Hungry Caterpillar",
+        "author": "Eric Carle",
+        "publisher": "World of Eric Carle",
+        "price": "$10.99",
+        "isbn": "9780399226908"
+      },
+      {
+        "position": "5",
+        "title": "Jamberry",
+        "author": "Bruce Degen",
+        "publisher": "HarperFestival",
+        "price": "$8.99",
+        "isbn": "9780694006519"
+      },
+      {
+        "position": "6",
+        "title": "Bluey: The Pool",
+        "author": "",
+        "publisher": "Penguin Young Readers",
+        "price": "$4.99",
+        "isbn": "9780593385685"
+      },
+      {
+        "position": "7",
+        "title": "Hot Dog",
+        "author": "Doug Salati",
+        "publisher": "Knopf Books for Young Readers",
+        "price": "$18.99",
+        "isbn": "9780593308431"
+      },
+      {
+        "position": "8",
+        "title": "Bluey: Easter",
+        "author": "Penguin Young Readers",
+        "publisher": "Penguin Young Readers",
+        "price": "$5.99",
+        "isbn": "9780593658383"
+      },
+      {
+        "position": "9",
+        "title": "Little Blue Truck",
+        "author": "Alice Schertle, Jill McElmurry (Illus.)",
+        "publisher": "Clarion Books",
+        "price": "$8.99",
+        "isbn": "9780358451228"
+      },
+      {
+        "position": "10",
+        "title": "Good Night, Gorilla",
+        "author": "Peggy Rathmann",
+        "publisher": "Putnam",
+        "price": "$8.99",
+        "isbn": "9780399230035"
+      }
+    ]
+  },
+  {
+    "EARLY & MIDDLE GRADE READERS": [
+      {
+        "position": "1",
+        "title": "The Moth Keeper: A Graphic Novel",
+        "author": "K. O'Neill",
+        "publisher": "Random House Graphic",
+        "price": "$13.99",
+        "isbn": "9780593182260"
+      },
+      {
+        "position": "2",
+        "title": "Working Boats: An Inside Look at Ten Amazing Watercraft",
+        "author": "Tom Crestodina",
+        "publisher": "Little Bigfoot",
+        "price": "$19.99",
+        "isbn": "9781632172594"
+      },
+      {
+        "position": "3",
+        "title": "Finally Seen",
+        "author": "Kelly Yang",
+        "publisher": "Simon & Schuster Books for Young Readers",
+        "price": "$17.99",
+        "isbn": "9781534488335"
+      },
+      {
+        "position": "4",
+        "title": "A Wolf Called Wander",
+        "author": "Rosanne Parry",
+        "publisher": "Greenwillow Books",
+        "price": "$7.99",
+        "isbn": "9780062895943"
+      },
+      {
+        "position": "5",
+        "title": "Super Extra Deluxe Essential Handbook (Pokémon)",
+        "author": "Scholastic",
+        "publisher": "Scholastic",
+        "price": "$14.99",
+        "isbn": "9781338714128"
+      },
+      {
+        "position": "6",
+        "title": "Squished: A Graphic Novel",
+        "author": "Megan Wagner Lloyd, Michelle Mee Nutter (Illus.)",
+        "publisher": "Graphix",
+        "price": "$12.99",
+        "isbn": "9781338568936"
+      },
+      {
+        "position": "7",
+        "title": "When You Trap a Tiger",
+        "author": "Tae Keller",
+        "publisher": "Yearling",
+        "price": "$8.99",
+        "isbn": "9781524715731"
+      },
+      {
+        "position": "8",
+        "title": "Odder",
+        "author": "Katherine Applegate, Charles Santoso (Illus.)",
+        "publisher": "Feiwel & Friends",
+        "price": "$16.99",
+        "isbn": "9781250147424"
+      },
+      {
+        "position": "9",
+        "title": "The Last Cuentista",
+        "author": "Donna Barba Higuera",
+        "publisher": "Levine Querido",
+        "price": "$18.99",
+        "isbn": "9781646140893"
+      },
+      {
+        "position": "10",
+        "title": "Forge Your Dragon World: A Wings of Fire Creative Guide",
+        "author": "Tui T. Sutherland, Mike Holmes (Illus.)",
+        "publisher": "Graphix",
+        "price": "$12.99",
+        "isbn": "9781338634778"
+      }
+    ]
+  },
+  {
+    "YOUNG ADULT": [
+      {
+        "position": "1",
+        "title": "One of Us Is Lying",
+        "author": "Karen M. McManus",
+        "publisher": "Delacorte Press",
+        "price": "$12.99",
+        "isbn": "9781524714758"
+      },
+      {
+        "position": "2",
+        "title": "She Is a Haunting",
+        "author": "Trang Thanh Tran",
+        "publisher": "Bloomsbury YA",
+        "price": "$18.99",
+        "isbn": "9781547610815"
+      },
+      {
+        "position": "3",
+        "title": "The Girl from the Sea: A Graphic Novel",
+        "author": "Molly Knox Ostertag",
+        "publisher": "Graphix",
+        "price": "$",
+        "isbn": "9781338540574"
+      },
+      {
+        "position": "4",
+        "title": "The Stolen Heir: A Novel of Elfhame",
+        "author": "Holly Black, Little",
+        "publisher": "Brown Books for Young Readers",
+        "price": "$",
+        "isbn": "9780316592703"
+      },
+      {
+        "position": "5",
+        "title": "Girl in Pieces",
+        "author": "Kathleen Glasgow",
+        "publisher": "Ember",
+        "price": "$",
+        "isbn": "9781101934746"
+      },
+      {
+        "position": "6",
+        "title": "Braiding Sweetgrass for Young Adults: Indigenous Wisdom, Scientific Knowledge, and the Teachings of Plants",
+        "author": "Robin Wall Kimmerer, Monique Gray Smith, Nicole Neidhardt (Illus.)",
+        "publisher": "Zest Books",
+        "price": "$17.99",
+        "isbn": "9781728458991"
+      },
+      {
+        "position": "7",
+        "title": "Immortality: A Love Story",
+        "author": "Dana Schwartz",
+        "publisher": "Wednesday Books",
+        "price": "$19.99",
+        "isbn": "9781250861016"
+      },
+      {
+        "position": "8",
+        "title": "The Girl Who Fell Beneath the Sea",
+        "author": "Axie Oh",
+        "publisher": "Feiwel & Friends",
+        "price": "$18.99",
+        "isbn": "9781250780867"
+      },
+      {
+        "position": "9",
+        "title": "Hell Followed with Us",
+        "author": "Andrew Joseph White",
+        "publisher": "Peachtree Teen",
+        "price": "$18.99",
+        "isbn": "9781682633243"
+      },
+      {
+        "position": "10",
+        "title": "Iron Widow",
+        "author": "Xiran Jay Zhao",
+        "publisher": "Tundra Books",
+        "price": "$11.99",
+        "isbn": "9780735269958"
+      }
+    ]
+  },
+  {
+    "CHILDREN'S SERIES TITLES": [
+      {
+        "position": "1",
+        "title": "Moon Rising: A Graphic Novel (Wings of Fire Graphic Novel, #6)",
+        "author": "Tui T. Sutherland, Mike Holmes (Illus.)",
+        "publisher": "Graphix",
+        "price": "$12.99",
+        "isbn": "9781338730890"
+      },
+      {
+        "position": "2",
+        "title": "Curse of the Shadow Dragon (Dragon Masters, #23)",
+        "author": "Tracey West, Graham Howells (Illus.)",
+        "publisher": "Scholastic",
+        "price": "$5.99",
+        "isbn": "9781338776942"
+      },
+      {
+        "position": "3",
+        "title": "The Cruel Prince (The Folk of the Air, #1)",
+        "author": "Holly Black, Little",
+        "publisher": "Brown Books for Young Readers",
+        "price": "$12.99",
+        "isbn": "9780316310314"
+      },
+      {
+        "position": "4",
+        "title": "Hilo Book 9: Gina and the Last City on Earth",
+        "author": "Judd Winick",
+        "publisher": "Random House Graphic",
+        "price": "$13.99",
+        "isbn": "9780593488096"
+      },
+      {
+        "position": "5",
+        "title": "The Hunger Games",
+        "author": "Suzanne Collins",
+        "publisher": "Scholastic",
+        "price": "$12.99",
+        "isbn": "9780545425117"
+      },
+      {
+        "position": "6",
+        "title": "A Good Girl's Guide to Murder",
+        "author": "Holly Jackson",
+        "publisher": "Ember",
+        "price": "$10.99",
+        "isbn": "9781984896391"
+      },
+      {
+        "position": "7",
+        "title": "InvestiGators: Agents of S.U.I.T.",
+        "author": "John Patrick Green, Christopher Hastings, Pat Lewis (Illus.)",
+        "publisher": "First Second",
+        "price": "$10.99",
+        "isbn": "9781250852564"
+      },
+      {
+        "position": "8",
+        "title": "Cinder: Book One of the Lunar Chronicles",
+        "author": "Marissa Meyer",
+        "publisher": "Square Fish",
+        "price": "$11.99",
+        "isbn": "9781250768889"
+      },
+      {
+        "position": "9",
+        "title": "Diary of a Wimpy Kid: Diper Överlöde",
+        "author": "Jeff Kinney",
+        "publisher": "Abrams",
+        "price": "$14.99",
+        "isbn": "9781419762949"
+      },
+      {
+        "position": "10",
+        "title": "Mary Anne's Bad Luck Mystery: A Graphic Novel (The Baby-Sitters Club Graphix, #13)",
+        "author": "Ann M. Martin, Cynthia Yuan Cheng (Illus.)",
+        "publisher": "Graphix",
+        "price": "$12.99",
+        "isbn": "9781338616101"
+      }
+    ]
+  }
+]
