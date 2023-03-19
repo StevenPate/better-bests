@@ -1,0 +1,59 @@
+---
+layout: default.njk
+title: "My Page"
+---
+{# {{ page | log }} #}
+
+{% for list in PNBA.lists %}
+<div class="row">
+
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box"><h2>{{ list.listName}}</h2></div>
+    </div>
+    <div class="col-xs">
+        <h3>All</h3>
+        <ol>
+        {% for book in list.allBooks %}
+            <li><strong>{{ book.title }}</strong>, {{ book.author }} - {{ book.isbn }}</li>
+        {% endfor %}
+        </ol>
+        <details>
+            <summary>All ISBNs</summary>
+            <div>
+                {{ list.allISBNs | join(', ') }}
+            </div>
+        </details>
+
+
+    </div>
+    <div class="col-xs">
+        <h3>Added</h3>
+        <ul>
+        {% for book in list.addedBooks %}
+            <li><strong>{{ book.title }}</strong>, {{ book.author }} ({{ book.position }})<br>
+            {{ book.barcode | safe }} </li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div class="col-xs">
+        <h3>Dropped</h3>
+        <ul>
+        {% for book in list.droppedBooks %}
+            <li><strong>{{ book.title }}</strong>, {{ book.author }} ({{ book.position }})<br>
+            {{ book.barcode | safe }} </li>
+        {% endfor %}
+        </ul>
+    </div>
+
+
+
+    {# {{ list | log }} #}
+    <details>
+        <summary></summary>
+            <div>
+            </div>
+    </details>
+</div>  
+{% endfor %}

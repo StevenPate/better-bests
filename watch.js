@@ -8,8 +8,8 @@ const watch = async (fileURI) => {
 
     // todo might change this to grab ALL the lists?
     const regex = /.*pn.txt/g;
-    const match = result.match(regex);
     const region = 'PNBA';
+    const match = result.match(regex);
     // const match = ['https://www.bookweb.org/sites/default/files/regional_bestseller/230308pn.txt']
 
     for (let i = 0; i < match.length; i++) {
@@ -118,7 +118,8 @@ const watch = async (fileURI) => {
                 }
 
                 lists.push({
-                    [list]: listItems,
+                    listName: list,
+                    listItems,
                 });
             }
         }

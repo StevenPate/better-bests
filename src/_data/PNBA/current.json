@@ -1,6 +1,7 @@
 [
   {
-    "HARDCOVER FICTION": [
+    "listName": "HARDCOVER FICTION",
+    "listItems": [
       {
         "position": "1",
         "title": "Lessons in Chemistry",
@@ -124,7 +125,8 @@
     ]
   },
   {
-    "HARDCOVER NONFICTION": [
+    "listName": "HARDCOVER NONFICTION",
+    "listItems": [
       {
         "position": "1",
         "title": "Enchantment: Awakening Wonder in an Anxious Age",
@@ -248,7 +250,8 @@
     ]
   },
   {
-    "TRADE PAPERBACK FICTION": [
+    "listName": "TRADE PAPERBACK FICTION",
+    "listItems": [
       {
         "position": "1",
         "title": "Daisy Jones & The Six",
@@ -372,7 +375,8 @@
     ]
   },
   {
-    "TRADE PAPERBACK NONFICTION": [
+    "listName": "TRADE PAPERBACK NONFICTION",
+    "listItems": [
       {
         "position": "1",
         "title": "Braiding Sweetgrass: Indigenous Wisdom, Scientific Knowledge, and the Teachings of Plants",
@@ -496,7 +500,8 @@
     ]
   },
   {
-    "MASS MARKET": [
+    "listName": "MASS MARKET",
+    "listItems": [
       {
         "position": "1",
         "title": "1984",
@@ -580,7 +585,8 @@
     ]
   },
   {
-    "CHILDREN'S ILLUSTRATED": [
+    "listName": "CHILDREN'S ILLUSTRATED",
+    "listItems": [
       {
         "position": "1",
         "title": "Goodnight Moon",
@@ -664,7 +670,8 @@
     ]
   },
   {
-    "EARLY & MIDDLE GRADE READERS": [
+    "listName": "EARLY & MIDDLE GRADE READERS",
+    "listItems": [
       {
         "position": "1",
         "title": "The Moth Keeper: A Graphic Novel",
@@ -748,7 +755,8 @@
     ]
   },
   {
-    "YOUNG ADULT": [
+    "listName": "YOUNG ADULT",
+    "listItems": [
       {
         "position": "1",
         "title": "One of Us Is Lying",
@@ -832,7 +840,8 @@
     ]
   },
   {
-    "CHILDREN'S SERIES TITLES": [
+    "listName": "CHILDREN'S SERIES TITLES",
+    "listItems": [
       {
         "position": "1",
         "title": "Moon Rising: A Graphic Novel (Wings of Fire Graphic Novel, #6)",
