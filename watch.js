@@ -6,26 +6,14 @@ const watch = async (fileURI) => {
     const { document } = await window(fileURI);
     const result = document.querySelector("#node-111 ").textContent;
 
-    // find string in result that ends with "pn.txt"
+    // todo might change this to grab all the lists?
     const regex = /.*pn.txt/g;
     const match = result.match(regex);
-    // if string begins with "\t" remove it
-    if (match[0].startsWith("\t")) {
-        match[0] = match[0].replace("\t", "");
-    }
 
-    // for each url in match, fetch the url and save the content to a file
     for (let i = 0; i < match.length; i++) {
-        const url = match[i];
-        // console.log("url: ", url);
+        let url = match[i].startsWith("\t") ? match[i].replace("\t", "") : match[i];
         const dateString = match[i].slice(-12, -6);
-        const date =
-            "20" +
-            dateString.slice(0, 2) +
-            "-" +
-            dateString.slice(2, 4) +
-            "-" +
-            dateString.slice(4, 6);
+        const date = "20" + dateString.slice(0, 2) + "-" + dateString.slice(2, 4) + "-" + dateString.slice(4, 6);
         const response = await fetch(url);
         const text = await response.text();
 
@@ -52,13 +40,13 @@ const watch = async (fileURI) => {
         }
 
         for (let i = 0; i < lines.length; i++) {
-            // create a variable that removes all non-alphanumeric characters
             let thisLine = lines[i].replace(/[\W_]/g, "");
             // if it's all caps, it's a list name
             if (/^[A-Z]*$/.test(thisLine)) {
                 let list = lines[i];
                 let listItems = [];
                 for (let j = i + 1; j < lines.length; j++) {
+                    let entry;
                     if (/^[0-9]/.test(lines[j])) {
                         let entryParts = [];
                         if (lines[j].slice(0, 4).includes(".")) {
@@ -67,23 +55,32 @@ const watch = async (fileURI) => {
                         if (!/^[0-9]/.test(lines[j + 1])) {
                             entryParts.push(...lines[j + 1].split(", "));
                         }
+                        let position = entryParts[0];
+                        let title = entryParts[1];
+                        let author = entryParts.length > 6
+                            ? entryParts.slice(2, entryParts.length - 3).join(", ")
+                            : entryParts[2];
+                        let publisher = entryParts[entryParts.length - 3];
+                        let price = entryParts[entryParts.length - 2];
+                        let isbn = entryParts[entryParts.length - 1];
 
                         entry = {
-                            position: entryParts[0],
-                            title: entryParts[1],
-                            author: entryParts[2],
-                            publisher: entryParts[3],
-                            price: entryParts[4],
-                            isbn: entryParts[5],
+                            position,
+                            title,
+                            author,
+                            publisher,
+                            price,
+                            isbn,
                         };
+
+                        listItems.push(entry);
+
                     }
-                    listItems.push(entry);
                     if (/^[A-Z]*$/.test(lines[j])) {
                         break;
                     }
                 }
 
-                // remove duplicates from listItems
                 // todo figure out why the duplicates are there in the first place!
                 listItems = listItems.filter(
                     (item, index, self) =>
