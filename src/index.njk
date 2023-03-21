@@ -1,59 +1,48 @@
 ---
 layout: default.njk
-title: "My Page"
+title: "Regional Bestseller Lists"
+pagination:
+    data: lists
+    size: 1
+    alias: region
+permalink: "{{ region.regionAbbreviation | slugify }}/"
 ---
-{# {{ page | log }} #}
+{# {{ region | log }} #}
 
-{% for list in PNBA.lists %}
-<div class="row">
-
-</div>
-<div class="row">
+{% for list in region.current %}
+<div class="row" style="page-break-after: always;">
     <div class="col-xs-12">
         <div class="box"><h2>{{ list.listName}}</h2></div>
     </div>
-    <div class="col-xs">
+    <div class="col-xs col-md-6">
         <h3>All</h3>
         <ol>
-        {% for book in list.allBooks %}
+            {# {{ list | log }} #}
+        {% for book in list.listItems %}
             <li><strong>{{ book.title }}</strong>, {{ book.author }} - {{ book.isbn }}</li>
         {% endfor %}
         </ol>
-        <details>
-            <summary>All ISBNs</summary>
-            <div>
-                {{ list.allISBNs | join(', ') }}
-            </div>
-        </details>
-
-
     </div>
-    <div class="col-xs">
-        <h3>Added</h3>
-        <ul>
-        {% for book in list.addedBooks %}
-            <li><strong>{{ book.title }}</strong>, {{ book.author }} ({{ book.position }})<br>
-            {{ book.barcode | safe }} </li>
-        {% endfor %}
-        </ul>
+    <div class="col-xs col-md-6">
+
+        <div class="col-xs">
+            <h3>Added</h3>
+            <ol>
+                {# {{ list | log }} #}
+            {% for book in list.addedItems %}
+                <li><strong>{{ book.title }}</strong>, {{ book.author }} - {{ book.isbn }}</li>
+            {% endfor %}
+            </ol>
+        </div>
+        <div class="col-xs">
+            <h3>Dropped</h3>
+            <ol>
+                {# {{ list | log }} #}
+            {% for book in list.droppedItems %}
+                <li><strong>{{ book.title }}</strong>, {{ book.author }} - {{ book.isbn }}</li>
+            {% endfor %}
+            </ol>
+        </div>
     </div>
-    <div class="col-xs">
-        <h3>Dropped</h3>
-        <ul>
-        {% for book in list.droppedBooks %}
-            <li><strong>{{ book.title }}</strong>, {{ book.author }} ({{ book.position }})<br>
-            {{ book.barcode | safe }} </li>
-        {% endfor %}
-        </ul>
-    </div>
-
-
-
-    {# {{ list | log }} #}
-    <details>
-        <summary></summary>
-            <div>
-            </div>
-    </details>
-</div>  
+</div>
 {% endfor %}
