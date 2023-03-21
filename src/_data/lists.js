@@ -1,6 +1,7 @@
 const aba = require("./aba.json");
 const dayjs = require("dayjs");
 const EleventyFetch = require("@11ty/eleventy-fetch");
+const Image = require("@11ty/eleventy-img");
 const JsBarcode = require('jsbarcode');
 const { createCanvas } = require("canvas");
 const canvas = createCanvas();
@@ -10,6 +11,34 @@ previousDateString = (dateString) =>
         .subtract(1, "week")
         .format("YYMMDD");
 
+// getImage = async (isbn) => {
+//     // console.log(`starting getImage for ${isbn}`);
+//     let ISBNdbURL = `https://api2.isbndb.com/book/${isbn}`;
+//     // let ISBNdbURL = `https://api2.isbndb.com/book/9780593329993`;
+//     try {
+//         let ISBNdb = await EleventyFetch(ISBNdbURL, {
+//             duration: "10d",
+//             directory: "_cache",
+//             type: "json",
+//             fetchOptions: {
+//                 headers: {
+//                     Host: "api2.isbndb.com",
+//                     "User-Agent": "insomnia/5.12.4",
+//                     Authorization: "48565_c9d95611e5493d3ce2ac9af517dcac2a",
+//                     Accept: "*/*",
+//                     "Content-Type": "application/json",
+//                 },
+//             },
+//         });
+//         // return ISBNdb.book.image;
+//         const bookImage = ISBNdb.book.image;
+//         return bookImage;
+//     } catch (error) {
+//         console.log(error);
+//         return "https://via.placeholder.com/150";
+//     }
+// }
+        
 parseListTxts = (text) => {
 
     let lines = text.split("\n");
@@ -84,6 +113,10 @@ parseListTxts = (text) => {
                     let publisher = entryParts[entryParts.length - 3];
                     let price = entryParts[entryParts.length - 2];
                     let isbn = entryParts[entryParts.length - 1];
+
+                    if (title.length > 50) {
+                        title = title.slice(0, 50) + "...";
+                    }
                     // if (!isbn || isbn.length < 10 || isbn.length > 13 || isbn === "") {
                     //     console.log(lines[j]);
                     //     console.log("ISBN is not valid: ", isbn, list, position, title);
@@ -106,6 +139,8 @@ parseListTxts = (text) => {
                     };
                     let barcode = barCode(isbn);
 
+                    // let cover = await getImage(isbn);
+
                     entry = {
                         position,
                         title,
@@ -113,7 +148,8 @@ parseListTxts = (text) => {
                         publisher,
                         price,
                         isbn,
-                        barcode
+                        barcode,
+                        coverImage: `https://images-us.bookshop.org/ingram/${isbn}.jpg?height=500&v=v2`
                     };
 
                     listItems.push(entry);
@@ -221,6 +257,5 @@ module.exports = async function () {
 
         })
     );
-
     return regionLists;
 };
