@@ -1,0 +1,42 @@
+{
+    "listsPageURL" : "https://www.bookweb.org/print/111",
+    "textFilePath" : "http://www.bookweb.org/sites/default/files/regional_bestseller/",
+    "regions" : [
+            {
+                "regionalAssociation" : "Pacific Northwest Booksellers Association (PNBA)",
+                "regionSuffix" : "pn"
+            },
+            {
+                "regionalAssociation" : "California Independent Booksellers Alliance (CALIBA) Northern",
+                "regionSuffix" : "nc"
+            },
+            {
+                "regionalAssociation" : "California Independent Booksellers Alliance (CALIBA) Southern",
+                "regionSuffix" : "sc"
+            },
+            {
+                "regionalAssociation" : "New England Independent Booksellers Association (NEIBA)",
+                "regionSuffix" : "ne"
+            },
+            {
+                "regionalAssociation" : "Southern Independent Booksellers Alliance (SIBA)",
+                "regionSuffix" : "si"
+            },
+            {
+                "regionalAssociation" : "Mountains & Plains Independent Booksellers Association (MPIBA)",
+                "regionSuffix" : "mp"
+            },
+            {
+                "regionalAssociation" : "New Atlantic Independent Booksellers Association (NAIBA)",
+                "regionSuffix" : "na"
+            },
+            {
+                "regionalAssociation" : "Great Lakes Independent Booksellers Association (GLIBA)",
+                "regionSuffix" : "gl"
+            },
+            {
+                "regionalAssociation" : "Midwest Independent Booksellers Association (MIBA)",
+                "regionSuffix" : "mw"
+            }
+        ]
+}
