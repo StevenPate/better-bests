@@ -5,7 +5,8 @@
             {
                 "regionalAssociation" : "Pacific Northwest Booksellers Association (PNBA)",
                 "regionSuffix" : "pn"
-            },
+            }],
+    "otherRegions" : [
             {
                 "regionalAssociation" : "California Independent Booksellers Alliance (CALIBA) Northern",
                 "regionSuffix" : "nc"

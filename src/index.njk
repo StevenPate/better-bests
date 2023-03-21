@@ -30,7 +30,8 @@ permalink: "{{ region.regionAbbreviation | slugify }}/"
             <ol>
                 {# {{ list | log }} #}
             {% for book in list.addedItems %}
-                <li><strong>{{ book.title }}</strong>, {{ book.author }} - {{ book.isbn }}</li>
+                <li><strong>{{ book.title }}</strong>, {{ book.author }} - {{ book.isbn }}<br>
+                {{ book.barcode | safe }} </li>
             {% endfor %}
             </ol>
         </div>
@@ -39,7 +40,8 @@ permalink: "{{ region.regionAbbreviation | slugify }}/"
             <ol>
                 {# {{ list | log }} #}
             {% for book in list.droppedItems %}
-                <li><strong>{{ book.title }}</strong>, {{ book.author }} - {{ book.isbn }}</li>
+                <li><strong>{{ book.title }}</strong>, {{ book.author }} - {{ book.isbn }}<br>
+                {{ book.barcode | safe }} </li></li>
             {% endfor %}
             </ol>
         </div>

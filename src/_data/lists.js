@@ -1,12 +1,14 @@
 const aba = require("./aba.json");
 const dayjs = require("dayjs");
 const EleventyFetch = require("@11ty/eleventy-fetch");
+const JsBarcode = require('jsbarcode');
+const { createCanvas } = require("canvas");
+const canvas = createCanvas();
 
 previousDateString = (dateString) =>
     dayjs(dateString.replace(/(\d{2})(\d{2})(\d{2})/, "20$1-$2-$3"))
         .subtract(1, "week")
         .format("YYMMDD");
-
 
 parseListTxts = (text) => {
 
@@ -66,7 +68,6 @@ parseListTxts = (text) => {
   
                             entryParts[1] =
                                 entryParts[1] + ", " + lines[j + 1];
-                            // console.log("entryParts[1]: ", entryParts[1]);
                             entryParts.push(...lines[j + 2].split(", "));
                         } else {
                             entryParts.push(...lines[j + 1].split(", "));
@@ -83,6 +84,27 @@ parseListTxts = (text) => {
                     let publisher = entryParts[entryParts.length - 3];
                     let price = entryParts[entryParts.length - 2];
                     let isbn = entryParts[entryParts.length - 1];
+                    // if (!isbn || isbn.length < 10 || isbn.length > 13 || isbn === "") {
+                    //     console.log(lines[j]);
+                    //     console.log("ISBN is not valid: ", isbn, list, position, title);
+                        
+                    //     // isbn = "0000000000000";
+                    // }
+
+                    const barCode = (isbn) => {
+                        JsBarcode(canvas, isbn, {
+                            format: "EAN13",
+                            lineColor: "#000",
+                            width: 2,
+                            height: 50,
+                            displayValue: true,
+                            textMargin: 0,
+                            fontSize: 15,
+                            margin: 20,
+                        });
+                        return `<img src="${canvas.toDataURL()}" />`;
+                    };
+                    let barcode = barCode(isbn);
 
                     entry = {
                         position,
@@ -91,6 +113,7 @@ parseListTxts = (text) => {
                         publisher,
                         price,
                         isbn,
+                        barcode
                     };
 
                     listItems.push(entry);
@@ -145,6 +168,7 @@ module.exports = async function () {
                     type: "text",
                 }
             );
+            // console.log(regionList);
             regionList.current = parseListTxts(currentText);
             pastText = await EleventyFetch(
                 regionList.pastListURL, 
@@ -158,7 +182,6 @@ module.exports = async function () {
             regionList.current.forEach((currentList) => {
                 currentList.addedItems = [];
                 currentList.droppedItems = [];
-                console.log(currentList.listName);
                 let pastList = regionList.past.find(
                     (pastList) => pastList.listName === currentList.listName
                 );
@@ -193,140 +216,11 @@ module.exports = async function () {
                     }
                     );
                 }
-                console.log(currentList.droppedItems);
             });
             
 
-                // if (pastList) {
-                //     currentList.listItems.forEach((currentListItem) => {
-                //         if (
-
-            // regionList.current.addedItems = [];
-            // regionList.current.droppedItems = [];
-            // regionList.current.forEach((currentList) => {
-            //     let pastList = regionList.past.find(
-            //         (pastList) => pastList.listName === currentList.listName
-            //     );
-            //     if (pastList) {
-            //         currentList.listItems.forEach((currentListItem) => {
-            //             // console.log(currentListItem);
-            //             if (
-            //                 !pastList.listItems.find(
-            //                     (pastListItem) =>
-            //                         pastListItem.isbn ==
-            //                         currentListItem.isbn
-            //                 )
-            //             ) {
-            //                 currentList.addedItems.push(
-            //                     currentListItem
-            //                 );
-            //             }
-            //         });
-            //     }
-            // });
-            // regionList.past.droppedItems = [];
-            // regionList.past.forEach((pastList) => {
-            //     let currentList = regionList.current.find(
-            //         (currentList) =>
-            //             currentList.listName === pastList.listName
-            //     );
-            //     // console.log ('pastList: ', pastList);
-            //     // console.log ('currentList: ', currentList);
-            //     // if an item.isbn is in the past list but not in the current list, console log it
-            //     if (currentList) {
-            //         pastList.listItems.forEach((pastListItem) => {
-            //             // console.log(pastListItem.isbn);
-            //             if (
-            //                 !currentList.listItems.find(
-            //                     (currentListItem) =>
-            //                         currentListItem.isbn ==
-            //                         pastListItem.isbn
-            //                 )
-            //             ) {
-            //                 currentList.droppedItems.push(
-            //                     pastListItem
-            //                 );
-            //             }
-            //         });
-            //         console.log('regionList.past.droppedItems: ', regionList.past.droppedItems);
-
-
-
-
-
-            //     // if (currentList) {
-            //         pastList.listItems.forEach((pastListItem) => {
-            //             // console.log(pastListItem);
-            //             if (
-            //                 !currentList.listItems.find(
-            //                     (currentListItem) =>
-            //                         currentListItem.isbn ==
-            //                         pastListItem.isbn
-            //                 )
-            //             ) {
-            //                 regionList.past.droppedItems.push(
-            //                     pastListItem
-            //                 );
-            //             }
-            //         });
-            //     }
-            // });
-
-            // console.log(regionList.current.droppedItems);
-            // console.log("regionList: ", JSON.stringify(regionList, null, 4));
-            
-            // regionList.dropped = [];
-            // regionList.past.forEach((pastList) => {
-            //     let currentList = regionList.current.find(
-            //         (currentList) =>
-            //             currentList.listName === pastList.listName
-            //     );
-            //     if (currentList) {
-            //         pastList.listItems.forEach((pastListItem) => {
-            //             if (
-            //                 !currentList.listItems.find(
-            //                     (currentListItem) =>
-            //                         currentListItem.isbn ==
-            //                         pastListItem.isbn
-            //                 )
-            //             ) {
-            //                 pastListItem.dropped = true;
-            //                 regionList.dropped.push(pastListItem);
-            //             }
-            //         });
-            //     }
-            // });
-
-            // regionList.added = [];
-            // regionList.current.forEach((currentList) => {
-            //     let pastList = regionList.past.find(
-            //         (pastList) =>
-            //             pastList.listName === currentList.listName
-            //     );
-            //     if (pastList) {
-            //         currentList.listItems.forEach((currentListItem) => {
-            //             //if currentlistitem is not in pastlist, it was added
-            //             if (
-            //                 !pastList.listItems.find(
-            //                     (pastListItem) =>
-            //                         pastListItem.isbn ==
-            //                         currentListItem.isbn
-            //                 )
-            //             ) {
-            //                 currentListItem.added = true;
-            //                 regionList.added.push(currentListItem);
-            //             }
-            //         })
-            //     }
-            // });
         })
     );
 
-
-
-    // regionLists.forEach((regionList) => {
-    //     console.log("regionList: ", regionList);
-    // })
-    
     return regionLists;
 };
