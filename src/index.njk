@@ -2,9 +2,12 @@
 layout: default.njk
 title: "Regional Bestseller Lists"
 ---
+
+
 {% for list in lists  %}
     <header>
-        <h1>{{ list.region }}</h1>
+        {# <h1>{{ list.region }}</h1> #}
+        <h1>The Pacific Northwest Indie Bestseller List for the week ended Sunday, March 19, 2023.</h1>
     </header>
     {% for item in list.current  %}
     <h2>{{ item.listName}}</h2>
@@ -18,7 +21,7 @@ title: "Regional Bestseller Lists"
                 {# <li><strong>{{ book.title }}</strong>, {{ book.author }} - {{ book.isbn }}</li> #}
                 <li>
                     <details>
-                        <summary><strong>{{ book.title }}</strong>, {{ book.author }} - {{ book.isbn }}</summary>
+                        <summary><strong>{{ book.title }}</strong>, {{ book.author }} - <span class="isbn">{{ book.isbn }}</span></summary>
                         <img src="{{ book.coverImage }}">
                     </details>
                 </li>
