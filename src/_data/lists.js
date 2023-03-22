@@ -129,13 +129,13 @@ parseListTxts = (text) => {
                             format: "EAN13",
                             lineColor: "#000",
                             width: 2,
-                            height: 50,
+                            height: 40,
                             displayValue: true,
                             textMargin: 0,
                             fontSize: 15,
-                            margin: 20,
+                            margin: 16,
                         });
-                        return `<img src="${canvas.toDataURL()}" />`;
+                        return `<img src="${canvas.toDataURL()}" style="max-width:120%;" />`;
                     };
                     let barcode = barCode(isbn);
 

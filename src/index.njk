@@ -7,9 +7,10 @@ title: "Regional Bestseller Lists"
         <h1>{{ list.region }}</h1>
     </header>
     {% for item in list.current  %}
-    <h2 class="bestsellerList">{{ item.listName}}</h2>
-    <div class="row" style="between-xs page-break-after: always;">
-        <div class="col-xs col-md-6">
+    <h2>{{ item.listName}}</h2>
+    <div class="listColumns row" style="page-break-after: always;">
+        <div class="allColumn col-xs-12 col-sm-6">
+            <div class="box">
             <h3>All titles</h3>
             <ol>
                 {# {{ list | log }} #}
@@ -23,41 +24,44 @@ title: "Regional Bestseller Lists"
                 </li>
             {% endfor %}
             </ol>
+            </div>
         </div>
-        <div class="col-xs-12 col-sm-6">
-            <div class="col-xs pullList">
+            <div class="added col-sm-3">
                 <h3>Added</h3>
-                <div class="row">
+                <div class="addedItems">
                 {% for book in item.addedItems %}
-                    <article  class="col-xs-12 col-md-5 barcodeCard">
+                    <article  class="bookWithBarcode box" style="min-height:9rem;">
+                        <div class="barcode">
+                            {{ book.barcode | safe }}
+                        </div>
                         <details>
-                            <summary><ol start="{{ book.position }}">
-                                <li><strong>{{ book.title }}</strong></li>
-                            </ol></summary>
-                            <img src="{{ book.coverImage }}">
+                            <summary style="height:3rem;"><strong>{{ book.title }}</strong></summary>
+                            <div class="coverImage">
+                                <img src="{{ book.coverImage }}" style="max-width:80%;">
+                            </div>
                         </details>
-                        {{ book.barcode | safe }}
                     </article>
                 {% endfor %}
                 </div>
             </div>
-            <div class="col-xs pullList">
+            <div class="dropped col-md-3">
                 <h3>Dropped</h3>
-                <div class="row">
-                    {# {{ list | log }} #}
+                <div class="droppededItems">
                 {% for book in item.droppedItems %}
-                    <article  class="col-xs-12 col-md-5 barcodeCard">
-                        <ol start="{{ book.position }}">
-                            <li><strong>{{ book.title }}</strong></li>
-                        </ol>
-                        {{ book.barcode | safe }}
+                    <article  class="bookWithBarcode box" style="min-height:9rem;">
+                        <div class="barcode">
+                            {{ book.barcode | safe }}
+                        </div>
+                        <details>
+                            <summary style="height:3rem;"><strong>{{ book.title }}</strong></summary>
+                            <div class="coverImage">
+                                <img src="{{ book.coverImage }}" style="max-width:80%;">
+                            </div>
+                        </details>
                     </article>
                 {% endfor %}
                 </div>
             </div>
-
-        </div>
-        </div>
     </div>
     {% endfor %}
 {% endfor %}

@@ -4,22 +4,44 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css">
-    <link href="
-        https://cdn.jsdelivr.net/npm/flexboxgrid@6.3.1/dist/flexboxgrid.min.css
-        " rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/flexboxgrid@6.3.1/dist/flexboxgrid.min.css" rel="stylesheet">
     <style>
+        main {
+            padding: 1rem;
+        }
+        ol {
+            padding:1rem;
+        }
+        h2 {
+            background-color: #f0f0f0;
+            color: #333;
+            padding: 1rem 0;
+        }
+        .added, .dropped {
+            {# background-color: #f0f0f0;
+            padding: .5rem;
+            margin: .5rem 0; #}
+            padding:1rem;
+        } 
+        @media print {
+            div.allColumn, div.pullColumn {
+            }
+        }
+    </style>
+    
+    {# <link rel="stylesheet" href="https://unpkg.com/awsm.css/dist/awsm.min.css">  #}
+   {# <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css"> #}
+    <!--style>
         article {
             padding:.5rem;
             margin:.3rem;
         }
-
         h2.bestsellerList {
             position: sticky;
             top: 0px;
             background-color:#fff;
         }
-
         .pullList {
             margin-bottom: 1rem;
         }
@@ -31,9 +53,6 @@
         .pullList h3 {
                 margin:0 0 .25rem;
             }
-        {# .barcodeCard {
-                padding:1rem;
-            } #}
         .barcodeCard ol {
                 margin:1rem;
             }
@@ -45,13 +64,7 @@
             display:none;
         }
 
-        @media print {
-            header, footer, aside, form, … {
-                display: none;
-            }
-}
-
-    </style>
+    </style-->
     <title>{{ title }}</title>
 </head>
 <body>
