@@ -29,38 +29,38 @@ title: "Regional Bestseller Lists"
             </ol>
             </div>
         </div>
-            <div class="added col-sm-3">
+            <div class="added col-sm-3" style="max-width:45%;">
                 <h3>Added</h3>
-                <div class="addedItems">
+                <div class="addedItems" style="padding-top:1rem;">
                 {% for book in item.addedItems %}
-                    <article  class="bookWithBarcode box" style="min-height:9rem;">
-                        <div class="barcode">
-                            {{ book.barcode | safe }}
-                        </div>
+                    <article  class="bookWithBarcode" style="min-height:9rem;page-break-inside: avoid;">
                         <details>
-                            <summary style="height:3rem;"><strong>{{ book.title }}</strong></summary>
+                            <summary style="min-height:3rem;max-width:100%;"><strong>{{ book.title }}</strong></summary>
                             <div class="coverImage">
                                 <img src="{{ book.coverImage }}" style="max-width:80%;">
                             </div>
                         </details>
+                        <div class="barcode">
+                            {{ book.barcode | safe }}
+                        </div>
                     </article>
                 {% endfor %}
                 </div>
             </div>
-            <div class="dropped col-md-3">
+            <div class="dropped col-md-3" style="max-width:45%;">
                 <h3>Dropped</h3>
-                <div class="droppededItems">
+                <div class="droppededItems" style="padding-top:1rem;">
                 {% for book in item.droppedItems %}
-                    <article  class="bookWithBarcode box" style="min-height:9rem;">
-                        <div class="barcode">
-                            {{ book.barcode | safe }}
-                        </div>
+                    <article  class="bookWithBarcode" style="min-height:9rem;page-break-inside: avoid;">
                         <details>
-                            <summary style="height:3rem;"><strong>{{ book.title }}</strong></summary>
+                            <summary style="min-height:3rem;max-width:100%;"><strong>{{ book.title }}</strong></summary>
                             <div class="coverImage">
                                 <img src="{{ book.coverImage }}" style="max-width:80%;">
                             </div>
                         </details>
+                        <div class="barcode">
+                            {{ book.barcode | safe }}
+                        </div>
                     </article>
                 {% endfor %}
                 </div>
