@@ -12,7 +12,7 @@ title: "Regional Bestseller Lists"
     {% for item in list.current  %}
     <h2>{{ item.listName}}</h2>
     <div class="listColumns row" style="page-break-after: always;">
-        <div class="allColumn col-xs-12 col-sm-6">
+        <div class="allColumn col-xs-12 col-sm-5" style="margin:.5rem;">
             <div class="box">
             <h3>All titles</h3>
             <ol>
@@ -31,9 +31,9 @@ title: "Regional Bestseller Lists"
         </div>
             <div class="added col-sm-3" style="max-width:45%;">
                 <h3>Added</h3>
-                <div class="addedItems" style="padding-top:1rem;">
+                <div class="addedItems " style="padding-top:1rem;">
                 {% for book in item.addedItems %}
-                    <article  class="bookWithBarcode" style="min-height:9rem;page-break-inside: avoid;">
+                    <article  class="bookWithBarcode box" style="margin:.25rem;min-height:9rem;page-break-inside: avoid;">
                         <details>
                             <summary style="min-height:3rem;max-width:100%;"><strong>{{ book.title }}</strong></summary>
                             <div class="coverImage">
@@ -51,7 +51,7 @@ title: "Regional Bestseller Lists"
                 <h3>Dropped</h3>
                 <div class="droppededItems" style="padding-top:1rem;">
                 {% for book in item.droppedItems %}
-                    <article  class="bookWithBarcode" style="min-height:9rem;page-break-inside: avoid;">
+                    <article  class="bookWithBarcode box" style="margin:.25rem;min-height:9rem;page-break-inside: avoid;">
                         <details>
                             <summary style="min-height:3rem;max-width:100%;"><strong>{{ book.title }}</strong></summary>
                             <div class="coverImage">
