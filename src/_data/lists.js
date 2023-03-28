@@ -2,7 +2,7 @@ const aba = require("./aba.json");
 const dayjs = require("dayjs");
 const EleventyFetch = require("@11ty/eleventy-fetch");
 const Image = require("@11ty/eleventy-img");
-const JsBarcode = require('jsbarcode');
+const JsBarcode = require("jsbarcode");
 const { createCanvas } = require("canvas");
 const canvas = createCanvas();
 
@@ -38,9 +38,8 @@ previousDateString = (dateString) =>
 //         return "https://via.placeholder.com/150";
 //     }
 // }
-        
-parseListTxts = (text) => {
 
+parseListTxts = (text) => {
     let lines = text.split("\n");
     lines.splice(0, 5);
     lines = lines
@@ -95,9 +94,7 @@ parseListTxts = (text) => {
                             !/^[0-9]/.test(lines[j + 2]) &&
                             !/^[A-Z]*$/.test(laterLine)
                         ) {
-  
-                            entryParts[1] =
-                                entryParts[1] + ", " + lines[j + 1];
+                            entryParts[1] = entryParts[1] + ", " + lines[j + 1];
                             entryParts.push(...lines[j + 2].split(", "));
                         } else {
                             entryParts.push(...lines[j + 1].split(", "));
@@ -121,7 +118,7 @@ parseListTxts = (text) => {
                     // if (!isbn || isbn.length < 10 || isbn.length > 13 || isbn === "") {
                     //     console.log(lines[j]);
                     //     console.log("ISBN is not valid: ", isbn, list, position, title);
-                        
+
                     //     // isbn = "0000000000000";
                     // }
 
@@ -150,7 +147,7 @@ parseListTxts = (text) => {
                         price,
                         isbn,
                         barcode,
-                        coverImage: `https://images-us.bookshop.org/ingram/${isbn}.jpg?height=500&v=v2`
+                        coverImage: `https://images-us.bookshop.org/ingram/${isbn}.jpg?height=500&v=v2`,
                     };
 
                     listItems.push(entry);
@@ -170,7 +167,6 @@ parseListTxts = (text) => {
     }
 
     return lists;
-
 };
 
 module.exports = async function () {
@@ -186,14 +182,19 @@ module.exports = async function () {
         const currentDate = allCurrentLists
             .match(regionRegex)[0]
             .slice(-12, -6);
-        const postDate = dayjs("20" + currentDate, "YYYYMMDD").format("MM-DD-YYYY");
-        const listDate = dayjs("20" + currentDate, "YYYYMMDD").subtract(3, 'day').format("MM-DD-YYYY");
+        const postDate = dayjs("20" + currentDate, "YYYYMMDD").format(
+            "MM-DD-YYYY"
+        );
+        const listDate = dayjs("20" + currentDate, "YYYYMMDD")
+            .subtract(3, "day")
+            .format("MM-DD-YYYY");
         const currentListURL = `${aba.textFilePath}${currentDate}${region.regionSuffix}.txt`;
         const pastListURL = `${aba.textFilePath}${previousDateString(
             currentDate
         )}${region.regionSuffix}.txt`;
         regionLists.push({
             region: region.regionalAssociation,
+            associationAbbreviation: region.regionalAssociationAbbreviation,
             regionAbbreviation: region.regionSuffix,
             listDate,
             currentListURL,
@@ -203,22 +204,16 @@ module.exports = async function () {
 
     await Promise.all(
         regionLists.map(async (regionList) => {
-            currentText = await EleventyFetch(
-                regionList.currentListURL,
-                {
-                    duration: "1d", // save for 1 day
-                    type: "text",
-                }
-            );
+            currentText = await EleventyFetch(regionList.currentListURL, {
+                duration: "1d", // save for 1 day
+                type: "text",
+            });
             // console.log(regionList);
             regionList.current = parseListTxts(currentText);
-            pastText = await EleventyFetch(
-                regionList.pastListURL, 
-                {
-                    duration: "1d", // save for 1 day
-                    type: "text",
-                }
-            );
+            pastText = await EleventyFetch(regionList.pastListURL, {
+                duration: "1d", // save for 1 day
+                type: "text",
+            });
             regionList.past = parseListTxts(pastText);
 
             regionList.current.forEach((currentList) => {
@@ -232,35 +227,51 @@ module.exports = async function () {
                         if (
                             !pastList.listItems.find(
                                 (pastListItem) =>
-                                    pastListItem.isbn ==
-                                    currentListItem.isbn
+                                    pastListItem.isbn == currentListItem.isbn
                             )
                         ) {
-                            currentList.addedItems.push(
-                                currentListItem
+                            currentList.addedItems.push(currentListItem);
+                        } else {
+                            let pastListItem = pastList.listItems.find(
+                                (pastListItem) =>
+                                    pastListItem.isbn == currentListItem.isbn
                             );
+                            if (
+                                pastListItem.position !==
+                                currentListItem.position
+                            ) {
+                                currentListItem.moved = true;
+                            }
+                            // get difference in position
+                            currentListItem.positionDifference =
+                                pastListItem.position -
+                                currentListItem.position;
+
+                            // console.log(currentListItem.title, pastListItem.position, currentListItem.position, currentListItem.positionDifference);
                         }
+                        currentListItem.positionDifference =
+                        currentListItem.positionDifference === undefined
+                            ? "*"
+                            : currentListItem.positionDifference === 0
+                                ? "="
+                                : currentListItem.positionDifference > 0
+                                ? "↑" + currentListItem.positionDifference
+                                : "↓" + Math.abs(currentListItem.positionDifference);
+                        
+                        
                     });
                     pastList.listItems.forEach((pastListItem) => {
                         if (
                             !currentList.listItems.find(
                                 (currentListItem) =>
-                                    currentListItem.isbn ==
-                                    pastListItem.isbn
+                                    currentListItem.isbn == pastListItem.isbn
                             )
                         ) {
-                            currentList.droppedItems.push(
-                                pastListItem
-                            );
-
+                            currentList.droppedItems.push(pastListItem);
                         }
-
-                    }
-                    );
+                    });
                 }
             });
-            
-
         })
     );
     return regionLists;
