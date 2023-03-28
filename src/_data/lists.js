@@ -67,6 +67,7 @@ parseListTxts = (text) => {
         if (/^[A-Z]*$/.test(thisLine)) {
             let list = lines[i];
             let listItems = [];
+            let listISBNs = [];
             for (let j = i + 1; j < lines.length; j++) {
                 let entry;
                 let nextLine = lines[j + 1]
@@ -153,6 +154,7 @@ parseListTxts = (text) => {
                     };
 
                     listItems.push(entry);
+                    listISBNs.push(isbn);
                 }
                 if (/^[A-Z]*$/.test(lines[j])) {
                     break;
@@ -162,6 +164,7 @@ parseListTxts = (text) => {
             lists.push({
                 listName: list,
                 listItems,
+                listISBNs,
             });
         }
     }
@@ -183,6 +186,8 @@ module.exports = async function () {
         const currentDate = allCurrentLists
             .match(regionRegex)[0]
             .slice(-12, -6);
+        const postDate = dayjs("20" + currentDate, "YYYYMMDD").format("MM-DD-YYYY");
+        const listDate = dayjs("20" + currentDate, "YYYYMMDD").subtract(3, 'day').format("MM-DD-YYYY");
         const currentListURL = `${aba.textFilePath}${currentDate}${region.regionSuffix}.txt`;
         const pastListURL = `${aba.textFilePath}${previousDateString(
             currentDate
@@ -190,6 +195,7 @@ module.exports = async function () {
         regionLists.push({
             region: region.regionalAssociation,
             regionAbbreviation: region.regionSuffix,
+            listDate,
             currentListURL,
             pastListURL,
         });

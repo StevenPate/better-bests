@@ -31,6 +31,14 @@
             div.allColumn, div.pullColumn {
             }
         }
+        
+        @media print {
+            header {display:none;}
+            main {padding:0;margin:0;}
+            @page { margin: 0; }
+            body { margin: 1.6cm; }
+            .dropped, .added {width:50%;}
+            }
     </style>
     
     {# <link rel="stylesheet" href="https://unpkg.com/awsm.css/dist/awsm.min.css">  #}

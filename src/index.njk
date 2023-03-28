@@ -6,65 +6,70 @@ title: "Regional Bestseller Lists"
 
 {% for list in lists  %}
     <header>
-        {# <h1>{{ list.region }}</h1> #}
-        <h1>The Pacific Northwest Indie Bestseller List for the week ended Sunday, March 19, 2023.</h1>
+        <h1>The Pacific Northwest Indie Bestseller List for the week ending {{ list.listDate }}.</h1>
     </header>
     {% for item in list.current  %}
-    <h2>{{ item.listName}}</h2>
+    
     <div class="listColumns row" style="page-break-after: always;">
-        <div class="allColumn col-xs-12 col-sm-5" style="margin:.5rem;">
-            <div class="box">
-            <h3>All titles</h3>
+        <div class="allColumn col-sm-6" style="padding:.5rem;">
+            <h2 class="is-size-4">{{ item.listName}}  ({{ list.listDate}})</h2>
             <ol>
-                {# {{ list | log }} #}
             {% for book in item.listItems %}
-                {# <li><strong>{{ book.title }}</strong>, {{ book.author }} - {{ book.isbn }}</li> #}
                 <li>
                     <details>
-                        <summary><strong>{{ book.title }}</strong>, {{ book.author }} - <span class="isbn">{{ book.isbn }}</span></summary>
+                        
+                        <summary><small><strong>{{ book.title }}</strong>, {{ book.author }} - <span class="isbn">{{ book.isbn }}</span></small></summary>
                         <img src="{{ book.coverImage }}">
                     </details>
                 </li>
             {% endfor %}
             </ol>
+            <details>
+                <summary>ISBNs</summary>
+                <ol>
+                {% for isbn in item.listISBNs %}
+                    {{ isbn }}<br>
+                {% endfor %}
+                </ol>
+        </div>
+        <div class="changedColumns col-xs-12 col-sm-6 row" style="padding:.5rem;page-break-inside: avoid;">
+            <div class="added col-sm-6" style="">
+                    <h3 class="is-size-5">Added</h3>
+                    <div class="addedItems " style="padding-top:1rem;">
+                    {% for book in item.addedItems %}
+                        <article  class="bookWithBarcode box" style="display: flex;flex:1;flex-basis:auto;flex-direction: column;margin-bottom:.25rem;padding:.25rem 0;page-break-inside: avoid;">
+                            <details style="padding-left:2.5rem">
+                                <summary style="min-height: 2rem;max-width:100%;"><strong>{{ book.title }}</strong></summary>
+                                <div class="coverImage">
+                                    <img src="{{ book.coverImage }}" style="max-width:80%;">
+                                </div>
+                            </details>
+                            <div class="barcode">
+                                {{ book.barcode | safe }}
+                            </div>
+                            </article>
+                    {% endfor %}
+                    </div> 
+            </div>
+            <div class="dropped col-md-6" style="">
+                    <h3 class="is-size-5">Dropped</h3>
+                    <div class="droppededItems" style="padding-top:1rem;">
+                    {% for book in item.droppedItems %}
+                        <article  class="bookWithBarcode box" style="display: flex;flex:1;flex-basis:auto;flex-direction: column;margin-bottom:.25rem;padding:.25rem 0;page-break-inside: avoid;">
+                            <details style="padding-left:1.5rem;text-align:left">
+                                <summary style="min-height: 2rem;max-width:100%;"><strong>{{ book.title }}</strong></summary>
+                                <div class="coverImage">
+                                    <img src="{{ book.coverImage }}" style="max-width:80%;">
+                                </div>
+                            </details>
+                            <div class="barcode" style="text-align:right">
+                                {{ book.barcode | safe }}
+                            </div>
+                        </article>
+                    {% endfor %}
+                    </div>
             </div>
         </div>
-            <div class="added col-sm-3" style="max-width:45%;">
-                <h3>Added</h3>
-                <div class="addedItems " style="padding-top:1rem;">
-                {% for book in item.addedItems %}
-                    <article  class="bookWithBarcode box" style="margin:.25rem;min-height:9rem;page-break-inside: avoid;">
-                        <details>
-                            <summary style="min-height:3rem;max-width:100%;"><strong>{{ book.title }}</strong></summary>
-                            <div class="coverImage">
-                                <img src="{{ book.coverImage }}" style="max-width:80%;">
-                            </div>
-                        </details>
-                        <div class="barcode">
-                            {{ book.barcode | safe }}
-                        </div>
-                    </article>
-                {% endfor %}
-                </div>
-            </div>
-            <div class="dropped col-md-3" style="max-width:45%;">
-                <h3>Dropped</h3>
-                <div class="droppededItems" style="padding-top:1rem;">
-                {% for book in item.droppedItems %}
-                    <article  class="bookWithBarcode box" style="margin:.25rem;min-height:9rem;page-break-inside: avoid;">
-                        <details>
-                            <summary style="min-height:3rem;max-width:100%;"><strong>{{ book.title }}</strong></summary>
-                            <div class="coverImage">
-                                <img src="{{ book.coverImage }}" style="max-width:80%;">
-                            </div>
-                        </details>
-                        <div class="barcode">
-                            {{ book.barcode | safe }}
-                        </div>
-                    </article>
-                {% endfor %}
-                </div>
-            </div>
     </div>
     {% endfor %}
 {% endfor %}
