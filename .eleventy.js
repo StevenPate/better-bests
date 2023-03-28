@@ -1,5 +1,21 @@
-
 module.exports = function (eleventyConfig) {
+    eleventyConfig.addCollection("rawISBNs", (collection) => {
+        let bsa = [];
+        let bsc = [];
+        // todo: get all regions, make object with two keys, one for each listType
+        collection.getAll()[0].data.lists[0].current.filter((item) => {
+            if (item.listType === "a") {
+                bsa.push(...item.listISBNs);
+            }
+            if (item.listType === "c") {
+                bsc.push(...item.listISBNs);
+            }
+        });
+        // console.log(bsa, bsc);
+        return {bsa, bsc};
+    });
+
+    eleventyConfig.addPassthroughCopy("src/static");
     return {
         dir: {
             input: "src",
@@ -9,4 +25,4 @@ module.exports = function (eleventyConfig) {
             output: "_site",
         },
     };
-}
+};

@@ -217,6 +217,9 @@ module.exports = async function () {
             regionList.past = parseListTxts(pastText);
 
             regionList.current.forEach((currentList) => {
+                currentList.listType = (currentList.listName === "CHILDREN'S ILLUSTRATED" || currentList.listName === "EARLY & MIDDLE GRADE READERS" | currentList.listName === "YOUNG ADULT" | currentList.listName === "CHILDREN'S SERIES TITLES") 
+                    ? "c"
+                    : "a";
                 currentList.addedItems = [];
                 currentList.droppedItems = [];
                 let pastList = regionList.past.find(
@@ -251,12 +254,12 @@ module.exports = async function () {
                         }
                         currentListItem.positionDifference =
                         currentListItem.positionDifference === undefined
-                            ? "*"
+                            ? `<span class="is-blue">*</span>`
                             : currentListItem.positionDifference === 0
                                 ? "="
                                 : currentListItem.positionDifference > 0
-                                ? "↑" + currentListItem.positionDifference
-                                : "↓" + Math.abs(currentListItem.positionDifference);
+                                ? `<span class="is-green">↑ ${currentListItem.positionDifference}</span>`
+                                : `<span class="is-red">↓ ${Math.abs(currentListItem.positionDifference)}</span>`;
                         
                         
                     });

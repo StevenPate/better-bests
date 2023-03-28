@@ -3,34 +3,37 @@ layout: default.njk
 title: "Regional Bestseller Lists"
 ---
 
-
 {% for list in lists  %}
-    <header>
-        <h1>The Pacific Northwest Indie Bestseller List for the week ending {{ list.listDate }}.</h1>
+    <header id="top">
+        <h1 class="is-size-3">The Pacific Northwest Indie Bestseller List for the week ending {{ list.listDate }}.</h1>
+        <p><strong>Jump to</strong>: {% for item in list.current  %}<a href="#{{ item.listName | slug }}">{{ item.listName }}</a>{% if not loop.last %} | {% endif %}{% endfor %}</p>
+        <p><strong>ISBNs</strong>: <a href="bsa">BSA</a> | <a href="bsc">BSC</a></p>
     </header>
     {% for item in list.current  %}
     
-    <div class="listColumns row" style="page-break-after: always;">
+    <div id="{{ item.listName | slug }}" class="listColumns row" style="page-break-after: always;">
         <div class="allColumn col-sm-6" style="padding:.5rem;">
-            <h2 class="is-size-4">{{ item.listName}}  ({{ list.listDate}})</h2>
+            <h2 class="is-size-4">{{ item.listName}} - {{ list.associationAbbreviation }} ({{ list.listDate}})</h2>
             <ol>
             {% for book in item.listItems %}
                 <li>
                     <details>
                         
-                        <summary><small><strong>{{ book.title }}</strong>, {{ book.author }} - <span class="isbn">{{ book.isbn }}</span></small></summary>
+                        <summary><small><strong>{{ book.title }}</strong>, {{ book.author }} - <span class="isbn">{{ book.isbn }}</span> <span style="color:#a6a6a6;">{{ book.positionDifference | safe }}</span></small></summary>
                         <img src="{{ book.coverImage }}">
                     </details>
                 </li>
             {% endfor %}
             </ol>
-            <details>
+            <a href="#top" class="toplink">Back to top</a>
+            {# <details>
                 <summary>ISBNs</summary>
                 <ol>
                 {% for isbn in item.listISBNs %}
                     {{ isbn }}<br>
                 {% endfor %}
                 </ol>
+            </details> #}
         </div>
         <div class="changedColumns col-xs-12 col-sm-6 row" style="padding:.5rem;page-break-inside: avoid;">
             <div class="added col-sm-6" style="">
@@ -39,7 +42,7 @@ title: "Regional Bestseller Lists"
                     {% for book in item.addedItems %}
                         <article  class="bookWithBarcode box" style="display: flex;flex:1;flex-basis:auto;flex-direction: column;margin-bottom:.25rem;padding:.25rem 0;page-break-inside: avoid;">
                             <details style="padding-left:2.5rem">
-                                <summary style="min-height: 2rem;max-width:100%;"><strong>{{ book.title }}</strong></summary>
+                                <summary class="titleCollapse" style="max-width:100%;"><strong>{{ book.title }}</strong></summary>
                                 <div class="coverImage">
                                     <img src="{{ book.coverImage }}" style="max-width:80%;">
                                 </div>
@@ -57,7 +60,7 @@ title: "Regional Bestseller Lists"
                     {% for book in item.droppedItems %}
                         <article  class="bookWithBarcode box" style="display: flex;flex:1;flex-basis:auto;flex-direction: column;margin-bottom:.25rem;padding:.25rem 0;page-break-inside: avoid;">
                             <details style="padding-left:1.5rem;text-align:left">
-                                <summary style="min-height: 2rem;max-width:100%;"><strong>{{ book.title }}</strong></summary>
+                                <summary style="max-width:100%;"><strong>{{ book.title }}</strong></summary>
                                 <div class="coverImage">
                                     <img src="{{ book.coverImage }}" style="max-width:80%;">
                                 </div>
@@ -72,4 +75,6 @@ title: "Regional Bestseller Lists"
         </div>
     </div>
     {% endfor %}
+
+
 {% endfor %}

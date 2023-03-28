@@ -27,13 +27,24 @@
             margin: .5rem 0; #}
             padding:1rem;
         } 
-        @media print {
-            div.allColumn, div.pullColumn {
-            }
+        header * {
+            margin:1rem 0;
         }
+        .is-green {
+            color: #8bc34a;
+        }
+        .is-red {
+            color: #b74f5a;
+        }
+        .is-blue {
+            color: #03a9f4;
+        }
+
+            .titleCollapse {min-height: 2rem;}
         
         @media print {
-            header {display:none;}
+            header, .toplink {display:none;}
+            .titleCollapse {min-height:0;max-height:1rem;}
             main {padding:0;margin:0;}
             @page { margin: 0; }
             body { margin: 1.6cm; }
