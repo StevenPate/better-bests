@@ -131,7 +131,9 @@ parseListTxts = (text) => {
                             displayValue: true,
                             textMargin: 0,
                             fontSize: 15,
+                            textPosition: "bottom",
                             margin: 16,
+                            flat: true
                         });
                         return `<img src="${canvas.toDataURL()}" style="max-width:120%;" />`;
                     };

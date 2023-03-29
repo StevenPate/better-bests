@@ -40,7 +40,7 @@ title: "Regional Bestseller Lists"
                     <h3 class="is-size-5">Added</h3>
                     <div class="addedItems " style="padding-top:1rem;">
                     {% for book in item.addedItems %}
-                        <article  class="bookWithBarcode box" style="display: flex;flex:1;flex-basis:auto;flex-direction: column;margin-bottom:.25rem;padding:.25rem 0;page-break-inside: avoid;">
+                        <article  class="bookWithBarcode box" style="display: flex;flex:1;flex-basis:auto;flex-direction: column;page-break-inside: avoid;">
                             <details style="padding-left:2.5rem">
                                 <summary class="titleCollapse" style="max-width:100%;"><strong>{{ book.title }}</strong></summary>
                                 <div class="coverImage">
@@ -58,14 +58,14 @@ title: "Regional Bestseller Lists"
                     <h3 class="is-size-5">Dropped</h3>
                     <div class="droppededItems" style="padding-top:1rem;">
                     {% for book in item.droppedItems %}
-                        <article  class="bookWithBarcode box" style="display: flex;flex:1;flex-basis:auto;flex-direction: column;margin-bottom:.25rem;padding:.25rem 0;page-break-inside: avoid;">
+                        <article  class="bookWithBarcode box" style="display: flex;flex:1;flex-basis:auto;flex-direction: column;page-break-inside: avoid;">
                             <details style="padding-left:1.5rem;text-align:left">
                                 <summary style="max-width:100%;"><strong>{{ book.title }}</strong></summary>
                                 <div class="coverImage">
                                     <img src="{{ book.coverImage }}" style="max-width:80%;">
                                 </div>
                             </details>
-                            <div class="barcode" style="text-align:right">
+                            <div class="barcode print-right" style="">
                                 {{ book.barcode | safe }}
                             </div>
                         </article>
