@@ -47,8 +47,14 @@
             .barcode {
                 text-align: center;
             }
+            .printBlock {
+                display:none;
+            }
         
         @media print {
+            .printBlock {
+                display:block;
+            }
             .changedColumns {
                 min-width:100%
                 padding:0;
@@ -68,7 +74,7 @@
             .titleCollapse {min-height:0;max-height:1.5rem;}
             main {padding:0;margin:0;}
             @page { margin: 0; }
-            body { margin: 2cm; }
+            body { margin: 3cm; }
             .dropped, .added {width:50%;}
             }
     </style>

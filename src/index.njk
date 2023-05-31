@@ -11,6 +11,17 @@ title: "Regional Bestseller Lists"
     </header>
     {% for item in list.current  %}
     
+<article class="message is-warning">
+  <div class="message-header">
+    <p>New Printing Option for this page</p>
+    <button class="delete" aria-label="delete"></button>
+  </div>
+  <div class="message-body">
+    Instead of printing this web page use this <a href="/PNBA.pdf">PDF designed for printing</a>.
+  </div>
+</article>
+
+    
     <div id="{{ item.listName | slug }}" class="listColumns row" style="page-break-after: always;">
         <div class="allColumn col-sm-6" style="padding:.5rem;">
             <h2 class="is-size-4">{{ item.listName}} - {{ list.associationAbbreviation }} ({{ list.listDate}})</h2>
@@ -19,7 +30,7 @@ title: "Regional Bestseller Lists"
                 <li>
                     <details>
                         
-                        <summary><small><strong>{{ book.title }}</strong>, {{ book.author }} - <span class="isbn">{{ book.isbn }}</span> <span style="color:#a6a6a6;">{{ book.positionDifference | safe }}</span></small></summary>
+                        <summary class="is-size-5"><strong>{{ book.title }}</strong>, {{ book.author }} - <span class="isbn">{{ book.isbn }}</span> <span style="color:#a6a6a6;">{{ book.positionDifference | safe }}</span></summary>
                         <img src="{{ book.coverImage }}">
                     </details>
                 </li>

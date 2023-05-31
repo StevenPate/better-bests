@@ -15,9 +15,7 @@
     "@11ty/eleventy-img": "^3.0.0",
     "canvas": "^2.11.0",
     "dayjs": "^1.11.7",
-    "jsbarcode": "^3.11.5"
-  },
-  "dependencies": {
-    "copy-to-clipboard": "^3.3.3"
+    "jsbarcode": "^3.11.5",
+    "pdfkit": "^0.13.0"
   }
 }

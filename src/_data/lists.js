@@ -1,7 +1,8 @@
 const aba = require("./aba.json");
+const generatePDF = require("../js/generatePDF.js");
 const dayjs = require("dayjs");
 const EleventyFetch = require("@11ty/eleventy-fetch");
-const Image = require("@11ty/eleventy-img");
+// const Image = require("@11ty/eleventy-img");
 const JsBarcode = require("jsbarcode");
 const { createCanvas } = require("canvas");
 const canvas = createCanvas();
@@ -10,34 +11,6 @@ previousDateString = (dateString) =>
     dayjs(dateString.replace(/(\d{2})(\d{2})(\d{2})/, "20$1-$2-$3"))
         .subtract(1, "week")
         .format("YYMMDD");
-
-// getImage = async (isbn) => {
-//     // console.log(`starting getImage for ${isbn}`);
-//     let ISBNdbURL = `https://api2.isbndb.com/book/${isbn}`;
-//     // let ISBNdbURL = `https://api2.isbndb.com/book/9780593329993`;
-//     try {
-//         let ISBNdb = await EleventyFetch(ISBNdbURL, {
-//             duration: "10d",
-//             directory: "_cache",
-//             type: "json",
-//             fetchOptions: {
-//                 headers: {
-//                     Host: "api2.isbndb.com",
-//                     "User-Agent": "insomnia/5.12.4",
-//                     Authorization: "48565_c9d95611e5493d3ce2ac9af517dcac2a",
-//                     Accept: "*/*",
-//                     "Content-Type": "application/json",
-//                 },
-//             },
-//         });
-//         // return ISBNdb.book.image;
-//         const bookImage = ISBNdb.book.image;
-//         return bookImage;
-//     } catch (error) {
-//         console.log(error);
-//         return "https://via.placeholder.com/150";
-//     }
-// }
 
 parseListTxts = (text) => {
     let lines = text.split("\n");
@@ -135,9 +108,11 @@ parseListTxts = (text) => {
                             margin: 16,
                             flat: true
                         });
-                        return `<img src="${canvas.toDataURL()}" style="max-width:120%;" />`;
+                        return canvas.toDataURL();
                     };
-                    let barcode = barCode(isbn);
+                    let barcode = `<img src="${barCode(isbn)}" style="max-width:120%;" />`;
+                    let barcodeURL = barCode(isbn);
+
 
                     // let cover = await getImage(isbn);
 
@@ -149,6 +124,7 @@ parseListTxts = (text) => {
                         price,
                         isbn,
                         barcode,
+                        barcodeURL,
                         coverImage: `https://images-us.bookshop.org/ingram/${isbn}.jpg?height=500&v=v2`,
                     };
 
@@ -176,24 +152,24 @@ module.exports = async function () {
         duration: "1d", // save for 1 day
         type: "text",
     });
+    // console.log(`allCurrentLists`);
 
     let regionLists = [];
-
+    // console.log(aba.regions)
     aba.regions.forEach((region) => {
         const regionRegex = new RegExp(`.*${region.regionSuffix}.txt`, "g");
         const currentDate = allCurrentLists
             .match(regionRegex)[0]
             .slice(-12, -6);
-        const postDate = dayjs("20" + currentDate, "YYYYMMDD").format(
-            "MM-DD-YYYY"
-        );
+        const previousDate = previousDateString(currentDate);
+        // const postDate = dayjs("20" + currentDate, "YYYYMMDD").format(
+        //     "MM-DD-YYYY"
+        // );
         const listDate = dayjs("20" + currentDate, "YYYYMMDD")
             .subtract(3, "day")
             .format("MM-DD-YYYY");
         const currentListURL = `${aba.textFilePath}${currentDate}${region.regionSuffix}.txt`;
-        const pastListURL = `${aba.textFilePath}${previousDateString(
-            currentDate
-        )}${region.regionSuffix}.txt`;
+        const pastListURL = `${aba.textFilePath}${previousDate}${region.regionSuffix}.txt`;
         regionLists.push({
             region: region.regionalAssociation,
             associationAbbreviation: region.regionalAssociationAbbreviation,
@@ -203,20 +179,24 @@ module.exports = async function () {
             pastListURL,
         });
     });
+    // console.log(`regionLists: ${JSON.stringify(regionLists, null, 2)}`)
+
 
     await Promise.all(
         regionLists.map(async (regionList) => {
+            // console.log(regionList.currentListURL);
             currentText = await EleventyFetch(regionList.currentListURL, {
                 duration: "1d", // save for 1 day
                 type: "text",
             });
-            // console.log(regionList);
             regionList.current = parseListTxts(currentText);
             pastText = await EleventyFetch(regionList.pastListURL, {
                 duration: "1d", // save for 1 day
                 type: "text",
             });
             regionList.past = parseListTxts(pastText);
+            // console.log(regionList.currentListURL);
+            // console.log(regionList.past.length);
 
             regionList.current.forEach((currentList) => {
                 currentList.listType = (currentList.listName === "CHILDREN'S ILLUSTRATED" || currentList.listName === "EARLY & MIDDLE GRADE READERS" | currentList.listName === "YOUNG ADULT" | currentList.listName === "CHILDREN'S SERIES TITLES") 
@@ -279,5 +259,22 @@ module.exports = async function () {
             });
         })
     );
+
+    // for each item in regionLists create a forPrint object
+    regionLists.forEach((regionList) => {
+        // console.log(regionList);
+        generatePDF(regionList);
+    });
+
+
+    // console.log(regionLists[0]);
+
+
+    // for each item in regionLists,
+    //     for each list in current
+    //         send an object to pdfOutput script 
+    //     name the outputfile regionList.pdf
+
+    // console.log(JSON.stringify(regionLists, null, 2));
     return regionLists;
 };
