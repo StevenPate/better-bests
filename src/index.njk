@@ -6,47 +6,32 @@ title: "Regional Bestseller Lists"
 {% for list in lists  %}
     <header id="top">
         <h1 class="is-size-3">The Pacific Northwest Indie Bestseller List for the week ending {{ list.listDate }}.</h1>
+  
         <p><strong>Jump to</strong>: {% for item in list.current  %}<a href="#{{ item.listName | slug }}">{{ item.listName }}</a>{% if not loop.last %} | {% endif %}{% endfor %}</p>
         <p><strong>ISBNs</strong>: <a href="bsa">BSA</a> | <a href="bsc">BSC</a></p>
+        <p style="background-color: #fffaeb;"><strong>Print BarCodes for Switchover</strong>: <a href="/PNBA.pdf">PDF</a></p>
+        <p>On-hand numbers accurate <strong>{{ list.lsiTime }}</strong>.
     </header>
     {% for item in list.current  %}
-    
-<article class="message is-warning">
-  <div class="message-header">
-    <p>New Printing Option for this page</p>
-    <button class="delete" aria-label="delete"></button>
-  </div>
-  <div class="message-body">
-    Instead of printing this web page use this <a href="/PNBA.pdf">PDF designed for printing</a>.
-  </div>
-</article>
-
-    
     <div id="{{ item.listName | slug }}" class="listColumns row" style="page-break-after: always;">
-        <div class="allColumn col-sm-6" style="padding:.5rem;">
+        <div class="allColumn col-sm-12" style="padding:.5rem;">
             <h2 class="is-size-4">{{ item.listName}} - {{ list.associationAbbreviation }} ({{ list.listDate}})</h2>
             <ol>
             {% for book in item.listItems %}
                 <li>
                     <details>
                         
-                        <summary class="is-size-5"><strong>{{ book.title }}</strong>, {{ book.author }} - <span class="isbn">{{ book.isbn }}</span> <span style="color:#a6a6a6;">{{ book.positionDifference | safe }}</span></summary>
+                        <summary class="is-size-5"><strong>{{ book.title }}</strong>, {{ book.author }} - <span class="isbn">{{ book.isbn }}</span> <span style="color:#a6a6a6;">{{ book.positionDifference | safe }} (<a href="https://www.portbooknews.com/book/{{ book.isbn}}" name="here's a name"  data-tooltip="{{ book.stockStatus.lsiTime }}">{{ book.stockStatus.lsiQuantity }} on hand</a>)</span></summary>
                         <img src="{{ book.coverImage }}">
                     </details>
                 </li>
             {% endfor %}
             </ol>
             <a href="#top" class="toplink">Back to top</a>
-            {# <details>
-                <summary>ISBNs</summary>
-                <ol>
-                {% for isbn in item.listISBNs %}
-                    {{ isbn }}<br>
-                {% endfor %}
-                </ol>
-            </details> #}
         </div>
-        <div class="changedColumns col-xs-12 col-sm-6 row" style="padding:.5rem;page-break-inside: avoid;">
+    </div>
+
+        {# <div class="changedColumns col-xs-12 col-sm-6 row" style="padding:.5rem;page-break-inside: avoid;">
             <div class="added col-sm-6" style="">
                     <h3 class="is-size-5">Added</h3>
                     <div class="addedItems " style="padding-top:1rem;">
@@ -83,8 +68,8 @@ title: "Regional Bestseller Lists"
                     {% endfor %}
                     </div>
             </div>
-        </div>
-    </div>
+        </div> #}
+        
     {% endfor %}
 
 

@@ -1,5 +1,6 @@
 const aba = require("./aba.json");
 const generatePDF = require("../js/generatePDF.js");
+const stockStatus = require("../js/stockStatus.js");
 const dayjs = require("dayjs");
 const EleventyFetch = require("@11ty/eleventy-fetch");
 // const Image = require("@11ty/eleventy-img");
@@ -113,9 +114,6 @@ parseListTxts = (text) => {
                     let barcode = `<img src="${barCode(isbn)}" style="max-width:120%;" />`;
                     let barcodeURL = barCode(isbn);
 
-
-                    // let cover = await getImage(isbn);
-
                     entry = {
                         position,
                         title,
@@ -123,6 +121,7 @@ parseListTxts = (text) => {
                         publisher,
                         price,
                         isbn,
+                        // inventoryInfo,
                         barcode,
                         barcodeURL,
                         coverImage: `https://images-us.bookshop.org/ingram/${isbn}.jpg?height=500&v=v2`,
@@ -155,6 +154,7 @@ module.exports = async function () {
     // console.log(`allCurrentLists`);
 
     let regionLists = [];
+
     // console.log(aba.regions)
     aba.regions.forEach((region) => {
         const regionRegex = new RegExp(`.*${region.regionSuffix}.txt`, "g");
@@ -197,6 +197,8 @@ module.exports = async function () {
             regionList.past = parseListTxts(pastText);
             // console.log(regionList.currentListURL);
             // console.log(regionList.past.length);
+
+            regionList.current = await stockStatus(regionList.current);
 
             regionList.current.forEach((currentList) => {
                 currentList.listType = (currentList.listName === "CHILDREN'S ILLUSTRATED" || currentList.listName === "EARLY & MIDDLE GRADE READERS" | currentList.listName === "YOUNG ADULT" | currentList.listName === "CHILDREN'S SERIES TITLES") 
@@ -257,6 +259,12 @@ module.exports = async function () {
                     });
                 }
             });
+            regionList.lsiTime = (regionList.current[0].listItems[0].stockStatus) 
+                ? regionList.current[0].listItems[0].stockStatus.lsiTime
+                : "No LSI Time";
+            console.log(`regionList.lsiTime: ${regionList.lsiTime}`);
+
+            // TODO move generatePDF to here
         })
     );
 
