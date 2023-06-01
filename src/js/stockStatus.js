@@ -6,7 +6,7 @@ const getData = async (isbn) => {
     let pbnURL = `https://www.portbooknews.com/book/${isbn}`;
     try {
         let pbnData = await EleventyFetch(pbnURL, {
-            duration: "10d",
+            duration: "1d",
             directory: "_cache",
             type: "text",
         });

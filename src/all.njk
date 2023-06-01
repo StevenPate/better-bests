@@ -1,0 +1,46 @@
+---
+layout: default.njk
+title: "Regional Bestseller Lists"
+pagination:
+    data: lists
+    size: 1
+    alias: regionList
+permalink: "/{{ regionList.associationAbbreviation }}/"
+---
+<strong>Regional Bestseller Lists</strong>:
+<ul>
+    {% for item in lists %}
+        <li><a href="/{{ item.associationAbbreviation }}/">{{ item.region }}</a></li>
+    {% endfor %}
+</ul>
+
+
+    <header id="top">
+        <h1 class="is-size-3">The {{ regionList.region }} lists for the week ending {{ regionList.listDate }}.</h1>
+        <p><strong>Jump to</strong>: {% for item in regionList.current  %}<a href="#{{ item.listName | slug }}">{{ item.listName }}</a>{% if not loop.last %} | {% endif %}{% endfor %}</p>
+        <p><strong>ISBNs</strong>: <a href="bsa">BSA</a> | <a href="bsc">BSC</a></p>
+        <p style="background-color: #fffaeb;"><strong>Print BarCodes for Switchover</strong>: <a href="/PNBA.pdf">PDF</a></p>
+        <p>On-hand numbers accurate <strong>{{ regionList.lsiTime }}</strong>.
+    </header>
+
+    {% for item in regionList.current  %}
+    <div id="{{ item.listName | slug }}" class="listColumns row" style="page-break-after: always;">
+        <div class="allColumn col-sm-12" style="padding:.5rem;">
+            <h2 class="is-size-4">{{ item.listName}} - {{ regionList.associationAbbreviation }} ({{ regionList.listDate}})</h2>
+            <ol>
+            {% for book in item.listItems %}
+                <li>
+                    <details>
+                        
+                        <summary class="is-size-5"><strong>{{ book.title }}</strong>, {{ book.author }} - <span class="isbn">{{ book.isbn }}</span> <span style="color:#a6a6a6;">{{ book.positionDifference | safe }} (<a href="https://www.portbooknews.com/book/{{ book.isbn}}" name="here's a name"  data-tooltip="{{ book.stockStatus.lsiTime }}">{{ book.stockStatus.lsiQuantity }} on hand</a>)</span></summary>
+                        <img src="{{ book.coverImage }}">
+                    </details>
+                </li>
+            {% endfor %}
+            </ol>
+            <a href="#top" class="toplink">Back to top</a>
+        </div>
+    </div>
+        
+    {% endfor %}
+
