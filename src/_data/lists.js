@@ -96,23 +96,6 @@ parseListTxts = (text) => {
                     //     // isbn = "0000000000000";
                     // }
 
-                    const barCode = (isbn) => {
-                        JsBarcode(canvas, isbn, {
-                            format: "EAN13",
-                            lineColor: "#000",
-                            width: 2,
-                            height: 40,
-                            displayValue: true,
-                            textMargin: 0,
-                            fontSize: 15,
-                            textPosition: "bottom",
-                            margin: 16,
-                            flat: true
-                        });
-                        return canvas.toDataURL();
-                    };
-                    let barcode = `<img src="${barCode(isbn)}" style="max-width:120%;" />`;
-                    let barcodeURL = barCode(isbn);
 
                     entry = {
                         position,
@@ -122,8 +105,6 @@ parseListTxts = (text) => {
                         price,
                         isbn,
                         // inventoryInfo,
-                        barcode,
-                        barcodeURL,
                         coverImage: `https://images-us.bookshop.org/ingram/${isbn}.jpg?height=500&v=v2`,
                     };
 
@@ -169,14 +150,14 @@ module.exports = async function () {
             .subtract(3, "day")
             .format("MM-DD-YYYY");
         const currentListURL = `${aba.textFilePath}${currentDate}${region.regionSuffix}.txt`;
-        const pastListURL = `${aba.textFilePath}${previousDate}${region.regionSuffix}.txt`;
+        const previousListURL = `${aba.textFilePath}${previousDate}${region.regionSuffix}.txt`;
         regionLists.push({
             region: region.regionalAssociation,
             associationAbbreviation: region.regionalAssociationAbbreviation,
             regionAbbreviation: region.regionSuffix,
             listDate,
             currentListURL,
-            pastListURL,
+            previousListURL,
         });
     });
     // console.log(`regionLists: ${JSON.stringify(regionLists, null, 2)}`)
@@ -190,7 +171,7 @@ module.exports = async function () {
                 type: "text",
             });
             regionList.current = parseListTxts(currentText);
-            pastText = await EleventyFetch(regionList.pastListURL, {
+            pastText = await EleventyFetch(regionList.previousListURL, {
                 duration: "1d", // save for 1 day
                 type: "text",
             });
@@ -206,35 +187,36 @@ module.exports = async function () {
                     : "a";
                 currentList.addedItems = [];
                 currentList.droppedItems = [];
-                let pastList = regionList.past.find(
-                    (pastList) => pastList.listName === currentList.listName
+                let previousList = regionList.past.find(
+                    (previousList) => previousList.listName === currentList.listName
                 );
-                if (pastList) {
+                if (previousList) {
                     currentList.listItems.forEach((currentListItem) => {
                         if (
-                            !pastList.listItems.find(
-                                (pastListItem) =>
-                                    pastListItem.isbn == currentListItem.isbn
+                            !previousList.listItems.find(
+                                (previousListItem) =>
+                                    previousListItem.isbn == currentListItem.isbn
                             )
                         ) {
+                            currentListItem.added = true;
                             currentList.addedItems.push(currentListItem);
                         } else {
-                            let pastListItem = pastList.listItems.find(
-                                (pastListItem) =>
-                                    pastListItem.isbn == currentListItem.isbn
+                            let previousListItem = previousList.listItems.find(
+                                (previousListItem) =>
+                                    previousListItem.isbn == currentListItem.isbn
                             );
                             if (
-                                pastListItem.position !==
+                                previousListItem.position !==
                                 currentListItem.position
                             ) {
                                 currentListItem.moved = true;
                             }
                             // get difference in position
                             currentListItem.positionDifference =
-                                pastListItem.position -
+                                previousListItem.position -
                                 currentListItem.position;
 
-                            // console.log(currentListItem.title, pastListItem.position, currentListItem.position, currentListItem.positionDifference);
+                            // console.log(currentListItem.title, previousListItem.position, currentListItem.position, currentListItem.positionDifference);
                         }
                         currentListItem.positionDifference =
                         currentListItem.positionDifference === undefined
@@ -247,14 +229,14 @@ module.exports = async function () {
                         
                         
                     });
-                    pastList.listItems.forEach((pastListItem) => {
+                    previousList.listItems.forEach((previousListItem) => {
                         if (
                             !currentList.listItems.find(
                                 (currentListItem) =>
-                                    currentListItem.isbn == pastListItem.isbn
+                                    currentListItem.isbn == previousListItem.isbn
                             )
                         ) {
-                            currentList.droppedItems.push(pastListItem);
+                            currentList.droppedItems.push(previousListItem);
                         }
                     });
                 }

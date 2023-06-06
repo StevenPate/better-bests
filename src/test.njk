@@ -1,0 +1,11 @@
+---
+layout: default.njk
+title: "Regional Bestseller Lists"
+---
+
+{% for list in lists  %}
+{# {{ list | log }} #}
+{# {% list | fromJSON | getBestsellers | renderList %} #}
+{# {{ list | fromJson }} #}
+
+{% endfor %}

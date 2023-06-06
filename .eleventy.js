@@ -14,7 +14,8 @@ module.exports = function (eleventyConfig) {
         // console.log(bsa, bsc);
         return {bsa, bsc};
     });
-
+    eleventyConfig.addFilter('fromJson', JSON.parse);
+    eleventyConfig.addFilter('toJson', JSON.stringify);
     eleventyConfig.addPassthroughCopy("src/static");
     return {
         dir: {
