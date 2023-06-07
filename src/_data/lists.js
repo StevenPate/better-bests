@@ -167,7 +167,7 @@ module.exports = async function () {
 
     await Promise.all(
         regionLists.map(async (regionList) => {
-            // console.log(regionList.currentListURL);
+            console.log(regionList);
             currentText = await EleventyFetch(regionList.currentListURL, {
                 duration: "1d", // save for 1 day
                 type: "text",
@@ -181,7 +181,7 @@ module.exports = async function () {
             // console.log(regionList.currentListURL);
             // console.log(regionList.past.length);
 
-            regionList.current = await stockStatus(regionList.current);
+            regionList.current = (regionList.associationAbbreviation == "PNBA") ? await stockStatus(regionList.current) : regionList.current;
 
             regionList.current.forEach((currentList) => {
                 currentList.listType = (currentList.listName === "CHILDREN'S ILLUSTRATED" || currentList.listName === "EARLY & MIDDLE GRADE READERS" | currentList.listName === "YOUNG ADULT" | currentList.listName === "CHILDREN'S SERIES TITLES") 
@@ -272,9 +272,8 @@ module.exports = async function () {
                 }
             });
             regionList.lsiTime = (regionList.current[0].listItems[0].stockStatus) 
-                ? regionList.current[0].listItems[0].stockStatus.lsiTime
+                ? regionList.current.lsiTime
                 : "No LSI Time";
-            console.log(`regionList.lsiTime: ${regionList.lsiTime}`);
 
             // TODO move generatePDF to here
             

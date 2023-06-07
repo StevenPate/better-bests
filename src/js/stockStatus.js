@@ -37,11 +37,12 @@ const getData = async (isbn) => {
                 .contents()
                 .text();
         // console.log(`lsiTime: ${lsiTime}`);
-        
+        const html = `(<a href="https://www.portbooknews.com/book/${isbn}" data-tooltip="${lsiTime}">${lsiQuantity} on hand</a>)`
         return {
-            lsiQuantity,
+            html,
             lsiTime
         };
+        // return `(<a href="https://www.portbooknews.com/book/${isbn}" name="here's a name"  data-tooltip="${lsiTime}">${lsiQuantity} on hand</a>)`;
 
     }
     catch (e) {
@@ -64,7 +65,9 @@ module.exports = async function (regionLists) {
             // console.log(`isbn: ${isbn}`);
             const stockStatus = await getData(isbn);
             // console.log(`stockStatus for ${isbn}: ${JSON.stringify(stockStatus, null, 2)}`)
-            regionLists[i].listItems[j].stockStatus = stockStatus;
+            regionLists[i].listItems[j].stockStatus = stockStatus.html;
+            regionLists[i].lsiTime = stockStatus.lsiTime;
+            // console.log(`regionLists p[i]: ${JSON.stringify(regionLists[i], null, 2)}`);
         }
     }
     return regionLists;

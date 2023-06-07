@@ -50,6 +50,32 @@
 {# details summary::before, details summary::marker, ::marker {
     display:none;
 } #}
+.listItemDetails {
+    display:flex;
+    flex-direction:column
+}
+@media (min-width: 576px) {
+    .listItemDetails {
+        flex-direction:row;
+    }
+}
+.otherListItemEntry {
+    display:inline-block;
+}
+.otherDetails {
+    padding: 0 2rem;
+}
+.barCode, .coverImage {
+    text-align:center
+}
+@media (min-width: 576px) {
+    .barCode, .coverImage {
+        text-align:left;
+    }
+    }
+.otherListItems {
+    max-width: 22rem;
+}
             .bookWithBarcode {
                 min-height:10rem;
                 padding: 2rem 1rem;

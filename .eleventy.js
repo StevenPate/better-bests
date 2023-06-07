@@ -1,3 +1,5 @@
+const barCode = require('./src/js/barCode');
+
 module.exports = function (eleventyConfig) {
     eleventyConfig.addCollection("rawISBNs", (collection) => {
         let bsa = [];
@@ -16,7 +18,9 @@ module.exports = function (eleventyConfig) {
     });
     eleventyConfig.addFilter('fromJson', JSON.parse);
     eleventyConfig.addFilter('toJson', JSON.stringify);
+    eleventyConfig.addFilter('barCode', barCode);
     eleventyConfig.addPassthroughCopy("src/static");
+    eleventyConfig.addPassthroughCopy('src/_redirects');
     return {
         dir: {
             input: "src",

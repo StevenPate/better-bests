@@ -15,7 +15,7 @@ function generatePDF(regionLists) {
         height:15,
     }
 
-    console.log(`Starting to build PDF for ${region} ${listDate}...`);
+    // console.log(`Starting to build PDF for ${region} ${listDate}...`);
     doc.pipe(fs.createWriteStream(pdfPath + '.pdf'));
     doc
         .fontSize(10)

@@ -22,7 +22,7 @@ permalink: "/{{ regionList.associationAbbreviation }}/"
         <p><strong>Jump to</strong>: {% for item in regionList.current  %}<a href="#{{ item.listName | slug }}">{{ item.listName }}</a>{% if not loop.last %} | {% endif %}{% endfor %}</p>
         <p><strong>ISBNs</strong>: <a href="bsa">BSA</a> | <a href="bsc">BSC</a></p>
         <p style="background-color: #fffaeb;"><strong>Print BarCodes for Switchover</strong>: <a href="/PNBA.pdf">PDF</a></p>
-        <p>On-hand numbers accurate <strong>{{ regionList.lsiTime }}</strong>.
+        <p>On-hand numbers accurate <strong>as of Jun 6 7:19pm {{ regionList.current.lsiTime | log}}</strong>.
     </header>
 
     {% for item in regionList.current  %}
@@ -33,18 +33,20 @@ permalink: "/{{ regionList.associationAbbreviation }}/"
             {% for book in item.listItems %}
                 <li>
                     <details>
-                        <summary class="is-size-5"><strong>{{ book.title }}</strong>{{ book.uniqueItem | safe }}, {{ book.author | safe }} - <span class="isbn">{{ book.isbn }}</span> <span style="color:#a6a6a6;">{{ book.positionDifference | safe }} (<a href="https://www.portbooknews.com/book/{{ book.isbn}}" name="here's a name"  data-tooltip="{{ book.stockStatus.lsiTime }}">{{ book.stockStatus.lsiQuantity }} on hand</a>)</span></summary>
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6">
-                                <img src="{{ book.coverImage }}">
+                        <summary class="is-size-5"><strong>{{ book.title }}</strong>{{ book.uniqueItem | safe }}, {{ book.author | safe }} - <span class="isbn">{{ book.isbn }}</span> <span style="color:#a6a6a6;">{{ book.positionDifference | safe }} {{ book.stockStatus | safe }}</span></summary>
+                        <div class="listItemDetails">
+                            <div class="coverImage">
+                                <img alt="{{ book.title }}" src="{{ book.coverImage }}" style="margin:1rem;">
                             </div>
-                            <div class="col-xs-12 col-sm-6">
+                            <div class="otherDetails">
+                                <div class="barCode">
+                                    <img alt="{{ book.isbn }}" src="{{ book.isbn | barCode }}">
+                                </div>
+                                <div class="otherListItems">
                                 {% for other in book.otherPositions %}
-                                    <div><strong>{{ other.region }}</strong>: {{ other.item.position }} {{ other.item.positionDifference | safe }}</div>
+                                    <div class="otherListItemEntry"><strong>{{ other.region }}</strong>: {{ other.item.position }} {{ other.item.positionDifference | safe }}</div>
                                 {% endfor %}
-                            </div>
-                            <div class="col-xs-12 col-sm-6">
-                                [barcode]
+                                </div>
                             </div>
                         </div>
                     </details>
