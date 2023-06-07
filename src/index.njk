@@ -3,75 +3,91 @@ layout: default.njk
 title: "Regional Bestseller Lists"
 ---
 
+{% include 'partials/notifications.njk' %}
+
 {% for regionList in lists | limit(1) %}
 
     <details>
-        <summary><strong>Select Region</strong>:</summary>
+        <summary>
+            <strong>Select Region</strong>:</summary>
         <ul>
             {% for regionList in lists %}
-                <li><a href="/{{ regionList.associationAbbreviation }}/">{{ regionList.region }}</a></li>
+                <li>
+                    <a href="/{{ regionList.associationAbbreviation }}/">{{ regionList.region }}</a>
+                </li>
             {% endfor %}
         </ul>
     </details>
-
     <header id="top">
         <h1 class="is-size-3">The {{ regionList.region }} lists for the week ending {{ regionList.listDate }}.</h1>
-        <p><strong>Jump to</strong>: {% for item in regionList.current  %}<a href="#{{ item.listName | slug }}">{{ item.listName }}</a>{% if not loop.last %} | {% endif %}{% endfor %}</p>
         <p>
-            <span><strong>BarCodes</strong>: <a href="/{{ regionList.associationAbbreviation }}.pdf">PDF</a></span>
-            {% if regionList.lsiTime %}
-            <span style="padding-left:1rem;">
-                <strong>ISBNs</strong>: <a href="bsa">BSA</a> | <a href="bsc">BSC</a>
-            </span>
-            {% endif %} 
-            {% if regionList.lsiTime %}
-                <span style="padding-left:1rem;"><strong>On-hand numbers</strong>: {{ regionList.lsiTime }}.</span>{% endif %}
+            <strong>Jump to</strong>: {% for item in regionList.current %}
+                <a href="#{{ item.listName | slug }}">{{ item.listName }}</a>
+                {% if not loop.last %} | {% endif %}
+            {% endfor %}
         </p>
         <p>
-        <span>
-            <span class="is-blue">&star;</span> = not found on this list the previous week 
+            <span>
+                <strong>BarCodes</strong>: <a href="/{{ regionList.associationAbbreviation }}.pdf">PDF</a>
+            </span>
+            {% if regionList.lsiTime %}
+                <span style="padding-left:1rem;">
+                    <strong>ISBNs</strong>: <a href="bsa">BSA</a> | <a href="bsc">BSC</a>
+                </span>
+            {% endif %}
+            {% if regionList.lsiTime %}
+                <span style="padding-left:1rem;">
+                    <strong>On-hand numbers</strong>: {{ regionList.lsiTime }}.</span>{% endif %}
+        </p>
+        <p>
+            <span>
+                <span class="is-blue">&star;</span> = not found on this list the previous week 
         </span>
-        <span style="padding-left:1rem;">
-            <span> ❄️</span> = not found on any other region's lists this week 
+            <span style="padding-left:1rem;">
+                <span> ❄️</span> = not found on any other region's lists this week 
         </span>
-    </p>
-</header>
+        </p>
+    </header>
 
-    {% for item in regionList.current  %}
-    <div id="{{ item.listName | slug }}" class="listColumns row" style="page-break-after: always;">
-        <div class="allColumn col-sm-12" style="padding:.5rem;">
-            <h2 class="is-size-4">{{ item.listName}} - {{ regionList.associationAbbreviation }} ({{ regionList.listDate}})</h2>
-            <ol>
-            {% for book in item.listItems %}
-                <li>
-                    <details>
-                        <summary class="is-size-5"><strong>{{ book.title }}</strong>{{ book.uniqueItem | safe }}, {{ book.author | safe }} - <span class="isbn">{{ book.isbn }}</span> <span style="color:#a6a6a6;">{{ book.positionDifference | safe }} {{ book.stockStatus | safe }}</span></summary>
-                        <div class="listItemDetails">
-                            <div class="coverImage">
-                                <img alt="{{ book.title }}" src="{{ book.coverImage }}" style="margin:1rem;">
-                            </div>
-                            <div class="otherDetails">
-                                <div class="barCode">
-                                    <img alt="{{ book.isbn }}" src="{{ book.isbn | barCode }}">
+    {% for item in regionList.current %}
+        <div id="{{ item.listName | slug }}" class="listColumns row" style="page-break-after: always;">
+            <div class="allColumn col-sm-12" style="padding:.5rem;">
+                <h2 class="is-size-4">{{ item.listName}} - {{ regionList.associationAbbreviation }} ({{ regionList.listDate}})</h2>
+                <ol>
+                    {% for book in item.listItems %}
+                        <li>
+                            <details>
+                                <summary class="is-size-5">
+                                    <strong>{{ book.title }}</strong>{{ book.uniqueItem | safe }}, {{ book.author | safe }} - <span class="isbn">{{ book.isbn }}</span>
+                                    <span style="color:#a6a6a6;">{{ book.positionDifference | safe }}
+                                        {{ book.stockStatus | safe }}</span></summary>
+                                <div class="listItemDetails">
+                                    <div class="coverImage">
+                                        <img alt="{{ book.title }}" src="{{ book.coverImage }}" style="margin:1rem;">
+                                    </div>
+                                    <div class="otherDetails">
+                                        <div class="barCode">
+                                            <img alt="{{ book.isbn }}" src="{{ book.isbn | barCode }}">
+                                        </div>
+                                        <div class="otherListItems">
+                                            {% for other in book.otherPositions %}
+                                                <div class="otherListItemEntry">
+                                                    <strong>{{ other.region }}</strong>: {{ other.item.position }}
+                                                    {{ other.item.positionDifference | safe }}</div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="otherListItems">
-                                {% for other in book.otherPositions %}
-                                    <div class="otherListItemEntry"><strong>{{ other.region }}</strong>: {{ other.item.position }} {{ other.item.positionDifference | safe }}</div>
-                                {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                    </details>
-                </li>
-            {% endfor %}
-            {# uniques #}
-                
-            </ol>
-            <a href="#top" class="toplink">Back to top</a>
+                            </details>
+                        </li>
+                    {% endfor %}
+                    {# uniques #}
+
+                </ol>
+                <a href="#top" class="toplink">Back to top</a>
+            </div>
         </div>
-    </div>
-        
-    {% endfor %}
 
+    {% endfor %}
 
 {% endfor %}

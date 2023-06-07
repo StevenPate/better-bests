@@ -1,124 +1,151 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/flexboxgrid@6.3.1/dist/flexboxgrid.min.css" rel="stylesheet">
-    <script defer src="/static/js/utils.js"></script>
-    <style>
-        
-        
-        main {
-            padding: 2rem;
-        }
-        ol {
-            padding:1rem;
-        }
-        h2 {
-            background-color: #f0f0f0;
-            color: #333;
-            padding: 1rem 0;
-        }
-        .added, .dropped {
-            {# background-color: #f0f0f0;
-            padding: .5rem;
-            margin: .5rem 0; #}
-            padding:1rem;
-        } 
-        header * {
-            margin:1rem 0;
-        }
-.is-green {
-    color: #6e9244;
-    background-color: #8cc34a52;
-    padding: 0 0.2rem;
-}
-.is-red {
-    color: #b74f5a;
-    background-color: #b74f5a40;
-    padding: 0 0.2rem;
-}
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <link href="https://cdn.jsdelivr.net/npm/flexboxgrid@6.3.1/dist/flexboxgrid.min.css" rel="stylesheet">
+        <script defer src="/static/js/utils.js"></script>
+        <script>
+        </script>
+        <style>
 
-.is-blue {
-    color: #03a9f4;
-    background-color: #ffeb3b70;
-    padding: 0 0.2rem;
-}
+            main {
+                padding: 2rem;
+            }
+            ol {
+                padding: 1rem;
+            }
+            h2 {
+                background-color: #f0f0f0;
+                color: #333;
+                padding: 1rem 0;
+            }
+            .added,
+            .dropped {
+                padding: 1rem;
+            }
+            header * {
+                margin: 1rem 0;
+            }
+            .is-green {
+                color: #6e9244;
+                background-color: #8cc34a52;
+                padding: 0 0.2rem;
+            }
+            .is-red {
+                color: #b74f5a;
+                background-color: #b74f5a40;
+                padding: 0 0.2rem;
+            }
 
-{# details summary::before, details summary::marker, ::marker {
-    display:none;
-} #}
-.listItemDetails {
-    display:flex;
-    flex-direction:column
-}
-@media (min-width: 576px) {
-    .listItemDetails {
-        flex-direction:row;
-    }
-}
-.otherListItemEntry {
-    display:inline-block;
-}
-.otherDetails {
-    padding: 0 2rem;
-}
-.barCode, .coverImage {
-    text-align:center
-}
-@media (min-width: 576px) {
-    .barCode, .coverImage {
-        text-align:left;
-    }
-    }
-.otherListItems {
-    max-width: 22rem;
-}
+            .is-blue {
+                color: #03a9f4;
+                background-color: #ffeb3b70;
+                padding: 0 0.2rem;
+            }
+
+            {
+                # details summary::before,
+                ::marker,
+                details summary::marker {
+                    display: none;
+                }
+                 #;
+            }
+            .listItemDetails {
+                display: flex;
+                flex-direction: column;
+            }
+            @media (min-width: 576px) {
+                .listItemDetails {
+                    flex-direction: row;
+                }
+            }
+            .otherListItemEntry {
+                display: inline-block;
+            }
+            .otherDetails {
+                padding: 0 2rem;
+            }
+            .barCode,
+            .coverImage {
+                text-align: center;
+            }
+            @media (min-width: 576px) {
+                .barCode,
+                .coverImage {
+                    text-align: left;
+                }
+            }
+            .otherListItems {
+                max-width: 22rem;
+            }
             .bookWithBarcode {
-                min-height:10rem;
+                min-height: 10rem;
                 padding: 2rem 1rem;
             }
-            .titleCollapse {min-height: 2rem;}
+            .titleCollapse {
+                min-height: 2rem;
+            }
             .barcode {
                 text-align: center;
             }
             .printBlock {
-                display:none;
+                display: none;
             }
-        
-        @media print {
-            .printBlock {
-                display:block;
-            }
-            .changedColumns {
-                min-width:100%
-                padding:0;
-            }
-            .changedColumns * {
 
-                margin:0;
-                padding:0;
+            @media print {
+                .printBlock {
+                    display: block;
+                }
+                .changedColumns {
+                    min-width:100% padding: 0;
+                }
+                .changedColumns * {
+
+                    margin: 0;
+                    padding: 0;
+                }
+                .bookWithBarcode {
+                    min-height: auto;
+                    padding: 0.25rem 0;
+                }
+                .barcode {
+                    text-align: left;
+                }
+                .print-right {
+                    text-align: right;
+                }
+                .toplink,
+                header {
+                    display: none;
+                }
+                .titleCollapse {
+                    min-height: 0;
+                    max-height: 1.5rem;
+                }
+                main {
+                    padding: 0;
+                    margin: 0;
+                }
+                @page {
+                    margin: 0;
+                }
+                body {
+                    margin: 3cm;
+                }
+                .added,
+                .dropped {
+                    width: 50%;
+                }
             }
-            .bookWithBarcode {
-                min-height:auto;
-                padding:.25rem 0
-            }
-            .barcode {text-align:left;}
-            .print-right {text-align:right;}
-            header, .toplink {display:none;}
-            .titleCollapse {min-height:0;max-height:1.5rem;}
-            main {padding:0;margin:0;}
-            @page { margin: 0; }
-            body { margin: 3cm; }
-            .dropped, .added {width:50%;}
-            }
-    </style>
-    
-    {# <link rel="stylesheet" href="https://unpkg.com/awsm.css/dist/awsm.min.css">  #}
-   {# <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css"> #}
-    <!--style>
+        </style>
+
+        {# <link rel="stylesheet" href="https://unpkg.com/awsm.css/dist/awsm.min.css">  #}
+        {# <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css"> #}
+        <!--style>
         article {
             padding:.5rem;
             margin:.3rem;
@@ -151,11 +178,11 @@
         }
 
     </style-->
-    <title>{{ title }}</title>
-</head>
-<body>
-    <main>
-        {% block content %}{% endblock %}
-    </main>
-</body>
+        <title>{{ title }}</title>
+    </head>
+    <body>
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+    </body>
 </html>

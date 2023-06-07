@@ -9,13 +9,13 @@ title: To-Do
 - [x] update PDF output: add minus sign for removed items
 - [x] update PDF output: put current list all on one page
 - [x] update PDF output: put renoved items all on one page
-- [ ] create lists page for each region
-- [ ] create navigation regions
+- [x] create lists page for each region
+- [x] create navigation regions
 - [ ] create lists page for each category
 - [ ] create a "unique to region" list
 - [ ] use more reliable update service for build hook
 - [ ] store historical lists in a database
 - [ ] allow comparisons to historical lists
 - [ ] remove details arrow from list items
-- [ ] add barcode to details
-- [ ] add appearances in other lists to details
+- [x] add barcode to details
+- [x] add appearances in other lists to details
