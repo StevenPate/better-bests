@@ -1,0 +1,76 @@
+---
+layout: default.njk
+title: "Regional Bestseller Lists"
+---
+
+{% for list in lists  %}
+
+    <header id="top">
+        <h1 class="is-size-3">The Pacific Northwest Indie Bestseller List for the week ending {{ list.listDate }}.</h1>
+  
+        <p><strong>Jump to</strong>: {% for item in list.current  %}<a href="#{{ item.listName | slug }}">{{ item.listName }}</a>{% if not loop.last %} | {% endif %}{% endfor %}</p>
+        <p><strong>ISBNs</strong>: <a href="bsa">BSA</a> | <a href="bsc">BSC</a></p>
+        <p style="background-color: #fffaeb;"><strong>Print BarCodes for Switchover</strong>: <a href="/PNBA.pdf">PDF</a></p>
+        <p>On-hand numbers accurate <strong>as of Jun 6 7:19pm </strong>.
+    </header>
+    {% for item in list.current  %}
+    <div id="{{ item.listName | slug }}" class="listColumns row" style="page-break-after: always;">
+        <div class="allColumn col-sm-12" style="padding:.5rem;">
+            <h2 class="is-size-4">{{ item.listName}} - {{ list.associationAbbreviation }} ({{ list.listDate}})</h2>
+            <ol>
+            {% for book in item.listItems %}
+                <li>
+                    <details>
+                        <summary class="is-size-5"><strong>{{ book.title }}</strong>{{ book.uniqueItem | safe }}, {{ book.author | safe }} - <span class="isbn">{{ book.isbn }}</span> <span style="color:#a6a6a6;">{{ book.positionDifference | safe }} {{ book.stockStatus | safe }}</span></summary>
+                        <img src="{{ book.coverImage }}">
+                    </details>
+                </li>
+            {% endfor %}
+            </ol>
+            <a href="#top" class="toplink">Back to top</a>
+        </div>
+    </div>
+
+        {# <div class="changedColumns col-xs-12 col-sm-6 row" style="padding:.5rem;page-break-inside: avoid;">
+            <div class="added col-sm-6" style="">
+                    <h3 class="is-size-5">Added</h3>
+                    <div class="addedItems " style="padding-top:1rem;">
+                    {% for book in item.addedItems %}
+                        <article  class="bookWithBarcode box" style="display: flex;flex:1;flex-basis:auto;flex-direction: column;page-break-inside: avoid;">
+                            <details style="padding-left:2.5rem">
+                                <summary class="titleCollapse" style="max-width:100%;"><strong>{{ book.title }}</strong></summary>
+                                <div class="coverImage">
+                                    <img src="{{ book.coverImage }}" style="max-width:80%;">
+                                </div>
+                            </details>
+                            <div class="barcode">
+                                {{ book.barcode | safe }}
+                            </div>
+                            </article>
+                    {% endfor %}
+                    </div> 
+            </div>
+            <div class="dropped col-md-6" style="">
+                    <h3 class="is-size-5">Dropped</h3>
+                    <div class="droppededItems" style="padding-top:1rem;">
+                    {% for book in item.droppedItems %}
+                        <article  class="bookWithBarcode box" style="display: flex;flex:1;flex-basis:auto;flex-direction: column;page-break-inside: avoid;">
+                            <details style="padding-left:1.5rem;text-align:left">
+                                <summary style="max-width:100%;"><strong>{{ book.title }}</strong></summary>
+                                <div class="coverImage">
+                                    <img src="{{ book.coverImage }}" style="max-width:80%;">
+                                </div>
+                            </details>
+                            <div class="barcode print-right" style="page-break-inside: avoid;">
+                                {{ book.barcode | safe }}
+                            </div>
+                        </article>
+                    {% endfor %}
+                    </div>
+            </div>
+        </div> #}
+        
+    {% endfor %}
+
+
+{% endfor %}

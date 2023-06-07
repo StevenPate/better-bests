@@ -1,17 +1,15 @@
 ---
 layout: default.njk
 title: "Regional Bestseller Lists"
-pagination:
-    data: lists
-    size: 1
-    alias: regionList
-permalink: "/{{ regionList.associationAbbreviation }}/"
 ---
+
+{% for regionList in lists | limit(1) %}
+
 <details>
     <summary><strong>Select Region</strong>:</summary>
     <ul>
-        {% for item in lists %}
-            <li><a href="/{{ item.associationAbbreviation }}/">{{ item.region }}</a></li>
+        {% for regionList in lists %}
+            <li><a href="/{{ regionList.associationAbbreviation }}/">{{ regionList.region }}</a></li>
         {% endfor %}
     </ul>
 </details>
@@ -21,7 +19,7 @@ permalink: "/{{ regionList.associationAbbreviation }}/"
         <h1 class="is-size-3">The {{ regionList.region }} lists for the week ending {{ regionList.listDate }}.</h1>
         <p><strong>Jump to</strong>: {% for item in regionList.current  %}<a href="#{{ item.listName | slug }}">{{ item.listName }}</a>{% if not loop.last %} | {% endif %}{% endfor %}</p>
         <p><strong>ISBNs</strong>: <a href="bsa">BSA</a> | <a href="bsc">BSC</a></p>
-        <p style="background-color: #fffaeb;"><strong>Print BarCodes for Switchover</strong>: <a href="/{{ regionList.associationAbbreviation }}.pdf">PDF</a></p>
+        <p style="background-color: #fffaeb;"><strong>Print BarCodes for Switchover</strong>: <a href="/PNBA.pdf">PDF</a></p>
         <p>On-hand numbers accurate <strong>as of Jun 6 7:19pm {{ regionList.current.lsiTime | log}}</strong>.
     </header>
 
@@ -61,3 +59,5 @@ permalink: "/{{ regionList.associationAbbreviation }}/"
         
     {% endfor %}
 
+
+{% endfor %}

@@ -19,6 +19,9 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addFilter('fromJson', JSON.parse);
     eleventyConfig.addFilter('toJson', JSON.stringify);
     eleventyConfig.addFilter('barCode', barCode);
+    eleventyConfig.addFilter("limit", function (arr, limit) {
+        return arr.slice(0, limit);
+    });
     eleventyConfig.addPassthroughCopy("src/static");
     eleventyConfig.addPassthroughCopy('src/_redirects');
     return {
