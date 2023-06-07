@@ -90,7 +90,7 @@ parseListTxts = (text) => {
                         title = title.slice(0, 50) + "...";
                     }
                     if (!isbn || isbn.length < 10 || isbn.length > 13 || isbn === "") {
-                        console.log(lines[j]);
+                        // console.log(lines[j]);
                         console.log("ISBN is not valid: ", isbn, list, position, title);
                         // isbn = "0000000000000";
                         isbn = "";
@@ -167,7 +167,7 @@ module.exports = async function () {
 
     await Promise.all(
         regionLists.map(async (regionList) => {
-            console.log(regionList);
+            // console.log(regionList);
             currentText = await EleventyFetch(regionList.currentListURL, {
                 duration: "1d", // save for 1 day
                 type: "text",
@@ -182,6 +182,10 @@ module.exports = async function () {
             // console.log(regionList.past.length);
 
             regionList.current = (regionList.associationAbbreviation == "PNBA") ? await stockStatus(regionList.current) : regionList.current;
+            if (regionList.associationAbbreviation == "PNBA") {
+                regionList.current = await stockStatus(regionList.current);
+                regionList.lsiTime = regionList.current[0].lsiTime;
+            }
 
             regionList.current.forEach((currentList) => {
                 currentList.listType = (currentList.listName === "CHILDREN'S ILLUSTRATED" || currentList.listName === "EARLY & MIDDLE GRADE READERS" | currentList.listName === "YOUNG ADULT" | currentList.listName === "CHILDREN'S SERIES TITLES") 
@@ -238,7 +242,7 @@ module.exports = async function () {
                         currentListItem.otherPositions = [];
                         regionLists.forEach((otherRegionList) => {
                             if (otherRegionList.region !== regionList.region) {
-                                let otherList = otherRegionList.current.find(
+                                let otherList = otherRegionList?.current.find(
                                     (otherList) => otherList.listName === currentList.listName
                                 );
                                 if (otherList) {
@@ -271,44 +275,16 @@ module.exports = async function () {
                     });
                 }
             });
-            regionList.lsiTime = (regionList.current[0].listItems[0].stockStatus) 
-                ? regionList.current.lsiTime
-                : "No LSI Time";
 
-            // TODO move generatePDF to here
+            if (regionList?.current[0]?.listItems[0]?.lsiTime) {
+                regionList.lsiTime = regionList.current[0].listItems[0].lsiTime;
+            }
             
             generatePDF(regionList);
 
-            
-            // await generatePDF(regionList);
         })
+        
     );
-    // for each regionlist in regionLists, generatePDF(regionList)
-    // for (let index = 0; index < regionLists.length; index++) {
-    //     const pdf = generatePDF(regionLists[index]);
-    // }
-
-
-
-
-    // for each item in regionLists create a forPrint object
-    // regionLists.forEach((regionList) => {
-    //     // console.log(regionList);
-    //     generatePDF(regionList);
-    // });
-
     
-
-
-
-    // console.log(regionLists[0]);
-
-
-    // for each item in regionLists,
-    //     for each list in current
-    //         send an object to pdfOutput script 
-    //     name the outputfile regionList.pdf
-
-    // console.log(JSON.stringify(regionLists, null, 2));
     return regionLists;
 };

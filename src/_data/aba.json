@@ -8,6 +8,21 @@
                 "regionSuffix" : "pn"
             },
             {
+                "regionalAssociation" : "California Independent Booksellers Alliance (CALIBA) Northern",
+                "regionalAssociationAbbreviation" : "CALIBAN",
+                "regionSuffix" : "nc"
+            },
+            {
+                "regionalAssociation" : "California Independent Booksellers Alliance (CALIBA) Southern",
+                "regionalAssociationAbbreviation" : "CALIBAS",
+                "regionSuffix" : "sc"
+            },
+            {
+                "regionalAssociation" : "Mountains & Plains Independent Booksellers Association (MPIBA)",
+                "regionalAssociationAbbreviation" : "MPIBA",
+                "regionSuffix" : "mp"
+            },
+            {
                 "regionalAssociation" : "Midwest Independent Booksellers Association (MIBA)",
                 "regionalAssociationAbbreviation" : "MIBA",
                 "regionSuffix" : "mw"
@@ -23,11 +38,6 @@
                 "regionSuffix" : "na"
             },
             {
-                "regionalAssociation" : "California Independent Booksellers Alliance (CALIBA) Northern",
-                "regionalAssociationAbbreviation" : "CALIBAN",
-                "regionSuffix" : "nc"
-            },
-            {
                 "regionalAssociation" : "New England Independent Booksellers Association (NEIBA)",
                 "regionalAssociationAbbreviation" : "NEIBA",
                 "regionSuffix" : "ne"
@@ -36,16 +46,6 @@
                 "regionalAssociation" : "Southern Independent Booksellers Alliance (SIBA)",
                 "regionalAssociationAbbreviation" : "SIBA",
                 "regionSuffix" : "si"
-            },
-            {
-                "regionalAssociation" : "Mountains & Plains Independent Booksellers Association (MPIBA)",
-                "regionalAssociationAbbreviation" : "MPIBA",
-                "regionSuffix" : "mp"
-            },
-            {
-                "regionalAssociation" : "California Independent Booksellers Alliance (CALIBA) Southern",
-                "regionalAssociationAbbreviation" : "CALIBAS",
-                "regionSuffix" : "sc"
             }
         ],
     "otherRegions" : [

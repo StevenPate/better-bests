@@ -20,9 +20,24 @@ permalink: "/{{ regionList.associationAbbreviation }}/"
     <header id="top">
         <h1 class="is-size-3">The {{ regionList.region }} lists for the week ending {{ regionList.listDate }}.</h1>
         <p><strong>Jump to</strong>: {% for item in regionList.current  %}<a href="#{{ item.listName | slug }}">{{ item.listName }}</a>{% if not loop.last %} | {% endif %}{% endfor %}</p>
-        <p><strong>ISBNs</strong>: <a href="bsa">BSA</a> | <a href="bsc">BSC</a></p>
-        <p style="background-color: #fffaeb;"><strong>Print BarCodes for Switchover</strong>: <a href="/{{ regionList.associationAbbreviation }}.pdf">PDF</a></p>
-        <p>On-hand numbers accurate <strong>as of Jun 6 7:19pm {{ regionList.current.lsiTime | log}}</strong>.
+        <p>
+            <span><strong>BarCodes</strong>: <a href="/{{ regionList.associationAbbreviation }}.pdf">PDF</a></span>
+            {% if regionList.lsiTime %}
+            <span style="padding-left:1rem;">
+                <strong>ISBNs</strong>: <a href="bsa">BSA</a> | <a href="bsc">BSC</a>
+            </span>
+            {% endif %} 
+            {% if regionList.lsiTime %}
+                <span style="padding-left:1rem;"><strong>On-hand numbers</strong>: {{ regionList.lsiTime }}.</span>{% endif %}
+        </p>
+        <p>
+            <span>
+                <span class="is-blue">&star;</span> = not found on this list the previous week 
+            </span>
+            <span style="padding-left:1rem;">
+                <span> ❄️</span> = not found on any other region's lists this week 
+            </span>
+        </p>
     </header>
 
     {% for item in regionList.current  %}
