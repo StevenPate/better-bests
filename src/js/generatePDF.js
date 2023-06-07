@@ -1,10 +1,10 @@
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
-const doc = new PDFDocument({
-    bufferPages: true});
 const barCode = require('./barCode');
 
 function generatePDF(regionLists) {
+    const doc = new PDFDocument({
+        bufferPages: true});
 
     const { region, listDate, associationAbbreviation, current } = regionLists;
     const pdfPath = `./_site/${associationAbbreviation}`;
@@ -20,7 +20,6 @@ function generatePDF(regionLists) {
     doc
         .fontSize(10)
         .font('Times-Roman')
-        
     current.forEach(list => {
         doc.font('Helvetica-Bold').fontSize(12);
         doc.text(list.listName, 30, 30)

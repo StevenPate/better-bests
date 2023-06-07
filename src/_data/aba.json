@@ -6,17 +6,26 @@
                 "regionalAssociation" : "Pacific Northwest Booksellers Association (PNBA)",
                 "regionalAssociationAbbreviation" : "PNBA",
                 "regionSuffix" : "pn"
-            }],
-    "otherRegions" : [
-            {
-                "regionalAssociation" : "California Independent Booksellers Alliance (CALIBA) Northern",
-                "regionalAssociationAbbreviation" : "CALIBA",
-                "regionSuffix" : "nc"
             },
             {
-                "regionalAssociation" : "California Independent Booksellers Alliance (CALIBA) Southern",
-                "regionalAssociationAbbreviation" : "CALIBA",
-                "regionSuffix" : "sc"
+                "regionalAssociation" : "Midwest Independent Booksellers Association (MIBA)",
+                "regionalAssociationAbbreviation" : "MIBA",
+                "regionSuffix" : "mw"
+            },
+            {
+                "regionalAssociation" : "Great Lakes Independent Booksellers Association (GLIBA)",
+                "regionalAssociationAbbreviation" : "GLIBA",
+                "regionSuffix" : "gl"
+            },
+            {
+                "regionalAssociation" : "New Atlantic Independent Booksellers Association (NAIBA)",
+                "regionalAssociationAbbreviation" : "NAIBA",
+                "regionSuffix" : "na"
+            },
+            {
+                "regionalAssociation" : "California Independent Booksellers Alliance (CALIBA) Northern",
+                "regionalAssociationAbbreviation" : "CALIBAN",
+                "regionSuffix" : "nc"
             },
             {
                 "regionalAssociation" : "New England Independent Booksellers Association (NEIBA)",
@@ -34,19 +43,16 @@
                 "regionSuffix" : "mp"
             },
             {
-                "regionalAssociation" : "New Atlantic Independent Booksellers Association (NAIBA)",
-                "regionalAssociationAbbreviation" : "NAIBA",
-                "regionSuffix" : "na"
-            },
-            {
-                "regionalAssociation" : "Great Lakes Independent Booksellers Association (GLIBA)",
-                "regionalAssociationAbbreviation" : "GLIBA",
-                "regionSuffix" : "gl"
-            },
-            {
-                "regionalAssociation" : "Midwest Independent Booksellers Association (MIBA)",
-                "regionalAssociationAbbreviation" : "MIBA",
-                "regionSuffix" : "mw"
+                "regionalAssociation" : "California Independent Booksellers Alliance (CALIBA) Southern",
+                "regionalAssociationAbbreviation" : "CALIBAS",
+                "regionSuffix" : "sc"
             }
+        ],
+    "otherRegions" : [
+        {
+            "regionalAssociation" : "California Independent Booksellers Alliance (CALIBA) Southern",
+            "regionalAssociationAbbreviation" : "CALIBAS",
+            "regionSuffix" : "sc"
+        }
         ]
 }

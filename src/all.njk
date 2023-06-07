@@ -7,12 +7,14 @@ pagination:
     alias: regionList
 permalink: "/{{ regionList.associationAbbreviation }}/"
 ---
-<strong>Regional Bestseller Lists</strong>:
-<ul>
-    {% for item in lists %}
-        <li><a href="/{{ item.associationAbbreviation }}/">{{ item.region }}</a></li>
-    {% endfor %}
-</ul>
+<details>
+    <summary><strong>Select Region</strong>:</summary>
+    <ul>
+        {% for item in lists %}
+            <li><a href="/{{ item.associationAbbreviation }}/">{{ item.region }}</a></li>
+        {% endfor %}
+    </ul>
+</details>
 
 
     <header id="top">
@@ -31,12 +33,25 @@ permalink: "/{{ regionList.associationAbbreviation }}/"
             {% for book in item.listItems %}
                 <li>
                     <details>
-                        
-                        <summary class="is-size-5"><strong>{{ book.title }}</strong>, {{ book.author }} - <span class="isbn">{{ book.isbn }}</span> <span style="color:#a6a6a6;">{{ book.positionDifference | safe }} (<a href="https://www.portbooknews.com/book/{{ book.isbn}}" name="here's a name"  data-tooltip="{{ book.stockStatus.lsiTime }}">{{ book.stockStatus.lsiQuantity }} on hand</a>)</span></summary>
-                        <img src="{{ book.coverImage }}">
+                        <summary class="is-size-5"><strong>{{ book.title }}</strong>{{ book.uniqueItem | safe }}, {{ book.author | safe }} - <span class="isbn">{{ book.isbn }}</span> <span style="color:#a6a6a6;">{{ book.positionDifference | safe }} (<a href="https://www.portbooknews.com/book/{{ book.isbn}}" name="here's a name"  data-tooltip="{{ book.stockStatus.lsiTime }}">{{ book.stockStatus.lsiQuantity }} on hand</a>)</span></summary>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                                <img src="{{ book.coverImage }}">
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                {% for other in book.otherPositions %}
+                                    <div><strong>{{ other.region }}</strong>: {{ other.item.position }} {{ other.item.positionDifference | safe }}</div>
+                                {% endfor %}
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                [barcode]
+                            </div>
+                        </div>
                     </details>
                 </li>
             {% endfor %}
+            {# uniques #}
+                
             </ol>
             <a href="#top" class="toplink">Back to top</a>
         </div>

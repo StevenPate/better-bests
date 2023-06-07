@@ -89,12 +89,14 @@ parseListTxts = (text) => {
                     if (title.length > 50) {
                         title = title.slice(0, 50) + "...";
                     }
-                    // if (!isbn || isbn.length < 10 || isbn.length > 13 || isbn === "") {
-                    //     console.log(lines[j]);
-                    //     console.log("ISBN is not valid: ", isbn, list, position, title);
-
-                    //     // isbn = "0000000000000";
-                    // }
+                    if (!isbn || isbn.length < 10 || isbn.length > 13 || isbn === "") {
+                        console.log(lines[j]);
+                        console.log("ISBN is not valid: ", isbn, list, position, title);
+                        // isbn = "0000000000000";
+                        isbn = "";
+                        break;
+                        // return;
+                    }
 
 
                     entry = {
@@ -171,11 +173,11 @@ module.exports = async function () {
                 type: "text",
             });
             regionList.current = parseListTxts(currentText);
-            pastText = await EleventyFetch(regionList.previousListURL, {
+            previousText = await EleventyFetch(regionList.previousListURL, {
                 duration: "1d", // save for 1 day
                 type: "text",
             });
-            regionList.past = parseListTxts(pastText);
+            regionList.past = parseListTxts(previousText);
             // console.log(regionList.currentListURL);
             // console.log(regionList.past.length);
 
@@ -187,12 +189,15 @@ module.exports = async function () {
                     : "a";
                 currentList.addedItems = [];
                 currentList.droppedItems = [];
+                currentList.uniqueItems = [];
                 let previousList = regionList.past.find(
                     (previousList) => previousList.listName === currentList.listName
                 );
                 if (previousList) {
                     currentList.listItems.forEach((currentListItem) => {
-                        if (
+
+                        // find positionDifference from previous list
+                        if ( 
                             !previousList.listItems.find(
                                 (previousListItem) =>
                                     previousListItem.isbn == currentListItem.isbn
@@ -218,16 +223,41 @@ module.exports = async function () {
 
                             // console.log(currentListItem.title, previousListItem.position, currentListItem.position, currentListItem.positionDifference);
                         }
+                       
+                        // indicate positionDifference with a symbol
                         currentListItem.positionDifference =
-                        currentListItem.positionDifference === undefined
-                            ? `<span class="is-blue">*</span>`
-                            : currentListItem.positionDifference === 0
-                                ? "="
-                                : currentListItem.positionDifference > 0
-                                ? `<span class="is-green">↑ ${currentListItem.positionDifference}</span>`
-                                : `<span class="is-red">↓ ${Math.abs(currentListItem.positionDifference)}</span>`;
+                            currentListItem.positionDifference === undefined
+                                ? `<span class="is-blue">&star;</span>`
+                                : currentListItem.positionDifference === 0
+                                    ? "&harr;"
+                                    : currentListItem.positionDifference > 0
+                                    ? `<span class="is-green">&uarr; ${currentListItem.positionDifference}</span>`
+                                    : `<span class="is-red">&darr; ${Math.abs(currentListItem.positionDifference)}</span>`;
                         
-                        
+                        // find this book in other lists
+                        currentListItem.otherPositions = [];
+                        regionLists.forEach((otherRegionList) => {
+                            if (otherRegionList.region !== regionList.region) {
+                                let otherList = otherRegionList.current.find(
+                                    (otherList) => otherList.listName === currentList.listName
+                                );
+                                if (otherList) {
+                                    let otherListItem = otherList.listItems.find(
+                                        (otherListItem) =>
+                                            otherListItem.isbn == currentListItem.isbn
+                                    );
+                                    if (otherListItem) {
+                                        currentListItem.otherPositions.push({
+                                            region: otherRegionList.regionAbbreviation,
+                                            item: otherListItem,
+                                        });
+                                    }
+                                }
+                            }
+                        });
+                    
+                        currentListItem.uniqueItem = (currentListItem.otherPositions.length == 0) ? `<span alt="this book is not found on any other region's lists!"> ❄️ </span>` : "";   
+            
                     });
                     previousList.listItems.forEach((previousListItem) => {
                         if (
@@ -247,14 +277,29 @@ module.exports = async function () {
             console.log(`regionList.lsiTime: ${regionList.lsiTime}`);
 
             // TODO move generatePDF to here
+            
+            generatePDF(regionList);
+
+            
+            // await generatePDF(regionList);
         })
     );
+    // for each regionlist in regionLists, generatePDF(regionList)
+    // for (let index = 0; index < regionLists.length; index++) {
+    //     const pdf = generatePDF(regionLists[index]);
+    // }
+
+
+
 
     // for each item in regionLists create a forPrint object
-    regionLists.forEach((regionList) => {
-        // console.log(regionList);
-        generatePDF(regionList);
-    });
+    // regionLists.forEach((regionList) => {
+    //     // console.log(regionList);
+    //     generatePDF(regionList);
+    // });
+
+    
+
 
 
     // console.log(regionLists[0]);
