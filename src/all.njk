@@ -28,7 +28,9 @@ permalink: "/{{ regionList.associationAbbreviation }}/"
             </span>
             {% endif %} 
             {% if regionList.lsiTime %}
-                <span style="padding-left:1rem;"><strong>On-hand numbers</strong>: {{ regionList.lsiTime }}.</span>{% endif %}
+                <span style="padding-left:1rem;"><strong>On-hand numbers</strong>: {{ regionList.lsiTime }}.</span>
+            {% endif %}
+            <span style="padding-left:1rem;"><strong>Source:</strong> <a href="{{ regionList.currentListURL }}">ABA</a></span>
         </p>
         <p>
             <span>

@@ -19,33 +19,27 @@ title: "Regional Bestseller Lists"
         </ul>
     </details>
     <header id="top">
-        <h1 class="is-size-3">The {{ regionList.region }} lists for the week ending {{ regionList.listDate }}.</h1>
+        <h1 class="is-size-3">The {{ regionList.region }} Indie Bestseller List for the week ending {{ regionList.listDate }}.</h1>
+        <p><strong>Jump to</strong>: {% for item in regionList.current  %}<a href="#{{ item.listName | slug }}">{{ item.listName }}</a>{% if not loop.last %} | {% endif %}{% endfor %}</p>
         <p>
-            <strong>Jump to</strong>: {% for item in regionList.current %}
-                <a href="#{{ item.listName | slug }}">{{ item.listName }}</a>
-                {% if not loop.last %} | {% endif %}
-            {% endfor %}
-        </p>
-        <p>
-            <span>
-                <strong>BarCodes</strong>: <a href="/{{ regionList.associationAbbreviation }}.pdf">PDF</a>
+            <span><strong>BarCodes</strong>: <a href="/{{ regionList.associationAbbreviation }}.pdf">PDF</a></span>
+            {% if regionList.lsiTime %}
+            <span style="padding-left:1rem;">
+                <strong>ISBNs</strong>: <a href="bsa">BSA</a> | <a href="bsc">BSC</a>
             </span>
+            {% endif %} 
             {% if regionList.lsiTime %}
-                <span style="padding-left:1rem;">
-                    <strong>ISBNs</strong>: <a href="bsa">BSA</a> | <a href="bsc">BSC</a>
-                </span>
+                <span style="padding-left:1rem;"><strong>On-hand numbers</strong>: {{ regionList.lsiTime }}.</span>
             {% endif %}
-            {% if regionList.lsiTime %}
-                <span style="padding-left:1rem;">
-                    <strong>On-hand numbers</strong>: {{ regionList.lsiTime }}.</span>{% endif %}
+            <span style="padding-left:1rem;"><strong>Source:</strong> <a href="{{ regionList.currentListURL }}">ABA</a></span>
         </p>
         <p>
             <span>
                 <span class="is-blue">&star;</span> = not found on this list the previous week 
-        </span>
+            </span>
             <span style="padding-left:1rem;">
                 <span> ❄️</span> = not found on any other region's lists this week 
-        </span>
+            </span>
         </p>
     </header>
 
