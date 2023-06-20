@@ -29,7 +29,7 @@ const getData = async (isbn) => {
             pbnHTML("span.abaproduct-lsi-timestamp")
                 .contents()
                 .text();
-        const html = `(<a href="https://www.portbooknews.com/book/${isbn}" data-tooltip="${lsiTime}">${lsiQuantity} on hand</a>)`
+        const html = `<a href="https://www.portbooknews.com/book/${isbn}" data-tooltip="${lsiTime}" class="has-text-info has-background-info-light">${lsiQuantity} on hand</a>`
         return {
             lsiQuantity,
             html,

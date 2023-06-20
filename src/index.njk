@@ -4,8 +4,8 @@ title: "Regional Bestseller Lists"
 ---
 
 {% for regionList in lists | limit(1) %}
+{{ regionList | log }}
 {% include 'partials/notifications.njk' %}
-
 <navbar>
 
     <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -14,37 +14,14 @@ title: "Regional Bestseller Lists"
         <strong>pnba.netlify.app</strong>
         </a>
 
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarTop">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         </a>
     </div>
 
-    <script>
-document.addEventListener('DOMContentLoaded', () => {
-
-  // Get all "navbar-burger" elements
-  const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-
-  // Add a click event on each of them
-  $navbarBurgers.forEach( el => {
-    el.addEventListener('click', () => {
-
-      // Get the target from the "data-target" attribute
-      const target = el.dataset.target;
-      const $target = document.getElementById(target);
-
-      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-      el.classList.toggle('is-active');
-      $target.classList.toggle('is-active');
-
-    });
-  });
-
-});
-</script>
-    <div id="navbar" class="navbar-menu">
+    <div id="navbarTop" class="navbar-menu">
         <div class="navbar-start">
 
         <div class="navbar-item has-dropdown is-hoverable">
@@ -120,28 +97,11 @@ document.addEventListener('DOMContentLoaded', () => {
         <p><strong>Jump to</strong>: {% for item in regionList.current  %}<a href="#{{ item.listName | slug }}">{{ item.listName }}</a>{% if not loop.last %} | {% endif %}{% endfor %}</p>
     </section>
 
-<div id="lists" 
-    class="is-flex-mobile is-flex-direction-row"
-    style="
-    --docs-outer: 3rem;
-    --docs-inner: 3rem;
-    display: grid;
-    grid-template-columns: 11.25rem 1fr;
-">
+<div id="lists" class="is-flex-mobile is-flex-direction-row">
 
-    <div class="sidebar is-hidden-mobile" style="
-        width: 11.25rem;
-        z-index: 40;
-    ">
+    <div class="sidebar is-hidden-mobile">
         
-        <nav style="
-            --height: 1.25;
-            max-height: 100vh;
-            overflow-y: auto;
-            padding: var(--docs-side-padding);
-            position: sticky;
-            top: 0;
-        ">
+        <nav class= "sticky-sidebar">
 
         <aside class="menu">
         <p class="menu-label">
@@ -167,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
             {% for book in item.listItems %}
                 <li>
                     <details>
-                        <summary class="is-size-5"><strong>{{ book.title }}</strong>{{ book.uniqueItem | safe }}, {{ book.author | safe }} - <span class="isbn">{{ book.isbn }}</span> <span style="color:#a6a6a6;">{{ book.positionDifference | safe }} {{ book.stockStatus | safe }}</span></summary>
+                        <summary class="is-size-5"><strong>{{ book.title }}</strong>{{ book.uniqueItem | safe }}, {{ book.author | safe }} - <span class="isbn has-text-grey-light">{{ book.isbn }}</span> <span style="color:#a6a6a6;">{{ book.positionDifference | safe }} {{ book.stockStatus | safe }}</span></summary>
                         <div class="listItemDetails">
                             <div class="coverImage">
                                 <img alt="{{ book.title }}" src="{{ book.coverImage }}" style="margin:1rem;">
@@ -195,13 +155,13 @@ document.addEventListener('DOMContentLoaded', () => {
     {% endfor %}
     {% if regionList.zeroStockItems %}
     <div id="zeroStockItems">
-            <h2 class="is-size-4">Bestseller Items with zero QOH</h2>
+            <h2 class="is-size-4">Zero Stock Items: Bestsellers with zero QOH</h2>
             <ol>
                 {% for book in regionList.zeroStockItems %}
                 <li>
                     <details>
                         <summary class="is-size-5">
-                            <strong>{{ book.title }}</strong>{{ book.uniqueItem | safe }}, {{ book.author | safe }} (<a href="#{{ book.listName| slug }}">{{ book.listName }}</a>, <strong>#{{ book.position}}</strong>) - <span class="isbn">{{ book.isbn }}</span>
+                            <strong>{{ book.title }}</strong>{{ book.uniqueItem | safe }}, {{ book.author | safe }} (<a href="#{{ book.listName| slug }}">{{ book.listName }}</a>, <strong>#{{ book.position}}</strong>) - <span class="isbn has-text-grey-light">{{ book.isbn }}</span>
                             <span style="color:#a6a6a6;">{{ book.positionDifference | safe }}
                                 {{ book.stockStatus | safe }}</span>
                         </summary>

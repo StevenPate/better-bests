@@ -29,15 +29,37 @@
             }
 
             .navbar-brand {
-                padding-left: 2rem;
+                padding: 0 2rem;
             }
 
             .listsColumn,
             aside.menu {
                 padding: calc(var(--docs-inner) *.5);
             }
+
+            div#lists {
+                --docs-outer: 3rem;
+                --docs-inner: 3rem;
+                display: grid;
+                grid-template-columns: 11.25rem 1fr;
+            }
             .listsColumn > div {
                 margin-bottom: calc(var(--docs-inner) * 1);
+            }
+            .allColumn>ol>li {
+                padding-bottom: 0.2rem;
+            }
+            .sidebar {
+                width: 11.25rem;
+                z-index: 40;
+            }
+            .sticky-sidebar {
+                --height: 1.25;
+                max-height: 100vh;
+                overflow-y: auto;
+                padding: var(--docs-side-padding);
+                position: sticky;
+                top: 0;
             }
 
             p.menu-label {
@@ -124,6 +146,9 @@
                 .printBlock {
                     display: block;
                 }
+                div#lists {
+                    display: block;
+                }
                 .changedColumns {
                     min-width:100% padding: 0;
                 }
@@ -142,6 +167,7 @@
                 .print-right {
                     text-align: right;
                 }
+                .sidebar,
                 .toplink,
                 header {
                     display: none;
@@ -166,42 +192,6 @@
                 }
             }
         </style>
-
-        {# <link rel="stylesheet" href="https://unpkg.com/awsm.css/dist/awsm.min.css">  #}
-        {# <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.classless.min.css"> #}
-        <!--style>
-        article {
-            padding:.5rem;
-            margin:.3rem;
-        }
-        h2.bestsellerList {
-            position: sticky;
-            top: 0px;
-            background-color:#fff;
-        }
-        .pullList {
-            margin-bottom: 1rem;
-        }
-        .pullList h3 small {
-            font-size: 1rem;
-            font-weight: 400;
-            color: #666;
-        }
-        .pullList h3 {
-                margin:0 0 .25rem;
-            }
-        .barcodeCard ol {
-                margin:1rem;
-            }
-        details {
-            padding-bottom:0;
-            border-bottom:0;
-        }
-        details summary::after {
-            display:none;
-        }
-
-    </style-->
         <title>{{ title }}</title>
     </head>
     <body>
