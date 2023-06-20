@@ -1,4 +1,4 @@
-<script>
+
 document.addEventListener('DOMContentLoaded', () => {
     (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
         const $notification = $delete.parentNode;
@@ -10,8 +10,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-</script>
-<div class="notification is-info">
-  <button class="delete"></button>
-  <p>🚨 <strong>Updates to this app (6/19)</strong>: Revised layout; Added "Zero Stock Items" list: books on PNBA lists where QOH = 0.</p>
-</div>

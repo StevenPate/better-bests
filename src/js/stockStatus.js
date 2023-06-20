@@ -31,6 +31,7 @@ const getData = async (isbn) => {
                 .text();
         const html = `(<a href="https://www.portbooknews.com/book/${isbn}" data-tooltip="${lsiTime}">${lsiQuantity} on hand</a>)`
         return {
+            lsiQuantity,
             html,
             lsiTime
         };
@@ -51,6 +52,7 @@ module.exports = async function (regionLists) {
             // console.log(`stockStatus: ${JSON.stringify(stockStatus)}`);
             regionLists[i].listItems[j].stockStatus = stockStatus.html;
             regionLists[i].listItems[j].lsiTime = stockStatus.lsiTime;
+            regionLists[i].listItems[j].lsiQuantity = stockStatus.lsiQuantity;
         }
         regionLists[i].lsiTime = regionLists[i].listItems[0].lsiTime;
     }

@@ -11,11 +11,10 @@ title: To-Do
 - [x] update PDF output: put renoved items all on one page
 - [x] create lists page for each region
 - [x] create navigation regions
-- [ ] create lists page for each category
-- [ ] create a "unique to region" list
+- [x] add barcode to details
+- [x] add appearances in other lists to details
+- [x] create a "unique to region" list
 - [ ] use more reliable update service for build hook
 - [ ] store historical lists in a database
 - [ ] allow comparisons to historical lists
-- [ ] remove details arrow from list items
-- [x] add barcode to details
-- [x] add appearances in other lists to details
+- [x] remove details arrow from list items

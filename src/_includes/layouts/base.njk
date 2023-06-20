@@ -7,20 +7,52 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link href="https://cdn.jsdelivr.net/npm/flexboxgrid@6.3.1/dist/flexboxgrid.min.css" rel="stylesheet">
         <script defer src="/static/js/utils.js"></script>
-        <script>
-        </script>
+        <script></script>
         <style>
 
+            details summary {
+                cursor: pointer;
+            }
+
+            details summary.is-size-5::marker {
+                display: none;
+                content: none;
+            }
+
+            details summary.is-size-5::before {
+                display: none;
+                content: none;
+            }
+            .on-hand {
+                text-align: right;
+                margin-right: 1.5rem;
+            }
+
+            .navbar-brand {
+                padding-left: 2rem;
+            }
+
+            .listsColumn,
+            aside.menu {
+                padding: calc(var(--docs-inner) *.5);
+            }
+            .listsColumn > div {
+                margin-bottom: calc(var(--docs-inner) * 1);
+            }
+
+            p.menu-label {
+                padding-top: calc(var(--docs-inner) *.1);
+            }
             main {
                 padding: 2rem;
             }
+            h2.has-text-grey.is-size-4.subhead {
+                margin-top: 0;
+                padding-top: 0;
+                margin-bottom: 3rem;
+            }
             ol {
                 padding: 1rem;
-            }
-            h2 {
-                background-color: #f0f0f0;
-                color: #333;
-                padding: 1rem 0;
             }
             .added,
             .dropped {
@@ -46,14 +78,6 @@
                 padding: 0 0.2rem;
             }
 
-            {
-                # details summary::before,
-                ::marker,
-                details summary::marker {
-                    display: none;
-                }
-                 #;
-            }
             .listItemDetails {
                 display: flex;
                 flex-direction: column;
@@ -181,8 +205,6 @@
         <title>{{ title }}</title>
     </head>
     <body>
-        <main>
-            {% block content %}{% endblock %}
-        </main>
+        {% block content %}{% endblock %}
     </body>
 </html>

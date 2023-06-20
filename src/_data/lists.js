@@ -181,11 +181,7 @@ module.exports = async function () {
             // console.log(regionList.currentListURL);
             // console.log(regionList.past.length);
 
-            regionList.current = (regionList.associationAbbreviation == "PNBA") ? await stockStatus(regionList.current) : regionList.current;
-            if (regionList.associationAbbreviation == "PNBA") {
-                regionList.current = await stockStatus(regionList.current);
-                regionList.lsiTime = regionList.current[0].lsiTime;
-            }
+
 
             regionList.current.forEach((currentList) => {
                 currentList.listType = (currentList.listName === "CHILDREN'S ILLUSTRATED" || currentList.listName === "EARLY & MIDDLE GRADE READERS" | currentList.listName === "YOUNG ADULT" | currentList.listName === "CHILDREN'S SERIES TITLES") 
@@ -275,6 +271,22 @@ module.exports = async function () {
                     });
                 }
             });
+
+            if (regionList.associationAbbreviation == "PNBA") {
+                regionList.zeroStockItems = [];
+                regionList.current = await stockStatus(regionList.current);
+                regionList.lsiTime = regionList.current[0].lsiTime;
+                regionList.current.forEach((currentList) => {
+                    currentList.zeroStockItems = [];
+                    currentList.listItems.forEach((currentListItem) => {
+                        if (currentListItem.lsiQuantity === '0') {
+                            currentListItem.listName = currentList.listName;
+                            regionList.zeroStockItems.push(currentListItem);
+                        }
+                    } 
+                    );
+                });
+            }
 
             if (regionList?.current[0]?.listItems[0]?.lsiTime) {
                 regionList.lsiTime = regionList.current[0].listItems[0].lsiTime;
