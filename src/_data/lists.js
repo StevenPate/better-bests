@@ -182,6 +182,14 @@ module.exports = async function () {
             // console.log(regionList.past.length);
 
 
+            let uniqueItemsList = {
+                listName: 'Unique Items to this Region',
+                listItems: [],
+                listISBNs: [],
+                addedItems: [],
+                droppedItems: [],
+            }
+            // console.log(`regionList.current.uniqueItems: ${JSON.stringify(regionList.current.uniqueItems, null, 2)}`)
 
             regionList.current.forEach((currentList) => {
                 currentList.listType = (currentList.listName === "CHILDREN'S ILLUSTRATED" || currentList.listName === "EARLY & MIDDLE GRADE READERS" | currentList.listName === "YOUNG ADULT" | currentList.listName === "CHILDREN'S SERIES TITLES") 
@@ -256,8 +264,13 @@ module.exports = async function () {
                             }
                         });
                     
-                        currentListItem.uniqueItem = (currentListItem.otherPositions.length == 0) ? `<span alt="this book is not found on any other region's lists!"> ❄️ </span>` : "";   
-            
+                        // currentListItem.uniqueItem = (currentListItem.otherPositions.length == 0) ? `<span alt="this book is not found on any other region's lists!"> ❄️ </span>` : "";   
+                        if (currentListItem.otherPositions.length == 0) {
+                            currentListItem.uniqueItem = `<span alt="this book is not found on any other region's lists!"> ❄️ </span>`
+                            uniqueItemsList.listItems.push(currentListItem);
+                        } else {
+                            currentListItem.uniqueItem = "";
+                        }
                     });
                     previousList.listItems.forEach((previousListItem) => {
                         if (
@@ -269,8 +282,12 @@ module.exports = async function () {
                             currentList.droppedItems.push(previousListItem);
                         }
                     });
-                }
+                    // console.log(`uniqueItemsList: ${JSON.stringify(uniqueItemsList, null, 2)}`)
+                    }
+            // console.log(regionList.current)
             });
+                    regionList.current.push(uniqueItemsList);
+
 
             if (regionList.associationAbbreviation == "PNBA") {
                 regionList.zeroStockItems = [];
@@ -287,6 +304,9 @@ module.exports = async function () {
                     );
                 });
             }
+
+            // console.log(uniqueItemsList)
+            regionList.uniqueItemsList = uniqueItemsList;
 
             if (regionList?.current[0]?.listItems[0]?.lsiTime) {
                 regionList.lsiTime = regionList.current[0].listItems[0].lsiTime;
