@@ -19,5 +19,9 @@
     "dayjs": "^1.11.7",
     "jsbarcode": "^3.11.5",
     "pdfkit": "^0.13.0"
+  },
+  "dependencies": {
+    "@netlify/functions": "^1.6.0",
+    "node-fetch": "^3.3.1"
   }
 }
