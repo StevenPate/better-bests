@@ -28,7 +28,7 @@ const BUILD_HOOK =
 // export { handler }
 
 
-exports.handler = schedule('0 0/30 0 ? * 2/1 *', async () => {
+exports.handler = schedule('0 0 * ? * *', async () => {
     await fetch(BUILD_HOOK, {
         method: 'POST'
     }).then(response => {
