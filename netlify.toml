@@ -3,3 +3,5 @@
 
 [functions."test-function"]
 schedule = "@hourly"
+[functions."test-build"]
+schedule = "@hourly"
