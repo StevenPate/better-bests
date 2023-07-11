@@ -4,4 +4,4 @@
 [functions."test-function"]
 schedule = "@hourly"
 [functions."build"]
-schedule = "@hourly"
+schedule = "0 */30 * ? * *"
