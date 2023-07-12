@@ -1,7 +1,0 @@
-[functions]
-  node_bundler = "esbuild"
-
-[functions."test-function"]
-schedule = "@hourly"
-[functions."build"]
-schedule = "0 */30 * ? * *"
