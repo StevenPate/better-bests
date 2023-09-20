@@ -4,9 +4,9 @@ const stockStatus = require("../js/stockStatus.js");
 const dayjs = require("dayjs");
 const EleventyFetch = require("@11ty/eleventy-fetch");
 // const Image = require("@11ty/eleventy-img");
-const JsBarcode = require("jsbarcode");
-const { createCanvas } = require("canvas");
-const canvas = createCanvas();
+// const JsBarcode = require("jsbarcode");
+// const { createCanvas } = require("canvas");
+// const canvas = createCanvas();
 
 previousDateString = (dateString) =>
     dayjs(dateString.replace(/(\d{2})(\d{2})(\d{2})/, "20$1-$2-$3"))
@@ -79,8 +79,8 @@ parseListTxts = (text) => {
                     let author =
                         entryParts.length > 6
                             ? entryParts
-                                  .slice(2, entryParts.length - 3)
-                                  .join(", ")
+                                .slice(2, entryParts.length - 3)
+                                .join(", ")
                             : entryParts[2];
                     let publisher = entryParts[entryParts.length - 3];
                     let price = entryParts[entryParts.length - 2];
@@ -134,6 +134,7 @@ module.exports = async function () {
         duration: "1d", // save for 1 day
         type: "text",
     });
+    // console.log("🚀 ~ file: lists.js:137 ~ allCurrentLists:", allCurrentLists)
     // console.log(`allCurrentLists`);
 
     let regionLists = [];
@@ -141,16 +142,25 @@ module.exports = async function () {
     // console.log(aba.regions)
     aba.regions.forEach((region) => {
         const regionRegex = new RegExp(`.*${region.regionSuffix}.txt`, "g");
-        const currentDate = allCurrentLists
-            .match(regionRegex)[0]
-            .slice(-12, -6);
+        const date = new Date()
+            .toLocaleString("en-US", { timeZone: "US/Pacific" });
+
+        // wrong date because of time zone
+
+        const currentDate = dayjs(date, "YYYYMMDD")
+            //     .subtract(1, "day") /////////////////////////////
+            .format(
+                "YYMMDD"
+            );
+        // const currentDate = "230920"
+
         const previousDate = previousDateString(currentDate);
         // const postDate = dayjs("20" + currentDate, "YYYYMMDD").format(
         //     "MM-DD-YYYY"
         // );
-        const listDate = dayjs("20" + currentDate, "YYYYMMDD")
+        const listDate = dayjs(currentDate)
             .subtract(3, "day")
-            .format("MM-DD-YYYY");
+            .format("YYMMDD");
         const currentListURL = `${aba.textFilePath}${currentDate}${region.regionSuffix}.txt`;
         const previousListURL = `${aba.textFilePath}${previousDate}${region.regionSuffix}.txt`;
         regionLists.push({
@@ -168,6 +178,8 @@ module.exports = async function () {
     await Promise.all(
         regionLists.map(async (regionList) => {
             // console.log(regionList);
+
+            console.log("🚀 ~ file: lists.js:179 ~ regionLists.map ~ regionList.currentListURL:", regionList.currentListURL)
             currentText = await EleventyFetch(regionList.currentListURL, {
                 duration: "1d", // save for 1 day
                 type: "text",
@@ -192,7 +204,7 @@ module.exports = async function () {
             // console.log(`regionList.current.uniqueItems: ${JSON.stringify(regionList.current.uniqueItems, null, 2)}`)
 
             regionList.current.forEach((currentList) => {
-                currentList.listType = (currentList.listName === "CHILDREN'S ILLUSTRATED" || currentList.listName === "EARLY & MIDDLE GRADE READERS" | currentList.listName === "YOUNG ADULT" | currentList.listName === "CHILDREN'S SERIES TITLES") 
+                currentList.listType = (currentList.listName === "CHILDREN'S ILLUSTRATED" || currentList.listName === "EARLY & MIDDLE GRADE READERS" | currentList.listName === "YOUNG ADULT" | currentList.listName === "CHILDREN'S SERIES TITLES")
                     ? "c"
                     : "a";
                 currentList.addedItems = [];
@@ -205,7 +217,7 @@ module.exports = async function () {
                     currentList.listItems.forEach((currentListItem) => {
 
                         // find positionDifference from previous list
-                        if ( 
+                        if (
                             !previousList.listItems.find(
                                 (previousListItem) =>
                                     previousListItem.isbn == currentListItem.isbn
@@ -231,7 +243,7 @@ module.exports = async function () {
 
                             // console.log(currentListItem.title, previousListItem.position, currentListItem.position, currentListItem.positionDifference);
                         }
-                       
+
                         // indicate positionDifference with a symbol
                         currentListItem.positionDifference =
                             currentListItem.positionDifference === undefined
@@ -239,9 +251,9 @@ module.exports = async function () {
                                 : currentListItem.positionDifference === 0
                                     ? "&harr;"
                                     : currentListItem.positionDifference > 0
-                                    ? `<span class="is-green">&uarr; ${currentListItem.positionDifference}</span>`
-                                    : `<span class="is-red">&darr; ${Math.abs(currentListItem.positionDifference)}</span>`;
-                        
+                                        ? `<span class="is-green">&uarr; ${currentListItem.positionDifference}</span>`
+                                        : `<span class="is-red">&darr; ${Math.abs(currentListItem.positionDifference)}</span>`;
+
                         // find this book in other lists
                         currentListItem.otherPositions = [];
                         regionLists.forEach((otherRegionList) => {
@@ -263,7 +275,7 @@ module.exports = async function () {
                                 }
                             }
                         });
-                    
+
                         // currentListItem.uniqueItem = (currentListItem.otherPositions.length == 0) ? `<span alt="this book is not found on any other region's lists!"> ❄️ </span>` : "";   
                         if (currentListItem.otherPositions.length == 0) {
                             currentListItem.uniqueItem = `<span alt="this book is not found on any other region's lists!"> ❄️ </span>`
@@ -283,10 +295,10 @@ module.exports = async function () {
                         }
                     });
                     // console.log(`uniqueItemsList: ${JSON.stringify(uniqueItemsList, null, 2)}`)
-                    }
-            // console.log(regionList.current)
+                }
+                // console.log(regionList.current)
             });
-                    regionList.current.push(uniqueItemsList);
+            regionList.current.push(uniqueItemsList);
 
 
             if (regionList.associationAbbreviation == "PNBA") {
@@ -300,7 +312,7 @@ module.exports = async function () {
                             currentListItem.listName = currentList.listName;
                             regionList.zeroStockItems.push(currentListItem);
                         }
-                    } 
+                    }
                     );
                 });
             }
@@ -311,12 +323,12 @@ module.exports = async function () {
             if (regionList?.current[0]?.listItems[0]?.lsiTime) {
                 regionList.lsiTime = regionList.current[0].listItems[0].lsiTime;
             }
-            
+
             generatePDF(regionList);
 
         })
-        
+
     );
-    
+
     return regionLists;
 };
