@@ -147,20 +147,24 @@ module.exports = async function () {
 
         // wrong date because of time zone
 
-        const currentDate = dayjs(date, "YYYYMMDD")
-            //     .subtract(1, "day") /////////////////////////////
-            .format(
-                "YYMMDD"
-            );
-        // const currentDate = "230920"
+        // const currentDate = dayjs(date, "YYYYMMDD")
+        //     //     .subtract(1, "day") /////////////////////////////
+        //     .format(
+        //         "YYMMDD"
+        //     );
+        const currentDate = "231003"
 
-        const previousDate = previousDateString(currentDate);
+        // const previousDate = previousDateString(currentDate);
+        const previousDate = "230927";
         // const postDate = dayjs("20" + currentDate, "YYYYMMDD").format(
         //     "MM-DD-YYYY"
         // );
-        const listDate = dayjs(currentDate)
-            .subtract(3, "day")
-            .format("YYMMDD");
+        // const listDate = dayjs(currentDate)
+        // .subtract(3, "day")
+        // .format("YYMMDD");
+        const listDate = currentDate;
+        console.log("🚀 ~ file: lists.js:162 ~ aba.regions.forEach ~ currentDate:", currentDate)
+        console.log("🚀 ~ file: lists.js:162 ~ aba.regions.forEach ~ listDate:", listDate)
         const currentListURL = `${aba.textFilePath}${currentDate}${region.regionSuffix}.txt`;
         const previousListURL = `${aba.textFilePath}${previousDate}${region.regionSuffix}.txt`;
         regionLists.push({
@@ -179,7 +183,7 @@ module.exports = async function () {
         regionLists.map(async (regionList) => {
             // console.log(regionList);
 
-            console.log("🚀 ~ file: lists.js:179 ~ regionLists.map ~ regionList.currentListURL:", regionList.currentListURL)
+            // console.log("🚀 ~ file: lists.js:179 ~ regionLists.map ~ regionList.currentListURL:", regionList.currentListURL)
             currentText = await EleventyFetch(regionList.currentListURL, {
                 duration: "1d", // save for 1 day
                 type: "text",
