@@ -2,6 +2,8 @@ const aba = require("./aba.json");
 const generatePDF = require("../js/generatePDF.js");
 const stockStatus = require("../js/stockStatus.js");
 const dayjs = require("dayjs");
+const customParseFormat = require('dayjs/plugin/customParseFormat')
+dayjs.extend(customParseFormat);
 const EleventyFetch = require("@11ty/eleventy-fetch");
 // const Image = require("@11ty/eleventy-img");
 // const JsBarcode = require("jsbarcode");
@@ -159,12 +161,9 @@ module.exports = async function () {
         // const postDate = dayjs("20" + currentDate, "YYYYMMDD").format(
         //     "MM-DD-YYYY"
         // );
-        // const listDate = dayjs(currentDate)
-        // .subtract(3, "day")
-        // .format("YYMMDD");
-        const listDate = currentDate;
-        console.log("🚀 ~ file: lists.js:162 ~ aba.regions.forEach ~ currentDate:", currentDate)
-        console.log("🚀 ~ file: lists.js:162 ~ aba.regions.forEach ~ listDate:", listDate)
+        const listDate = dayjs(currentDate, "YYMMDD")
+            .subtract(2, "day")
+            .format('MM/DD/YYYY');
         const currentListURL = `${aba.textFilePath}${currentDate}${region.regionSuffix}.txt`;
         const previousListURL = `${aba.textFilePath}${previousDate}${region.regionSuffix}.txt`;
         regionLists.push({
