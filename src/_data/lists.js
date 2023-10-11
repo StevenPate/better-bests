@@ -159,7 +159,7 @@ module.exports = async function () {
         //     .format(
         //         "YYMMDD"
         //     );
-        const currentDate = "231011"
+        const currentDate = "231010"
 
         // const previousDate = previousDateString(currentDate);
         const previousDate = "231003";
