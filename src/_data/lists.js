@@ -132,21 +132,26 @@ parseListTxts = (text) => {
 };
 
 module.exports = async function () {
+    //this returns the page (string of html) on ABAs website which contains hyperlinks to the region lists
     const allCurrentLists = await EleventyFetch(aba.listsPageURL, {
         duration: "1d", // save for 1 day
         type: "text",
     });
-    // console.log("🚀 ~ file: lists.js:137 ~ allCurrentLists:", allCurrentLists)
-    // console.log(`allCurrentLists`);
 
     let regionLists = [];
 
-    // console.log(aba.regions)
+    // get the regions from a json file that has the regions, their abbreviation, and the suffix for the text file links
     aba.regions.forEach((region) => {
-        const regionRegex = new RegExp(`.*${region.regionSuffix}.txt`, "g");
-        const date = new Date()
-            .toLocaleString("en-US", { timeZone: "US/Pacific" });
 
+        //we'll use a regular expression to find the lists based on their file name
+        const regionRegex = new RegExp(`.*${region.regionSuffix}.txt`, "g");
+
+        // get today's date so we can use it to create the string for the most recent sunday
+        const date = new Date().toLocaleString("en-US", { timeZone: "US/Pacific" });
+
+        const newCurrentDate = dayjs(date)
+        // const newCurrentDateDay = newCurrentDate.day();
+        console.log("🚀 ~ file: lists.js:154 ~ aba.regions.forEach ~ newCurrentDateDay:", newCurrentDateDay)
         // wrong date because of time zone
 
         // const currentDate = dayjs(date, "YYYYMMDD")
@@ -154,10 +159,10 @@ module.exports = async function () {
         //     .format(
         //         "YYMMDD"
         //     );
-        const currentDate = "231003"
+        const currentDate = "231011"
 
         // const previousDate = previousDateString(currentDate);
-        const previousDate = "230927";
+        const previousDate = "231003";
         // const postDate = dayjs("20" + currentDate, "YYYYMMDD").format(
         //     "MM-DD-YYYY"
         // );
@@ -175,12 +180,13 @@ module.exports = async function () {
             previousListURL,
         });
     });
+    console.log("🚀 ~ file: lists.js:177 ~ aba.regions.forEach ~ region:", region)
     // console.log(`regionLists: ${JSON.stringify(regionLists, null, 2)}`)
 
 
     await Promise.all(
         regionLists.map(async (regionList) => {
-            // console.log(regionList);
+            console.log(regionList);
 
             // console.log("🚀 ~ file: lists.js:179 ~ regionLists.map ~ regionList.currentListURL:", regionList.currentListURL)
             currentText = await EleventyFetch(regionList.currentListURL, {
