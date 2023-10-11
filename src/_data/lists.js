@@ -180,7 +180,7 @@ module.exports = async function () {
             previousListURL,
         });
     });
-    console.log("🚀 ~ file: lists.js:177 ~ aba.regions.forEach ~ region:", region)
+    // console.log("🚀 ~ file: lists.js:177 ~ aba.regions.forEach ~ region:", region)
     // console.log(`regionLists: ${JSON.stringify(regionLists, null, 2)}`)
 
 
