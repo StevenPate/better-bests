@@ -151,7 +151,7 @@ module.exports = async function () {
 
         const newCurrentDate = dayjs(date)
         // const newCurrentDateDay = newCurrentDate.day();
-        console.log("🚀 ~ file: lists.js:154 ~ aba.regions.forEach ~ newCurrentDateDay:", newCurrentDateDay)
+        // console.log("🚀 ~ file: lists.js:154 ~ aba.regions.forEach ~ newCurrentDateDay:", newCurrentDateDay)
         // wrong date because of time zone
 
         // const currentDate = dayjs(date, "YYYYMMDD")
