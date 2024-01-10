@@ -159,10 +159,10 @@ module.exports = async function () {
         //     .format(
         //         "YYMMDD"
         //     );
-        const currentDate = "240103"
+        const currentDate = "240110"
 
         // const previousDate = previousDateString(currentDate);
-        const previousDate = "231227";
+        const previousDate = "240103";
         // const postDate = dayjs("20" + currentDate, "YYYYMMDD").format(
         //     "MM-DD-YYYY"
         // );
