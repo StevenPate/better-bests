@@ -6,7 +6,14 @@
                 "regionalAssociation" : "Pacific Northwest Booksellers Association (PNBA)",
                 "regionalAssociationAbbreviation" : "PNBA",
                 "regionSuffix" : "pn"
-            },
+            }
+        ],
+    "otherRegions" : [
+        {
+            "regionalAssociation" : "California Independent Booksellers Alliance (CALIBA) Southern",
+            "regionalAssociationAbbreviation" : "CALIBAS",
+            "regionSuffix" : "sc"
+        },
             {
                 "regionalAssociation" : "California Independent Booksellers Alliance (CALIBA) Northern",
                 "regionalAssociationAbbreviation" : "CALIBAN",
@@ -42,12 +49,5 @@
                 "regionalAssociationAbbreviation" : "SIBA",
                 "regionSuffix" : "si"
             }
-        ],
-    "otherRegions" : [
-        {
-            "regionalAssociation" : "California Independent Booksellers Alliance (CALIBA) Southern",
-            "regionalAssociationAbbreviation" : "CALIBAS",
-            "regionSuffix" : "sc"
-        }
         ]
 }
