@@ -54,7 +54,7 @@ module.exports = async function (regionLists) {
             regionLists[i].listItems[j].lsiTime = stockStatus.lsiTime;
             regionLists[i].listItems[j].lsiQuantity = stockStatus.lsiQuantity;
         }
-        regionLists[i].lsiTime = regionLists[i].listItems[0].lsiTime;
+        regionLists[i].lsiTime = regionLists[i]?.listItems[0]?.lsiTime || "";
     }
     // console.log(`regionLists[0].listITems[0].lsiTime: ${JSON.stringify(regionLists[0]?.listItems[0]?.lsiTime, null, 2)}`);
     // regionLists.lsiTime = regionLists[0].lsiTime;
