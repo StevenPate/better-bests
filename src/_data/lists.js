@@ -16,7 +16,8 @@ previousDateString = (dateString) =>
         .format("YYMMDD");
 
 parseListTxts = (text) => {
-    let lines = text.split("\n");
+    // let lines = text.split("\n");
+    let lines = text.split(/\r|\n/);
     lines.splice(0, 5);
     lines = lines
         .map((line) => line.replace("\r", ""))
