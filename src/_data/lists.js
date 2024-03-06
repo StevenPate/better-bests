@@ -314,7 +314,7 @@ module.exports = async function () {
             if (regionList.associationAbbreviation == "PNBA") {
                 regionList.zeroStockItems = [];
                 regionList.current = await stockStatus(regionList.current);
-                regionList.lsiTime = regionList.current[0].lsiTime;
+                regionList.lsiTime = regionList.current[0]?.lsiTime || "";
                 regionList.current.forEach((currentList) => {
                     currentList.zeroStockItems = [];
                     currentList.listItems.forEach((currentListItem) => {
