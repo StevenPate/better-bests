@@ -42,6 +42,7 @@ parseListTxts = (text) => {
         let thisLine = lines[i].replace(/[\W_]/g, "");
         if (/^[A-Z]*$/.test(thisLine)) {
             let list = lines[i];
+            list = list.replace(/[^a-zA-Z0-9\s]/g, "").toUpperCase();
             let listItems = [];
             let listISBNs = [];
             for (let j = i + 1; j < lines.length; j++) {
@@ -160,10 +161,10 @@ module.exports = async function () {
         //     .format(
         //         "YYMMDD"
         //     );
-        const currentDate = "240306"
+        const currentDate = "240313"
 
         // const previousDate = previousDateString(currentDate);
-        const previousDate = "240228";
+        const previousDate = "240306";
         // const postDate = dayjs("20" + currentDate, "YYYYMMDD").format(
         //     "MM-DD-YYYY"
         // );
@@ -200,6 +201,7 @@ module.exports = async function () {
                 type: "text",
             });
             regionList.past = parseListTxts(previousText);
+            // console.log("🚀 ~ regionLists.map ~ regionList.past:", regionList.past)
             // console.log(regionList.currentListURL);
             // console.log(regionList.past.length);
 
