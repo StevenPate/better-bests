@@ -4,190 +4,201 @@ title: "Regional Bestseller Lists"
 ---
 
 {% for regionList in lists | limit(1) %}
-{% include 'partials/notifications.njk' %}
-<navbar>
+    {% include 'partials/notifications.njk' %}
+    <navbar>
 
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-        <a class="navbar-item" href="https://pnba.netlify.app">
-        <strong>pnba.netlify.app</strong>
-        </a>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="https://pnba.netlify.app">
+                    <strong>pnba.netlify.app</strong>
+                </a>
 
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarTop">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        </a>
-    </div>
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarTop">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
 
-    <div id="navbarTop" class="navbar-menu">
-        <div class="navbar-start">
+            <div id="navbarTop" class="navbar-menu">
+                <div class="navbar-start">
 
-        <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
             Select a Region
             </a>
 
-            <div class="navbar-dropdown">
-            {% for item in lists %}
-                <a  class="navbar-item is-capitalized {{ 'has-background-link has-text-primary-light' if item.associationAbbreviation in page.url }}" href="/{{ item.associationAbbreviation }}/"><span class="is-capitalized">{{ item.region }}</span></a></li>
-            {% endfor %}
-            <hr class="navbar-divider">
-            <a class="navbar-item" href="mailto:steven@stevenpate.com">
+                        <div class="navbar-dropdown">
+                            {% for item in lists %}
+                                <a  class="navbar-item is-capitalized {{ 'has-background-link has-text-primary-light' if item.associationAbbreviation in page.url }}" href="/{{ item.associationAbbreviation }}/">
+                                    <span class="is-capitalized">{{ item.region }}</span></a>
+                            </li>
+                        {% endfor %}
+                        <hr class="navbar-divider">
+                        <a class="navbar-item" href="mailto:steven@stevenpate.com">
                 Report an issue
             </a>
+                    </div>
+                </div>
             </div>
-        </div>
-        </div> 
 
-        <div class="navbar-end">
-        <div class="navbar-item">
-            <a href="{{ regionList.currentListURL }}">Source (ABA)</a>
-        </div>
-        <div class="navbar-item">
-            <div class="buttons">
-            <a class="button is-primary" href="/{{ regionList.associationAbbreviation }}.pdf">
-                <strong>Barcodes PDF</strong>
-            </a>
-        {% if "PNBA" in regionList.associationAbbreviation %}
-            <a class="button is-light" href="/bsa">
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <a href="{{ regionList.currentListURL }}">Source (ABA)</a>
+                </div>
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-primary" href="/{{ regionList.associationAbbreviation }}.pdf">
+                            <strong>Barcodes PDF</strong>
+                        </a>
+                        {% if "PNBA" in regionList.associationAbbreviation %}
+                            <a class="button is-light" href="/bsa">
                 BSA ISBNs
             </a>
-            <a class="button is-light" href="/bsc">
+                            <a class="button is-light" href="/bsc">
                 BSC ISBNs
             </a>
-        {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    </nav>
-    {% if regionList.lsiTime %}
-        <p class="on-hand"><strong>On-hand numbers</strong>: {{ regionList.lsiTime }}.</p>
-    {% endif %}
+        </nav>
+        {% if regionList.lsiTime %}
+            <p class="on-hand">
+                <strong>On-hand numbers</strong>: {{ regionList.lsiTime }}.</p>
+        {% endif %}
 
-</navbar>
+    </navbar>
 
-<main>
+    <main>
 
-    <header id="top">
-        <h1 class="is-size-3">The {{ regionList.region }} Indie Bestseller List</h1>
-        <h2 class="is-size-4 has-text-grey">for the week ending {{ regionList.listDate }}</h2>
+        <header id="top">
+            <h class="is-size-1">
+                <a href="https://newer-better.netlify.app/pnba/240424/">NEWER SITE</a>
+            </h1>
+            <h1 class="is-size-3">The {{ regionList.region }} Indie Bestseller List</h1>
+            <h2 class="is-size-4 has-text-grey">for the week ending {{ regionList.listDate }}</h2>
 
-        <p>
-            <span>
-                <span class="is-blue">&star;</span> = not found on this list the previous week 
+            <p>
+                <span>
+                    <span class="is-blue">&star;</span> = not found on this list the previous week 
             </span>
-            <span style="padding-left:1rem;">
-                <span> ❄️</span> = not found on any other region's lists this week 
+                <span style="padding-left:1rem;">
+                    <span> ❄️</span> = not found on any other region's lists this week 
             </span>
-        </p>
-    </header>
+            </p>
+        </header>
 
+        <section class="jump is-hidden-tablet">
+            <p>
+                <strong>Jump to</strong>: {% for item in regionList.current %}
+                    <a href="#{{ item.listName | slug }}">{{ item.listName }}</a>
+                    {% if not loop.last %} | {% endif %}
+                {% endfor %}
+            </p>
+        </section>
 
+        <div id="lists" class="is-flex-mobile is-flex-direction-row">
 
+            <div class="sidebar is-hidden-mobile">
 
+                <nav class= "sticky-sidebar">
 
-
-
-
-
-
-    <section class="jump is-hidden-tablet">
-        <p><strong>Jump to</strong>: {% for item in regionList.current  %}<a href="#{{ item.listName | slug }}">{{ item.listName }}</a>{% if not loop.last %} | {% endif %}{% endfor %}</p>
-    </section>
-
-<div id="lists" class="is-flex-mobile is-flex-direction-row">
-
-    <div class="sidebar is-hidden-mobile">
-        
-        <nav class= "sticky-sidebar">
-
-        <aside class="menu">
-        <p class="menu-label">
+                    <aside class="menu">
+                        <p class="menu-label">
             Lists
         </p>
-        <ul class="menu-list">
-            {% for item in regionList.current  %}
-            <li><a href="#{{ item.listName | slug }}" class="is-capitalized">{{ item.listName }}</a></li>
-            {% endfor %}
-            {% if regionList.zeroStockItems %}
-            <li class="is-active"><a href="#zeroStockItems">Zero Stock Items</a></li>
-            {% endif %}
-        </ul>
-        </aside>
-    </div>
-</nav>
-<div class="listsColumn">
-    {% for item in regionList.current  %}
-    <div id="{{ item.listName | slug }}" class="listColumns row" style="page-break-after: always;">
-        <div class="allColumn col-sm-12">
-            <h2 class="is-size-4 is-capitalized">{{ item.listName}} - {{ regionList.associationAbbreviation }} ({{ regionList.listDate}})</h2>
-            <ol>
-            {% for book in item.listItems %}
-                <li>
-                    <details>
-                        <summary class="is-size-5"><strong>{{ book.title }}</strong>{{ book.uniqueItem | safe }}, {{ book.author | safe }} - <span class="isbn has-text-grey-light">{{ book.isbn }}</span> <span style="color:#a6a6a6;">{{ book.positionDifference | safe }} {{ book.stockStatus | safe }}</span></summary>
-                        <div class="listItemDetails">
-                            <div class="coverImage">
-                                <img alt="{{ book.title }}" src="{{ book.coverImage }}" style="margin:1rem;">
-                            </div>
-                            <div class="otherDetails">
-                                <div class="barCode">
-                                    <img alt="{{ book.isbn }}" src="{{ book.isbn | barCode }}">
-                                </div>
-                                <div class="otherListItems">
-                                {% for other in book.otherPositions %}
-                                    <div class="otherListItemEntry"><strong>{{ other.region }}</strong>: {{ other.item.position }} {{ other.item.positionDifference | safe }}</div>
+                        <ul class="menu-list">
+                            {% for item in regionList.current %}
+                                <li>
+                                    <a href="#{{ item.listName | slug }}" class="is-capitalized">{{ item.listName }}</a>
+                                </li>
+                            {% endfor %}
+                            {% if regionList.zeroStockItems %}
+                                <li class="is-active">
+                                    <a href="#zeroStockItems">Zero Stock Items</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </aside>
+                </div>
+            </nav>
+            <div class="listsColumn">
+                {% for item in regionList.current %}
+                    <div id="{{ item.listName | slug }}" class="listColumns row" style="page-break-after: always;">
+                        <div class="allColumn col-sm-12">
+                            <h2 class="is-size-4 is-capitalized">{{ item.listName}} - {{ regionList.associationAbbreviation }} ({{ regionList.listDate}})</h2>
+                            <ol>
+                                {% for book in item.listItems %}
+                                    <li>
+                                        <details>
+                                            <summary class="is-size-5">
+                                                <strong>{{ book.title }}</strong>{{ book.uniqueItem | safe }}, {{ book.author | safe }} - <span class="isbn has-text-grey-light">{{ book.isbn }}</span>
+                                                <span style="color:#a6a6a6;">{{ book.positionDifference | safe }}
+                                                    {{ book.stockStatus | safe }}</span></summary>
+                                            <div class="listItemDetails">
+                                                <div class="coverImage">
+                                                    <img alt="{{ book.title }}" src="{{ book.coverImage }}" style="margin:1rem;">
+                                                </div>
+                                                <div class="otherDetails">
+                                                    <div class="barCode">
+                                                        <img alt="{{ book.isbn }}" src="{{ book.isbn | barCode }}">
+                                                    </div>
+                                                    <div class="otherListItems">
+                                                        {% for other in book.otherPositions %}
+                                                            <div class="otherListItemEntry">
+                                                                <strong>{{ other.region }}</strong>: {{ other.item.position }}
+                                                                {{ other.item.positionDifference | safe }}</div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </details>
+                                    </li>
                                 {% endfor %}
-                                </div>
-                            </div>
+                                {# uniques #}
+
+                            </ol>
+                            <a href="#top" class="toplink is-hidden-tablet">Back to top</a>
                         </div>
-                    </details>
-                </li>
-            {% endfor %}
-            {# uniques #}
-                
-            </ol>
-            <a href="#top" class="toplink is-hidden-tablet">Back to top</a>
+                    </div>
+                {% endfor %}
+                {% if regionList.zeroStockItems %}
+                    <div id="zeroStockItems">
+                        <h2 class="is-size-4">Zero Stock Items: Bestsellers with zero QOH</h2>
+                        <ol>
+                            {% for book in regionList.zeroStockItems %}
+                                <li>
+                                    <details>
+                                        <summary class="is-size-5">
+                                            <strong>{{ book.title }}</strong>{{ book.uniqueItem | safe }}, {{ book.author | safe }} (<a href="#{{ book.listName| slug }}">{{ book.listName }}</a>, <strong>#{{ book.position}}</strong>) - <span class="isbn has-text-grey-light">{{ book.isbn }}</span>
+                                            <span style="color:#a6a6a6;">{{ book.positionDifference | safe }}
+                                                {{ book.stockStatus | safe }}</span>
+                                        </summary>
+                                        <div class="listItemDetails">
+                                            <div class="coverImage">
+                                                <img alt="{{ book.title }}" src="{{ book.coverImage }}" style="margin:1rem;">
+                                            </div>
+                                            <div class="otherDetails">
+                                                <div class="barCode">
+                                                    <img alt="{{ book.isbn }}" src="{{ book.isbn | barCode }}">
+                                                </div>
+                                                <div class="otherListItems">
+                                                    {% for other in book.otherPositions %}
+                                                        <div class="otherListItemEntry">
+                                                            <strong>{{ other.region }}</strong>: {{ other.item.position }}
+                                                            {{ other.item.positionDifference | safe }}</div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </details>
+                                </li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                {% endif %}
+            </div>
         </div>
-    </div>
-    {% endfor %}
-    {% if regionList.zeroStockItems %}
-    <div id="zeroStockItems">
-            <h2 class="is-size-4">Zero Stock Items: Bestsellers with zero QOH</h2>
-            <ol>
-                {% for book in regionList.zeroStockItems %}
-                <li>
-                    <details>
-                        <summary class="is-size-5">
-                            <strong>{{ book.title }}</strong>{{ book.uniqueItem | safe }}, {{ book.author | safe }} (<a href="#{{ book.listName| slug }}">{{ book.listName }}</a>, <strong>#{{ book.position}}</strong>) - <span class="isbn has-text-grey-light">{{ book.isbn }}</span>
-                            <span style="color:#a6a6a6;">{{ book.positionDifference | safe }}
-                                {{ book.stockStatus | safe }}</span>
-                        </summary>
-                        <div class="listItemDetails">
-                            <div class="coverImage">
-                                <img alt="{{ book.title }}" src="{{ book.coverImage }}" style="margin:1rem;">
-                            </div>
-                            <div class="otherDetails">
-                                <div class="barCode">
-                                    <img alt="{{ book.isbn }}" src="{{ book.isbn | barCode }}">
-                                </div>
-                                <div class="otherListItems">
-                                    {% for other in book.otherPositions %}
-                                        <div class="otherListItemEntry">
-                                            <strong>{{ other.region }}</strong>: {{ other.item.position }}
-                                            {{ other.item.positionDifference | safe }}</div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                    </details>
-                </li>
-            {% endfor %}
-            </ol>
-        </div>
-        {% endif %}
-</div>
-</div>
-</main>
+    </main>
 {% endfor %}
