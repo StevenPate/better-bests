@@ -161,10 +161,10 @@ module.exports = async function () {
         //     .format(
         //         "YYMMDD"
         //     );
-        const currentDate = "240501"
+        const currentDate = "240508"
 
         // const previousDate = p4reviousDateString(currentDate);
-        const previousDate = "240424";
+        const previousDate = "240501";
         // const postDate = dayjs("20" + currentDate, "YYYYMMDD").format(
         //     "MM-DD-YYYY"
         // );
